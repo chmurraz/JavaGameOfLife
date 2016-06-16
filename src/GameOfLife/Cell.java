@@ -9,7 +9,7 @@ public class Cell
 	private int y;
 	private boolean alive;
 	private boolean nextRound;
-	static int size = 3;
+	static int size = 5;
 	
 	public Cell(int xVal, int yVal)
 	{
