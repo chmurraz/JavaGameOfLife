@@ -14,7 +14,6 @@ public class Main {
 	public static void main(String[] args) 
 	{
 		Frame f = new Frame();
-		//f.setUndecorated(true);
 		f.setVisible(true);
 		f.setResizable(false);
 

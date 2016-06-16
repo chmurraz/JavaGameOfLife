@@ -1,7 +1,9 @@
 package GameOfLife;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +17,9 @@ public class Frame extends JFrame
 	
 	public Frame()
 	{
-		setExtendedState(MAXIMIZED_BOTH);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(new Dimension(screen.width/2,screen.height/2));
+		//setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	

@@ -22,13 +22,13 @@ public class Simulation
 			for (int y = 0; y < height; y++)
 			{
 				test = random.nextFloat();
-				//cells[x] [y] = new Cell(x,y);
+				cells[x] [y] = new Cell(x,y);
 				//cells[x] [y].setAlive(random.nextBoolean());
 				
 				if (test < weight)
-					cells[x][y].setAlive(true);
+					cells[x] [y].setAlive(true);
 				else
-					cells[x][y].setAlive(false);
+					cells[x] [y].setAlive(false);
 			}
 		}
 	}
