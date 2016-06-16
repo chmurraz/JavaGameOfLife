@@ -61,7 +61,7 @@ public class Blob
 	public Blob()
 	{
 		liveCellCount = 0;
-		cellsInGame = new ArrayList<Cell>();
+		cellsInGame = new ArrayList<CellChris>();
 		
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();

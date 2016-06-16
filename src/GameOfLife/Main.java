@@ -1,5 +1,7 @@
 package GameOfLife;
 
+import Classes.Blob;
+
 /*
  * Inspired by my own C++ code and ...
  * https://www.youtube.com/watch?v=lIJOuUZROo8
@@ -42,6 +44,22 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
+				
+		/*
+		 * CHRIS MAIN CODE BELOW
+		 * REMOVE THE COMMENT BLOCK
+		 	
+		 
+	 		Blob myblob = new Blob();
+			myblob.BuildRandom(0.05);
+	
+			for (int i = 0; i <= 500; i++)
+			{
+				myblob.UpdateBlob();
+				Thread.sleep(500);
+			}
+			
+		 */
 		
 	}
 
