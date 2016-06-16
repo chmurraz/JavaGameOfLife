@@ -10,6 +10,7 @@ public class Main {
 
 	static int width;
 	static int height;
+	static float PAUSETIME = 0.05f;
 	
 	public static void main(String[] args) 
 	{

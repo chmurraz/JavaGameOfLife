@@ -16,6 +16,7 @@ public class Blob
 	private long lastFrameTime;
 	private long thisFrameTime;
 	private float tslf;
+	private float tslu;
 	
 	private void BuildDeadCells()
 	{
@@ -67,6 +68,8 @@ public class Blob
 		frame = new Frame();
 		frame.setVisible(true);
 		frame.setResizable(false);
+		tslu = System.currentTimeMillis();
+		tslf = System.currentTimeMillis();
 		
 		liveCellCount = 0;
 		cellsInGame = new ArrayList<CellChris>();
@@ -214,8 +217,10 @@ public class Blob
 		cellsInGame = cellsInGameCopy;
 	}
 	
-	public void UpdateBlob()
+	public void UpdateBlob(float tslf)
 	{
+		tslu += tslf;
+		
 		//	Update Timers
 		lastFrameTime = System.currentTimeMillis();
 		thisFrameTime = System.currentTimeMillis();
@@ -229,7 +234,7 @@ public class Blob
 		BuildDeadCells();
 
 		//	Draw the blob
-		//Draw(true);
+		Draw(true);
 		frame.Update(tslf);
 		frame.Repaint();
 

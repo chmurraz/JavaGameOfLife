@@ -11,20 +11,20 @@ public class Frame extends JFrame
 {
 	private Screen s;
 	//private Simulation sim;
-	private float tslu;
-	private float PAUSETIME = 0.05f;
 	
 	public Frame()
 	{
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(new Dimension(screen.width/2,screen.height/2));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 	
 	public void CreateScreen()
 	{
 		s = new Screen();
 		//sim = new Simulation();
+		//blob = new Blob();
 		s.setBounds(0,0,Main.width,Main.height);
 		add(s);
 	}
@@ -33,9 +33,10 @@ public class Frame extends JFrame
 	public void Update(float tslf)
 	{
 		tslu += tslf;
-		if(tslu > PAUSETIME)
+		if(tslu > Main.PAUSETIME)
 		{
 			//sim.Update();
+			blob.UpdateBlob();
 			tslu = 0;
 		}
 	}
@@ -51,7 +52,8 @@ public class Frame extends JFrame
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
-			sim.Draw(g);
+			//sim.Draw(g);
+			blob.Draw(true);
 
 		}
 	}
