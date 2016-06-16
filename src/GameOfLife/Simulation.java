@@ -9,7 +9,7 @@ public class Simulation
 	private Random random;
 	private int width = Main.width/Cell.size;
 	private int height = Main.height/Cell.size;
-	private float weight = 0.95f;
+	private float weight = 0.50f;
 	private float test;
 	
 	public Simulation()
