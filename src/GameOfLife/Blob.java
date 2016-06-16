@@ -12,7 +12,10 @@ public class Blob
 	private IntPoint2D plotmin;
 	private IntPoint2D plotmax;
 	private int age;
-	private BlobJFrame window;
+	private Frame frame;
+	private long lastFrameTime;
+	private long thisFrameTime;
+	private float tslf;
 	
 	private void BuildDeadCells()
 	{
@@ -60,6 +63,11 @@ public class Blob
 	
 	public Blob()
 	{
+		
+		frame = new Frame();
+		frame.setVisible(true);
+		frame.setResizable(false);
+		
 		liveCellCount = 0;
 		cellsInGame = new ArrayList<CellChris>();
 		
@@ -70,11 +78,9 @@ public class Blob
 		
 		age=0;
 		
-		window = new BlobJFrame();
-		
-		//window.setSize(800,600);
-		//window.setTitle("Hey Guy!");
-		//window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setSize(800,600);
+		//frame.setTitle("Hey Guy!");
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void AddLiveCell(IntPoint2D point)
@@ -159,15 +165,15 @@ public class Blob
 	
 	public void Draw(Boolean printStats)
 	{
-		//	Draw the rectangle on a "JComponent" and add the JComponent to the window
-		//window.setVisible(false);
+		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
+		//frame.setVisible(false);
 		for (CellChris it:cellsInGame)
 		{
-			//window.add(it);
+			//frame.add(it);
 		}
 		//CellGraphic DC = new CellGraphic();
-		//window.add(DC);
-		window.setVisible(true);
+		//frame.add(DC);
+		frame.setVisible(true);
 	}
 	
 	public Boolean IsCellHere(IntPoint2D point)
@@ -210,6 +216,12 @@ public class Blob
 	
 	public void UpdateBlob()
 	{
+		//	Update Timers
+		lastFrameTime = System.currentTimeMillis();
+		thisFrameTime = System.currentTimeMillis();
+		tslf = (float)((thisFrameTime - lastFrameTime)/1000.0);
+		
+		
 		//	Reset vital stats
 		ResetBlobStats();
 		
@@ -217,7 +229,9 @@ public class Blob
 		BuildDeadCells();
 
 		//	Draw the blob
-		Draw(true);
+		//Draw(true);
+		frame.Update(tslf);
+		frame.Repaint();
 
 		//	Calculate neighbors
 		CountNeighbors();
@@ -229,5 +243,9 @@ public class Blob
 		age++;
 	}
 	
+	public Frame getFrame()
+	{
+		return frame;
+	}
 }
 	

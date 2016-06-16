@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 public class Frame extends JFrame
 {
 	private Screen s;
-	private Simulation sim;
+	//private Simulation sim;
 	private float tslu;
 	private float PAUSETIME = 0.05f;
 	
@@ -18,14 +18,13 @@ public class Frame extends JFrame
 	{
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(new Dimension(screen.width/2,screen.height/2));
-		//setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	public void CreateScreen()
 	{
 		s = new Screen();
-		sim = new Simulation();
+		//sim = new Simulation();
 		s.setBounds(0,0,Main.width,Main.height);
 		add(s);
 	}
@@ -36,7 +35,7 @@ public class Frame extends JFrame
 		tslu += tslf;
 		if(tslu > PAUSETIME)
 		{
-			sim.Update();
+			//sim.Update();
 			tslu = 0;
 		}
 	}
