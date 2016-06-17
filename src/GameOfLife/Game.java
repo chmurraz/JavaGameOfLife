@@ -14,7 +14,7 @@ public class Game
 	private long thisFrameTime;
 	private float tslf;
 	private float tslu;
-	private Graphics g;
+	//private Graphics g;
 	
 	private Frame frame;
 	
@@ -41,7 +41,7 @@ public class Game
 			tslf = (float)((thisFrameTime-lastFrameTime)/1000.0);
 			lastFrameTime = thisFrameTime;
 			
-			getFrame().getBlob().UpdateBlob(tslf, g);
+			getFrame().getBlob().UpdateBlob(tslf);
 			getFrame().Repaint();
 			
 			try

@@ -157,13 +157,13 @@ public class Blob
 		}
 	}
 	
-	public void Draw(Boolean printStats, Graphics g)
+	public void Draw()
 	{
 		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
 		//frame.setVisible(false);
 		for (CellChris it:cellsInGame)
 		{
-			it.Draw(g);;
+			it.Draw();
 		}
 		//CellGraphic DC = new CellGraphic();
 		//frame.add(DC);
@@ -208,7 +208,7 @@ public class Blob
 		cellsInGame = cellsInGameCopy;
 	}
 	
-	public void UpdateBlob(float tslf, Graphics g)
+	public void UpdateBlob(float tslf)
 	{
 		//	Reset vital stats
 		ResetBlobStats();
@@ -217,7 +217,7 @@ public class Blob
 		BuildDeadCells();
 
 		//	Draw the blob
-		Draw(true, g);
+		Draw();
 		//frame.Update(tslf);
 		//frame.Repaint();
 
