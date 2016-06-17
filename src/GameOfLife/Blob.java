@@ -12,11 +12,7 @@ public class Blob
 	private IntPoint2D plotmin;
 	private IntPoint2D plotmax;
 	private int age;
-	private Frame frame;
-	private long lastFrameTime;
-	private long thisFrameTime;
-	private float tslf;
-	private float tslu;
+
 	
 	private void BuildDeadCells()
 	{
@@ -64,12 +60,6 @@ public class Blob
 	
 	public Blob()
 	{
-		
-		frame = new Frame();
-		frame.setVisible(true);
-		frame.setResizable(false);
-		tslu = System.currentTimeMillis();
-		tslf = System.currentTimeMillis();
 		
 		liveCellCount = 0;
 		cellsInGame = new ArrayList<CellChris>();
@@ -176,7 +166,7 @@ public class Blob
 		}
 		//CellGraphic DC = new CellGraphic();
 		//frame.add(DC);
-		frame.setVisible(true);
+		//frame.setVisible(true);
 	}
 	
 	public Boolean IsCellHere(IntPoint2D point)
@@ -219,14 +209,6 @@ public class Blob
 	
 	public void UpdateBlob(float tslf)
 	{
-		tslu += tslf;
-		
-		//	Update Timers
-		lastFrameTime = System.currentTimeMillis();
-		thisFrameTime = System.currentTimeMillis();
-		tslf = (float)((thisFrameTime - lastFrameTime)/1000.0);
-		
-		
 		//	Reset vital stats
 		ResetBlobStats();
 		
@@ -235,8 +217,8 @@ public class Blob
 
 		//	Draw the blob
 		Draw(true);
-		frame.Update(tslf);
-		frame.Repaint();
+		//frame.Update(tslf);
+		//frame.Repaint();
 
 		//	Calculate neighbors
 		CountNeighbors();
@@ -246,11 +228,6 @@ public class Blob
 
 		//	Increment age
 		age++;
-	}
-	
-	public Frame getFrame()
-	{
-		return frame;
 	}
 }
 	
