@@ -3,46 +3,64 @@ package GameOfLife;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Cell
+public class CellChris
 {
-	private int x;
-	private int y;
-	private boolean alive;
-	private boolean nextRound;
+
+	private IntPoint2D point = new IntPoint2D();
+	private int neighborCount;
+	private Boolean isAlive;
 	static int size = 5;
-	
-	public Cell(int xVal, int yVal)
-	{
-		this.x = xVal;
-		this.y = yVal;
-	}
 	
 	public void Draw(Graphics g)
 	{
-		if(alive) g.setColor(Color.BLACK);
-		else g.setColor(Color.WHITE);
-		g.drawRect(x*size, y*size, size, size);
+		g.setColor(Color.BLACK);
+		g.drawRect(point.getX()*size, point.getY()*size, size, size);
 		//g.drawOval(x*size, y*size, size, size);
-		g.fillRect(x*size + 1, y*size + 1, size - 1, size - 1);		
-	}
-
-	public boolean isAlive()
-	{
-		return alive;
-	}
-
-	public void setAlive(boolean alive)
-	{
-		this.alive = alive;
+		g.fillRect(point.getX()*size + 1, point.getY()*size + 1, size - 1, size - 1);		
 	}
 	
-	public void setNextRound(boolean alive)
+	public CellChris(IntPoint2D pointVal)
 	{
-		this.nextRound = alive;
+		point = pointVal;
+		neighborCount = 0;
+		isAlive = true;
 	}
 	
-	public void NextRound()
+	public CellChris(int xVal, int yVal)
 	{
-		alive = nextRound;
+		point.setxy(xVal, yVal);
+		neighborCount = 0;
+		isAlive = true;
+	}
+
+
+	public void setPoint(IntPoint2D pointVal)
+	{
+		point = pointVal;
+	}
+	
+	public void setNeighborCount(int intVal)
+	{
+		neighborCount = intVal;
+	}
+	
+	public int getNeighborCount()
+	{
+		return neighborCount;
+	}
+	
+	public void setIsAlive(Boolean boolVal)
+	{
+		isAlive = boolVal;
+	}
+	
+	public Boolean getIsAlive()
+	{
+		return isAlive;
+	}
+	
+	public IntPoint2D getIntPoint()
+	{
+		return point;
 	}
 }
