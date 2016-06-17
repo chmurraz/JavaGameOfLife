@@ -65,8 +65,8 @@ public class Blob
 		
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();
-		plotmin.setxy(0,0);
-		plotmax.setxy(5,5);
+		plotmin.setxy(20,20);
+		plotmax.setxy(150,150);
 		
 		age=0;
 		

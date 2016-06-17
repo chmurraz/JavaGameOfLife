@@ -8,7 +8,7 @@ public class Game
 {
 	static int width;
 	static int height;
-	static float PAUSETIME = 0.05f;
+	static float PAUSETIME = 0.1f;
 	
 	private long lastFrameTime;
 	private long thisFrameTime;
@@ -27,7 +27,7 @@ public class Game
 		frame.setResizable(false);
 		tslu = 0;
 		tslf = System.currentTimeMillis();
-		frame.getBlob().BuildRandom(1);
+		frame.getBlob().BuildRandom(0.05);
 	}
 	
 	public void Run()
