@@ -1,7 +1,14 @@
 package GameOfLife;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 public class Game
 {
+	static int width;
+	static int height;
+	static float PAUSETIME = 0.05f;
+	
 	private long lastFrameTime;
 	private long thisFrameTime;
 	private float tslf;
@@ -11,12 +18,15 @@ public class Game
 	
 	public Game()
 	{
+		Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+		width = screenDim.width;
+		height = screenDim.height;
 		frame = new Frame();
 		frame.setVisible(true);
 		frame.setResizable(false);
 		tslu = 0;
 		tslf = System.currentTimeMillis();
-		frame.getBlob().BuildRandom(0.5);
+		frame.getBlob().BuildRandom(0.05);
 	}
 	
 	public void Run()

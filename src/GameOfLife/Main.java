@@ -8,18 +8,11 @@ package GameOfLife;
 
 public class Main {
 
-	static int width;
-	static int height;
-	static float PAUSETIME = 0.05f;
-	
 	public static void main(String[] args) 
 	{
 		//System.out.println(f.getWidth() + ";" + f.getHeight());
 		
 		Game game = new Game();
-		
-		width = game.getFrame().getWidth();
-		height = game.getFrame().getHeight();
 		
 		//game.getFrame().CreateScreen();		//	Added this into the constructor for Frame()
 		game.Run();

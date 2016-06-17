@@ -29,11 +29,12 @@ public class Frame extends JFrame
 	{
 		blob = new Blob();
 		s = new Screen();
-		Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(new Dimension(screenDim.width/2,screenDim.height/2));
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-		s.setBounds(0,0,Main.width, Main.height);
+		setSize(new Dimension(Game.width/2,Game.height));
+		s.setBounds(0,0,Game.width,Game.height);
+		add(s);
 	}
 	
 	

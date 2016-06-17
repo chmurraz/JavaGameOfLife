@@ -162,7 +162,7 @@ public class Blob
 		//frame.setVisible(false);
 		for (CellChris it:cellsInGame)
 		{
-			//frame.add(it);
+			it.Draw(g);;
 		}
 		//CellGraphic DC = new CellGraphic();
 		//frame.add(DC);

@@ -1,11 +1,23 @@
 package GameOfLife;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class CellChris
 {
 
 	private IntPoint2D point = new IntPoint2D();
 	private int neighborCount;
 	private Boolean isAlive;
+	static int size = 5;
+	
+	public void Draw(Graphics g)
+	{
+		g.setColor(Color.BLACK);
+		g.drawRect(point.getX()*size, point.getY()*size, size, size);
+		//g.drawOval(x*size, y*size, size, size);
+		g.fillRect(point.getX()*size + 1, point.getY()*size + 1, size - 1, size - 1);		
+	}
 	
 	public CellChris(IntPoint2D pointVal)
 	{
