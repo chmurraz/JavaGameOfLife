@@ -1,6 +1,7 @@
 package GameOfLife;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Toolkit;
 
 public class Game
@@ -13,6 +14,7 @@ public class Game
 	private long thisFrameTime;
 	private float tslf;
 	private float tslu;
+	private Graphics g;
 	
 	private Frame frame;
 	
@@ -39,7 +41,7 @@ public class Game
 			tslf = (float)((thisFrameTime-lastFrameTime)/1000.0);
 			lastFrameTime = thisFrameTime;
 			
-			getFrame().getBlob().UpdateBlob(tslf);
+			getFrame().getBlob().UpdateBlob(tslf, g);
 			getFrame().Repaint();
 			
 			try

@@ -1,6 +1,7 @@
 package GameOfLife;
 
 import java.util.ArrayList;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.lang.Math;
 import javax.swing.JFrame;
@@ -156,7 +157,7 @@ public class Blob
 		}
 	}
 	
-	public void Draw(Boolean printStats)
+	public void Draw(Boolean printStats, Graphics g)
 	{
 		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
 		//frame.setVisible(false);
@@ -207,7 +208,7 @@ public class Blob
 		cellsInGame = cellsInGameCopy;
 	}
 	
-	public void UpdateBlob(float tslf)
+	public void UpdateBlob(float tslf, Graphics g)
 	{
 		//	Reset vital stats
 		ResetBlobStats();
@@ -216,7 +217,7 @@ public class Blob
 		BuildDeadCells();
 
 		//	Draw the blob
-		Draw(true);
+		Draw(true, g);
 		//frame.Update(tslf);
 		//frame.Repaint();
 
