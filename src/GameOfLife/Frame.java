@@ -20,8 +20,8 @@ public class Frame extends JFrame
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
-			//sim.Draw(g);
-			blob.Draw();
+			blob.Draw(g);
+			blob.UpdateBlob();
 		}
 	}
 	

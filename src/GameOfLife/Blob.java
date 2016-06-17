@@ -155,13 +155,13 @@ public class Blob
 		}
 	}
 	
-	public void Draw()
+	public void Draw(Graphics g)
 	{
 		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
 		//frame.setVisible(false);
 		for (CellChris it:cellsInGame)
 		{
-			it.Draw();
+			it.Draw(g);
 		}
 		//CellGraphic DC = new CellGraphic();
 		//frame.add(DC);
@@ -214,8 +214,8 @@ public class Blob
 		//	Fill the blob with dead cells around every living cell (making sure to avoid any adjacent living cells)
 		BuildDeadCells();
 
-		//	Draw the blob
-		Draw();
+		//	REMOVE the DRAW from the UpdateBlob() routine so that Graphics g can be propogated
+		//Draw(g);
 		//frame.Update(tslf);
 		//frame.Repaint();
 
