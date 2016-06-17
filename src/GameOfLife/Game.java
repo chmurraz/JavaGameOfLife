@@ -27,7 +27,7 @@ public class Game
 		frame.setResizable(false);
 		tslu = 0;
 		tslf = System.currentTimeMillis();
-		frame.getBlob().BuildRandom(0.05);
+		frame.getBlob().BuildRandom(0.20);
 	}
 	
 	public void Run()
