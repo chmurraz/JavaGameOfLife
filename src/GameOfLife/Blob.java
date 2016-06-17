@@ -6,7 +6,7 @@ import java.lang.Math;
 
 public class Blob 
 {
-	private ArrayList<CellChris> cellsInGame;
+	private ArrayList<Cell> cellsInGame;
 	private int liveCellCount;
 	private IntPoint2D plotmin;
 	private IntPoint2D plotmax;
@@ -19,11 +19,11 @@ public class Blob
 		if(liveCellCount > 0)
 		{
 			//	Create a copy of the (cellsInGame) vector to add the dead CellChriss to
-			ArrayList<CellChris>cellsInGameCopy = new ArrayList<CellChris>();
-			for(CellChris it:cellsInGame)
+			ArrayList<Cell>cellsInGameCopy = new ArrayList<Cell>();
+			for(Cell it:cellsInGame)
 			{
 				IntPoint2D newPoint = it.getIntPoint();
-				CellChris newCell = new CellChris(newPoint);
+				Cell newCell = new Cell(newPoint);
 				cellsInGameCopy.add(newCell);				
 			}
 			
@@ -31,7 +31,7 @@ public class Blob
 			//	Iterate over this copy and add dead cells to the ORIGINAL array (but only if)
 			//	there isn't already a cell there
 			
-			for (CellChris it:cellsInGameCopy)
+			for (Cell it:cellsInGameCopy)
 			{
 				IntPoint2D centerPoint = it.getIntPoint();
 				for(int x = centerPoint.getX()-1; x<=centerPoint.getX()+1; x++)
@@ -46,7 +46,7 @@ public class Blob
 							//	add it to the ArrayList of cellsInGame
 							//	make sure this cell is dead
 							
-							CellChris newCell = new CellChris(testPoint);
+							Cell newCell = new Cell(testPoint);
 							cellsInGame.add(newCell);
 							cellsInGame.get(cellsInGame.size()-1).setIsAlive(false);
 
@@ -61,7 +61,7 @@ public class Blob
 	{
 		
 		liveCellCount = 0;
-		cellsInGame = new ArrayList<CellChris>();
+		cellsInGame = new ArrayList<Cell>();
 		
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();
@@ -77,14 +77,14 @@ public class Blob
 	
 	public void AddLiveCell(IntPoint2D point)
 	{
-		CellChris addingCell = new CellChris(point);
+		Cell addingCell = new Cell(point);
 		cellsInGame.add(addingCell);
 		liveCellCount++;
 	}
 	
 	public void BirthDeath()
 	{
-		for(CellChris it:cellsInGame)
+		for(Cell it:cellsInGame)
 		{
 			if(it.getNeighborCount()<2 || it.getNeighborCount()>3)
 			{
@@ -134,10 +134,10 @@ public class Blob
 	
 	public void CountNeighbors()
 	{
-		for (CellChris inputCell:cellsInGame)
+		for (Cell inputCell:cellsInGame)
 		{
 			//	Loop through the ArrayList of cellsInGame.  These are the "it" cells.  Compare them to the "inputCell" from outer loop
-			for (CellChris it:cellsInGame)
+			for (Cell it:cellsInGame)
 			{
 				//	Check two things at each loop....
 				//
@@ -159,7 +159,7 @@ public class Blob
 	{
 		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
 		//frame.setVisible(false);
-		for (CellChris it:cellsInGame)
+		for (Cell it:cellsInGame)
 		{
 			it.Draw(g);
 		}
@@ -171,7 +171,7 @@ public class Blob
 	public Boolean IsCellHere(IntPoint2D point)
 	{
 		//	Search the list of cells.  Check for a matching (x,y) at "point" ... doesn't matter if it's alive or dead.
-		for (CellChris it:cellsInGame)
+		for (Cell it:cellsInGame)
 		{
 			if(it.getIntPoint().Equal(point))
 			{
@@ -190,15 +190,15 @@ public class Blob
 		//	cells will be built during the update.
 		
 		liveCellCount = 0;
-		ArrayList<CellChris> cellsInGameCopy = new ArrayList<CellChris>();
+		ArrayList<Cell> cellsInGameCopy = new ArrayList<Cell>();
 		
-		for (CellChris it:cellsInGame)
+		for (Cell it:cellsInGame)
 		{
 			if(it.getIsAlive())
 			{
 				liveCellCount++;
 				IntPoint2D newPoint = new IntPoint2D(it.getIntPoint().getX(),it.getIntPoint().getY());
-				CellChris newCell = new CellChris(newPoint);
+				Cell newCell = new Cell(newPoint);
 				cellsInGameCopy.add(newCell);
 			}
 			it.setNeighborCount(0);

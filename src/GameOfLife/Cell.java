@@ -3,7 +3,7 @@ package GameOfLife;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class CellChris
+public class Cell
 {
 
 	private IntPoint2D point = new IntPoint2D();
@@ -19,14 +19,14 @@ public class CellChris
 		g.fillRect(point.getX()*size + 1, point.getY()*size + 1, size - 1, size - 1);		
 	}
 	
-	public CellChris(IntPoint2D pointVal)
+	public Cell(IntPoint2D pointVal)
 	{
 		point = pointVal;
 		neighborCount = 0;
 		isAlive = true;
 	}
 	
-	public CellChris(int xVal, int yVal)
+	public Cell(int xVal, int yVal)
 	{
 		point.setxy(xVal, yVal);
 		neighborCount = 0;
