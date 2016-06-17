@@ -9,7 +9,7 @@ public class CellChris
 	private IntPoint2D point = new IntPoint2D();
 	private int neighborCount;
 	private Boolean isAlive;
-	static int size = 5;
+	static int size = 1;
 	
 	public void Draw(Graphics g)
 	{
