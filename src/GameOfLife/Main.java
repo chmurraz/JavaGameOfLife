@@ -5,6 +5,7 @@ package GameOfLife;
  * https://www.youtube.com/watch?v=lIJOuUZROo8
  * Left off at approx 36:00
  */
+import java.awt.Graphics;
 
 public class Main {
 

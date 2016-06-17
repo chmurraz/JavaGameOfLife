@@ -21,7 +21,7 @@ public class Frame extends JFrame
 		{
 			super.paintComponent(g);
 			//sim.Draw(g);
-			blob.Draw(g);
+			blob.Draw();
 		}
 	}
 	

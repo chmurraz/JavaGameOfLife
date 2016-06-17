@@ -11,7 +11,7 @@ public class CellChris
 	private Boolean isAlive;
 	static int size = 5;
 	
-	public void Draw(Graphics g)
+	public void Draw()
 	{
 		g.setColor(Color.BLACK);
 		g.drawRect(point.getX()*size, point.getY()*size, size, size);

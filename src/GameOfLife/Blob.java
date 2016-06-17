@@ -2,9 +2,7 @@ package GameOfLife;
 
 import java.util.ArrayList;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.lang.Math;
-import javax.swing.JFrame;
 
 public class Blob 
 {
@@ -208,7 +206,7 @@ public class Blob
 		cellsInGame = cellsInGameCopy;
 	}
 	
-	public void UpdateBlob(float tslf)
+	public void UpdateBlob()
 	{
 		//	Reset vital stats
 		ResetBlobStats();
