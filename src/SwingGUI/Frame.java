@@ -1,5 +1,7 @@
 package SwingGUI;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -14,6 +16,7 @@ public class Frame extends JFrame
 {
 	//private Screen s;
 	private GameScreen gameScreen;
+	private UserPanel userPanel;
 	//private Blob blob;
 	//private Simulation sim;
 	
@@ -42,6 +45,27 @@ public class Frame extends JFrame
 		setSize(new Dimension(Game.getWidth()/2,Game.getHeight()));
 		gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
 		add(gameScreen);
+		
+		userPanel = new UserPanel();
+		
+		userPanel.addUserListener(new UserListener ()
+		{
+			public void detailEventOccured(UserEvent event)
+			{
+				//	Get the text from the event
+				//String text = event.getText();
+				
+				//	Append this text into the text panel
+				//textArea.append(text);
+			}
+		});
+		
+		//	Add Swing components to content pane
+		Container c = getContentPane();
+		
+		//c.add(textArea, BorderLayout.CENTER);
+		c.add(gameScreen, BorderLayout.CENTER);
+		c.add(userPanel,BorderLayout.WEST);
 	}
 	
 	

@@ -109,13 +109,14 @@ public class UserPanel extends JPanel
 		}
 	}
 	
-	public void addDetailListener(UserListener listener)
+	public void addUserListener(UserListener listener)
 	{
 		listenerList.add(UserListener.class, listener);
 	}
 	
-	public void removeDetailListener(UserListener listener)
+	public void removeUserListener(UserListener listener)
 	{
 		listenerList.remove(UserListener.class, listener);
 	}
+
 }

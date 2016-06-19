@@ -159,13 +159,18 @@ public class Blob
 	{
 		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
 		//frame.setVisible(false);
+		
+		g.drawRect(0*5, 0*5, 5, 5);
+		//g.fillRect(point.getX()*5 + 1, point.getY()*5 + 1, 5 - 1, 5 - 1);
+		
+		/*
 		for (Cell it:cellsInGame)
 		{
 			it.Draw(g);
 		}
-		//CellGraphic DC = new CellGraphic();
-		//frame.add(DC);
-		//frame.setVisible(true);
+		
+		*/
+
 	}
 	
 	public Boolean IsCellHere(IntPoint2D point)
