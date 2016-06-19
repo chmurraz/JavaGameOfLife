@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 
+import SwingGUI.Frame;
+
 public class Game
 {
 	static int width;
@@ -22,12 +24,12 @@ public class Game
 		Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
 		width = screenDim.width;
 		height = screenDim.height;
-		frame = new Frame();
+		frame = new Frame("Game of Life");
 		frame.setVisible(true);
 		frame.setResizable(false);
 		tslu = 0;
 		tslf = System.currentTimeMillis();
-		frame.getBlob().BuildRandom(0.05);
+		frame.getGameScreen().getBlob().BuildRandom(0.05);
 	}
 	
 	public void Run()
@@ -40,7 +42,7 @@ public class Game
 			tslf = (float)((thisFrameTime-lastFrameTime)/1000.0);
 			lastFrameTime = thisFrameTime;
 			
-			getFrame().getBlob().UpdateBlob();
+			getFrame().getGameScreen().getBlob().UpdateBlob();
 			getFrame().Repaint();
 			
 			try
@@ -57,6 +59,16 @@ public class Game
 	public Frame getFrame()
 	{
 		return frame;
+	}
+	
+	public static int getHeight()
+	{
+		return height;
+	}
+	
+	public static int getWidth()
+	{
+		return width;
 	}
 	
 }
