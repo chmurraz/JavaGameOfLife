@@ -43,7 +43,7 @@ public class Game
 			tslf = (float)((thisFrameTime-lastFrameTime)/1000.0);
 			lastFrameTime = thisFrameTime;
 			
-			getFrame().getGameScreen().getBlob().UpdateBlob();
+			getFrame().getGameScreen().getBlob().UpdateBlob(tslf);
 			getFrame().Repaint();
 			
 			try
