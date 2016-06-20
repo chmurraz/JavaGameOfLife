@@ -42,7 +42,11 @@ public class Frame extends JFrame
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+		
+		//	Set size of "this" Frame
 		setSize(new Dimension(Game.getWidth()/2,Game.getHeight()));
+		
+		//	Set size of the gameScreen
 		gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
 		add(gameScreen);
 		

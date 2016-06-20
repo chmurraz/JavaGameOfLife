@@ -65,8 +65,8 @@ public class Blob
 		
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();
-		plotmin.setxy(20,20);
-		plotmax.setxy(150,150);
+		plotmin.setxy(0,0);
+		plotmax.setxy(25,25);
 		
 		age=0;
 		
@@ -97,10 +97,11 @@ public class Blob
 	
 	public void BuildGlider()
 	{
-		int xshift = 10;
-		int yshift = 20;
-		
-		this.AddLiveCell(new IntPoint2D(20+xshift,0+yshift));
+		this.AddLiveCell(new IntPoint2D(20,5));
+		this.AddLiveCell(new IntPoint2D(21,5));
+		this.AddLiveCell(new IntPoint2D(21,7));
+		this.AddLiveCell(new IntPoint2D(22,5));
+		this.AddLiveCell(new IntPoint2D(22,6));
 	}
 	
 	public void BuildRandom(double density)
@@ -114,18 +115,18 @@ public class Blob
 			density = 0.0;
 		}
 		
-		int count = (int)Math.floor(density * plotmax.getX() * plotmax.getY());
+		int count = (int)Math.floor(density * (plotmax.getX() - plotmin.getX()) * (plotmax.getY()-plotmin.getY()));
 		
-		Dice XDice = new Dice(plotmax.getX());
-		Dice YDice = new Dice(plotmax.getY());
+		Dice XDice = new Dice(plotmax.getX() - plotmin.getX() + 1);
+		Dice YDice = new Dice(plotmax.getY() - plotmin.getY() + 1);
 		
 		IntPoint2D randomPoint;
-		for (int i = 0; i <= count; i++)
+		for (int i = 1; i <= count; i++)
 		{
 			do
 			{
 				randomPoint = new IntPoint2D();
-				randomPoint.setxy(XDice.roll(), YDice.roll());
+				randomPoint.setxy(XDice.roll() + plotmin.getX() - 1, YDice.roll() + plotmin.getY() - 1);
 			}while(this.IsCellHere(randomPoint));
 			this.AddLiveCell(randomPoint);
 		}
@@ -160,16 +161,13 @@ public class Blob
 		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
 		//frame.setVisible(false);
 		
-		g.drawRect(0*5, 0*5, 5, 5);
+		//g.drawRect(0*5, 0*5, 5, 5);
 		//g.fillRect(point.getX()*5 + 1, point.getY()*5 + 1, 5 - 1, 5 - 1);
 		
-		/*
 		for (Cell it:cellsInGame)
 		{
 			it.Draw(g);
 		}
-		
-		*/
 
 	}
 	
