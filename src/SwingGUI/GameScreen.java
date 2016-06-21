@@ -20,7 +20,7 @@ public class GameScreen extends JLabel
 	{
 		super.paintComponent(g);
 		blob.Draw(g);
-		blob.UpdateBlob();
+		//blob.UpdateBlob();
 	}
 	
 	public Blob getBlob()

@@ -29,9 +29,9 @@ public class Game
 		frame.setResizable(false);
 		tslu = 0;
 		tslf = System.currentTimeMillis();
-		//frame.getGameScreen().getBlob().BuildRandom(0.50);
-		frame.getGameScreen().getBlob().BuildGlider();
-		frame.getGameScreen().getBlob().BuildOscillator();
+		frame.getGameScreen().getBlob().BuildRandom(0.50);
+		//frame.getGameScreen().getBlob().BuildGlider();
+		//frame.getGameScreen().getBlob().BuildOscillator();
 	}
 	
 	public void Run()
