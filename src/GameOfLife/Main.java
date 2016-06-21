@@ -1,5 +1,12 @@
 package GameOfLife;
 
+///	To do list...
+/*
+ * fix image tearing on panels
+ * fix concurrent modification of cellsInGame area
+ */
+
+
 public class Main {
 
 	public static void main(String[] args) 
