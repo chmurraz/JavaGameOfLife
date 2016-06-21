@@ -1,10 +1,5 @@
 package GameOfLife;
 
-/*
- * Inspired by my own C++ code and various tutorials on Java Swing
- */
-import java.awt.Graphics;
-
 public class Main {
 
 	public static void main(String[] args) 
