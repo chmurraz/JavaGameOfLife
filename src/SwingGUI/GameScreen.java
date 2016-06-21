@@ -19,7 +19,10 @@ public class GameScreen extends JLabel
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		blob.Draw(g);
+		if(blob.getLiveCellCount()>0)
+		{
+			blob.Draw(g);
+		}
 		//blob.UpdateBlob();
 	}
 	

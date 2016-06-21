@@ -65,7 +65,7 @@ public class Blob
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();
 		plotmin.setxy(0,0);
-		plotmax.setxy(25,25);
+		plotmax.setxy(100,100);
 		
 		age=0;
 		
@@ -85,7 +85,7 @@ public class Blob
 	{
 		for(Cell it:cellsInGame)
 		{
-			if(it.getNeighborCount()<2 || it.getNeighborCount()>3)
+			if(it.getIsAlive() && (it.getNeighborCount()<2 || it.getNeighborCount()>3))
 			{
 				it.setIsAlive(false);
 			}
@@ -108,6 +108,13 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(10,1));
 		this.AddLiveCell(new IntPoint2D(10,2));
 		this.AddLiveCell(new IntPoint2D(10,3));
+		this.AddLiveCell(new IntPoint2D(10,4));
+		this.AddLiveCell(new IntPoint2D(10,5));
+		this.AddLiveCell(new IntPoint2D(10,6));
+		this.AddLiveCell(new IntPoint2D(10,7));
+		this.AddLiveCell(new IntPoint2D(10,8));
+		this.AddLiveCell(new IntPoint2D(10,9));
+		this.AddLiveCell(new IntPoint2D(10,10));
 	}
 	
 	public void BuildRandom(double density)

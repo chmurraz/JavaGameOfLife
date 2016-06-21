@@ -10,7 +10,7 @@ public class Game
 {
 	static int width;
 	static int height;
-	static float PAUSETIME = 0.5f;
+	static float PAUSETIME = 0.05f;
 	
 	private long lastFrameTime;
 	private long thisFrameTime;
@@ -29,7 +29,7 @@ public class Game
 		frame.setResizable(false);
 		tslu = 0;
 		tslf = System.currentTimeMillis();
-		frame.getGameScreen().getBlob().BuildRandom(0.50);
+		frame.getGameScreen().getBlob().BuildRandom(0.5);
 		//frame.getGameScreen().getBlob().BuildGlider();
 		//frame.getGameScreen().getBlob().BuildOscillator();
 	}
