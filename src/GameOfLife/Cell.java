@@ -9,12 +9,16 @@ public class Cell
 	private IntPoint2D point = new IntPoint2D();
 	private int neighborCount;
 	private Boolean isAlive;
-	static int size = 1;
+	static int size = 5;
 	
 	public void Draw(Graphics g)
 	{
-		g.setColor(Color.BLACK);
-		g.drawRect(point.getX(), point.getY(), size, size);
+		if (isAlive)
+		{
+			g.setColor(Color.BLACK);
+			g.drawRect(point.getX()*size, point.getY()*size, size, size);
+		}
+
 		//g.drawOval(x*size, y*size, size, size);
 		//g.fillRect(point.getX(), point.getY(), size - 1, size - 1);		
 	}

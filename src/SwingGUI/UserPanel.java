@@ -19,6 +19,9 @@ public class UserPanel extends JPanel
 
 	private EventListenerList listenerList = new EventListenerList();
 	
+	private JLabel ageLabel;
+	private JLabel countLabel;
+	
 	public UserPanel()
 	{
 		Dimension size = getPreferredSize();
@@ -28,12 +31,12 @@ public class UserPanel extends JPanel
 		//	Adds a beveled border
 		setBorder(BorderFactory.createTitledBorder("Personal Details"));
 		
-		JLabel nameLabel = new JLabel("Name: ");
-		JLabel occupationLabel = new JLabel("Occupation: ");
+		ageLabel = new JLabel("Blob Age: ");
+		countLabel = new JLabel("Cell Count: ");
 		
 		//	Parameter is the number of columns for the textfield
-		JTextField nameField = new JTextField(10);
-		JTextField occupationField = new JTextField(10);
+		//JTextField ageField = new JTextField(10);
+		//JTextField countField = new JTextField(10);
 		
 		JButton addBtn = new JButton("Add");
 		
@@ -41,10 +44,11 @@ public class UserPanel extends JPanel
 				{
 					public void actionPerformed(ActionEvent e)
 					{
-						String name = nameField.getText();
-						String occupation = occupationField.getText();
+						//String age = ageField.getText();
+						//String count = countField.getText();
 						
-						String text = name + ": " + occupation + "\n";
+						//String text = age + ": " + count + "\n";
+						String text = "hey guy";
 						
 						//	fire event using "this" panel and the text
 						fireUserEvent(new UserEvent(this,text));
@@ -64,22 +68,22 @@ public class UserPanel extends JPanel
 		
 		gc.gridx = 0;	//	x increasing to right
 		gc.gridy = 0;	//	y increasing downwards
-		add(nameLabel,gc);
+		add(ageLabel,gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
-		add(occupationLabel, gc);
+		add(countLabel, gc);
 		
 		////	Second Column (x = 1)	////
 		
-		gc.anchor = GridBagConstraints.LINE_START;	//	Left justify
-		gc.gridx = 1;
-		gc.gridy = 0;
-		add(nameField, gc);
+		//gc.anchor = GridBagConstraints.LINE_START;	//	Left justify
+		//gc.gridx = 1;
+		//gc.gridy = 0;
+		//add(ageField, gc);
 		
-		gc.gridx = 1;
-		gc.gridy = 1;
-		add(occupationField, gc);
+		//gc.gridx = 1;
+		//gc.gridy = 1;
+		//add(countField, gc);
 		
 		////	Final Row	////
 		
@@ -117,6 +121,16 @@ public class UserPanel extends JPanel
 	public void removeUserListener(UserListener listener)
 	{
 		listenerList.remove(UserListener.class, listener);
+	}
+	
+	public void updateAgeLabel(int ageVal)
+	{
+		ageLabel.setText("Blob Age: " + ageVal);
+	}
+	
+	public void updateCountLabel(int countVal)
+	{
+		countLabel.setText("Cell Count: " + countVal);
 	}
 
 }

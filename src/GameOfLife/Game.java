@@ -10,7 +10,7 @@ public class Game
 {
 	static int width;
 	static int height;
-	static float PAUSETIME = 5.0f;
+	static float PAUSETIME = 0.5f;
 	
 	private long lastFrameTime;
 	private long thisFrameTime;
@@ -31,20 +31,36 @@ public class Game
 		tslf = System.currentTimeMillis();
 		//frame.getGameScreen().getBlob().BuildRandom(0.50);
 		frame.getGameScreen().getBlob().BuildGlider();
+		frame.getGameScreen().getBlob().BuildOscillator();
 	}
 	
 	public void Run()
 	{
 		lastFrameTime = System.currentTimeMillis();
+		tslu = PAUSETIME * 2;
 		
 		while(true)
 		{
-			thisFrameTime = System.currentTimeMillis();
 			tslf = (float)((thisFrameTime-lastFrameTime)/1000.0);
 			lastFrameTime = thisFrameTime;
+			thisFrameTime = System.currentTimeMillis();
 			
-			getFrame().getGameScreen().getBlob().UpdateBlob(tslf);
-			getFrame().Repaint();
+			//	tslf = time since last frame
+			tslu += tslf;
+			if(tslu > PAUSETIME)
+			{
+				//	Update the blob and repaint
+				getFrame().getGameScreen().getBlob().UpdateBlob();
+				getFrame().Repaint();
+				
+				//	Update the user panel
+				int age = this.getFrame().getGameScreen().getBlob().getAge();
+				int count = this.getFrame().getGameScreen().getBlob().getLiveCellCount();
+				getFrame().getUserPanel().updateAgeLabel(age);
+				getFrame().getUserPanel().updateCountLabel(count);
+				
+				tslu = 0;
+			}
 			
 			try
 			{

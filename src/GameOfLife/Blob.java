@@ -12,7 +12,6 @@ public class Blob
 	private IntPoint2D plotmax;
 	private int age;
 
-	
 	private void BuildDeadCells()
 	{
 		//	If there aren't any live cells, don't bother adding dead ones
@@ -99,9 +98,16 @@ public class Blob
 	{
 		this.AddLiveCell(new IntPoint2D(20,5));
 		this.AddLiveCell(new IntPoint2D(21,5));
-		this.AddLiveCell(new IntPoint2D(21,7));
 		this.AddLiveCell(new IntPoint2D(22,5));
 		this.AddLiveCell(new IntPoint2D(22,6));
+		this.AddLiveCell(new IntPoint2D(21,7));
+	}
+	
+	public void BuildOscillator()
+	{
+		this.AddLiveCell(new IntPoint2D(10,1));
+		this.AddLiveCell(new IntPoint2D(10,2));
+		this.AddLiveCell(new IntPoint2D(10,3));
 	}
 	
 	public void BuildRandom(double density)
@@ -161,7 +167,8 @@ public class Blob
 		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
 		//frame.setVisible(false);
 		
-		//g.drawRect(0*5, 0*5, 5, 5);
+		//g.drawRect(0, 0, 1, 1);
+		//g.drawRect(0, 1, 1, 1);
 		//g.fillRect(point.getX()*5 + 1, point.getY()*5 + 1, 5 - 1, 5 - 1);
 		
 		for (Cell it:cellsInGame)
@@ -230,6 +237,16 @@ public class Blob
 
 		//	Increment age
 		age++;
+	}
+	
+	public int getAge()
+	{
+		return age;
+	}
+	
+	public int getLiveCellCount()
+	{
+		return liveCellCount;
 	}
 }
 	

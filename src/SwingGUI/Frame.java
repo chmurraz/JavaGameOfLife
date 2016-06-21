@@ -102,4 +102,9 @@ public class Frame extends JFrame
 		return gameScreen;
 	}
 	
+	public UserPanel getUserPanel()
+	{
+		return userPanel;
+	}
+	
 }
