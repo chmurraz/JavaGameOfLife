@@ -4,6 +4,7 @@ package GameOfLife;
 /*
  * fix image tearing on panels
  * fix concurrent modification of cellsInGame area
+ * add double buffering on panels/frames
  */
 
 
