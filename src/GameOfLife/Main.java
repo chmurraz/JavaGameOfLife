@@ -18,5 +18,36 @@ public class Main {
 		//game.getFrame().CreateScreen();		//	Added this into the constructor for Frame()
 		game.Run();
 	}
+	
+	/*
+	 * Program work flow...
+	 * declare Game game in main and game.Run()
+	 * 
+	 * Game.Run()
+	 * 		Frame..... blob.updateBlob()
+	 * 				ResetBlobStats()
+	 * 				BuildDeadCells()
+	 * 				CountNeighbors()
+	 * 				BirthDeath()
+	 * 				age++
+	 * 		Frame.repaint()
+	 * 				gameScreen.repaint();
+	 * 				
+	 * 				
+	 * 
+	 * 
+	 * 		Frame..... userPanel.updateAgeLabel()
+	 * 		Frame..... userPanel.updateCountLabel();
+	 * 
+	 * 
+	 */
+	
+	//	Double buffering work flow
+	/*
+	 * declare Image image and Graphics bufferGraphics object
+	 * image = createImage(dim.width, dim.height)
+	 * bufferGraphics = image.getGraphics()
+	 * bufferGraphics.clear
+	 */
 
 }
