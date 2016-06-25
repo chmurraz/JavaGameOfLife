@@ -5,9 +5,11 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
 
 import GameOfLife.Blob;
 import GameOfLife.Game;
@@ -17,6 +19,8 @@ public class Frame extends JFrame
 	//private Screen s;
 	private GameScreen gameScreen;
 	private UserPanel userPanel;
+	private GameRunner gameRunner;
+	private MyListener myListener;
 	//private Blob blob;
 	//private Simulation sim;
 	
@@ -30,6 +34,79 @@ public class Frame extends JFrame
 			blob.Draw(g);
 			blob.UpdateBlob();
 		}
+	}
+	*/
+	
+	/*
+	 * 
+	 * FIX THIS BASED ON...
+	 * http://docs.oracle.com/javase/tutorial/uiswing/examples/concurrency/FlipperProject/src/concurrency/Flipper.java
+	 * 
+	 */
+	
+	private class GameRunner extends SwingWorker<Void,Void>
+	{
+		
+		private long lastFrameTime;
+		private long thisFrameTime;
+		private float tslf;
+		private float tslu;
+		
+		private float PAUSETIME = 0.05f;
+		
+		@Override
+		protected Void doInBackground() throws Exception 
+		{
+			lastFrameTime = System.currentTimeMillis();
+			tslu = PAUSETIME * 2;
+			
+			while(!isCancelled())
+			{
+				tslf = (float) ((thisFrameTime - lastFrameTime) / 1000.0);
+				lastFrameTime = thisFrameTime;
+				thisFrameTime = System.currentTimeMillis();
+
+				//	tslf = time since last frame
+				tslu += tslf;
+				if (tslu > PAUSETIME) 
+				{
+					//	Update the blob and repaint
+					gameScreen.getBlob().UpdateBlob();
+					Repaint();
+
+					//	Update the user panel
+					int age = gameScreen.getBlob().getAge();
+					int count = gameScreen.getBlob().getLiveCellCount();
+					userPanel.updateAgeLabel(age);
+					userPanel.updateCountLabel(count);
+
+					tslu = 0;
+				}
+			}
+			return null;
+		
+		}
+	}
+	
+	/*
+	public void actionPerformed(ActionEvent e)
+	{
+		String caption;
+		if ("Start Simulation" == e.getActionCommand())
+		{
+			caption = "Stop Simulation";
+			(gameRunner = new GameRunner()).execute();
+			userPanel.getToggleButton1().setText(caption);
+			userPanel.getToggleButton1().setActionCommand(caption);
+		}
+		if("Stop Simulation" == e.getActionCommand())
+		{
+			caption = "Start Simulation";
+			gameRunner.cancel(true);
+			gameRunner = null;
+			userPanel.getToggleButton1().setText(caption);
+			userPanel.getToggleButton1().setActionCommand(caption);
+		}	
 	}
 	*/
 	
@@ -48,9 +125,12 @@ public class Frame extends JFrame
 		
 		//	Set size of the gameScreen
 		gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
+		//gameScreen.getBlob().BuildRandom(0.5);
 		add(gameScreen);
 		
 		userPanel = new UserPanel();
+		myListener = new MyListener(this);
+		userPanel.getToggleButton1().addActionListener(myListener);
 		
 		userPanel.addUserListener(new UserListener ()
 		{
@@ -105,6 +185,22 @@ public class Frame extends JFrame
 	public UserPanel getUserPanel()
 	{
 		return userPanel;
+	}
+	
+	public GameRunner getGameRunner()
+	{
+		return gameRunner;
+	}
+	
+	public void Execute()
+	{
+		(gameRunner = new GameRunner()).execute();
+	}
+	
+	public void Cancel()
+	{
+		gameRunner.cancel(true);
+		gameRunner = null;
 	}
 	
 }

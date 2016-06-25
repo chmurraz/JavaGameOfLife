@@ -1,5 +1,7 @@
 package GameOfLife;
 
+import javax.swing.SwingUtilities;
+
 ///	To do list...
 /*
  * fix image tearing on panels
@@ -12,11 +14,20 @@ public class Main {
 
 	public static void main(String[] args) 
 	{
-		//System.out.println(f.getWidth() + ";" + f.getHeight());
+
 		Game game = new Game();
-		
+		SwingUtilities.invokeLater(new Runnable()
+			{
+				@Override
+				public void run() 
+				{
+					game.CreateAndShowGUI();
+					
+				}
+			});
+
 		//game.getFrame().CreateScreen();		//	Added this into the constructor for Frame()
-		game.Run();
+		//game.Run();
 	}
 	
 	/*

@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.event.EventListenerList;
 
 public class UserPanel extends JPanel
@@ -21,6 +22,9 @@ public class UserPanel extends JPanel
 	
 	private JLabel ageLabel;
 	private JLabel countLabel;
+	private JButton startBtn;
+	private JToggleButton startToggleButton;
+	private GridBagConstraints constraints;
 	
 	public UserPanel()
 	{
@@ -29,7 +33,7 @@ public class UserPanel extends JPanel
 		setPreferredSize(size);
 		
 		//	Adds a beveled border
-		setBorder(BorderFactory.createTitledBorder("Personal Details"));
+		setBorder(BorderFactory.createTitledBorder("Simulation Data"));
 		
 		ageLabel = new JLabel("Blob Age: ");
 		countLabel = new JLabel("Cell Count: ");
@@ -38,9 +42,13 @@ public class UserPanel extends JPanel
 		//JTextField ageField = new JTextField(10);
 		//JTextField countField = new JTextField(10);
 		
-		JButton addBtn = new JButton("Add");
+		//startBtn = new JButton("Start Simulation");
+		startToggleButton = new JToggleButton("Start Simulation");
+		startToggleButton.setActionCommand("Start Simulation");
+		startToggleButton.setFocusPainted(false);		//	Removes annoying border
 		
-		addBtn.addActionListener(new ActionListener()
+		/*
+		startBtn.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
@@ -53,26 +61,50 @@ public class UserPanel extends JPanel
 						//	fire event using "this" panel and the text
 						fireUserEvent(new UserEvent(this,text));
 					}
-			
 				});
+		*/
+		
+		/*
+		startToggleButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e) 
+					{
+						if (startToggleButton.getText() == "Start Simulation")
+						{
+							startToggleButton.setText("Stop Simulation");
+						}
+						
+						else if (startToggleButton.getText() == "Stop Simulation")
+						{
+							startToggleButton.setText("Start Simulation");
+						}
+					}
+				});
+		*/
+			
 		
 		//	GridBagLayout lets you add controls in conjunction with a GridBagConstraints class
 		setLayout(new GridBagLayout());
-		GridBagConstraints gc = new GridBagConstraints();
+		constraints = new GridBagConstraints();
 		
 		////	First Column (x = 0)	////
 		
-		gc.anchor = GridBagConstraints.LINE_END;	//	Right justify
-		gc.weightx = 0.5;	//	Weights do not have to add up to 1.0
-		gc.weighty = 0.5;
+		constraints.anchor = GridBagConstraints.LINE_END;	//	Right justify
+		constraints.weightx = 0.5;	//	Weights do not have to add up to 1.0
+		constraints.weighty = 0.5;
 		
-		gc.gridx = 0;	//	x increasing to right
-		gc.gridy = 0;	//	y increasing downwards
-		add(ageLabel,gc);
+		constraints.gridx = 0;	//	x increasing to right
+		constraints.gridy = 0;	//	y increasing downwards
+		add(ageLabel,constraints);
 		
-		gc.gridx = 0;
-		gc.gridy = 1;
-		add(countLabel, gc);
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		add(countLabel, constraints);
+		
+		constraints.weighty = 10;
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		add(startToggleButton,constraints);
 		
 		////	Second Column (x = 1)	////
 		
@@ -88,11 +120,11 @@ public class UserPanel extends JPanel
 		////	Final Row	////
 		
 		//gc.fill = GridBagConstraints.BOTH;	//	This is a good option for some text fields
-		gc.weighty = 10;	//	Weight very high to make this "row" take up a lot of space
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;	//	Top justify
-		gc.gridx = 1;
-		gc.gridy = 2;
-		add(addBtn,gc);		
+		//gc.weighty = 10;	//	Weight very high to make this "row" take up a lot of space
+		//gc.anchor = GridBagConstraints.FIRST_LINE_START;	//	Top justify
+		//gc.gridx = 1;
+		//gc.gridy = 3;
+		//add(startBtn,gc);		
 	}
 	
 	public void fireUserEvent(UserEvent event)
@@ -113,6 +145,16 @@ public class UserPanel extends JPanel
 		}
 	}
 	
+	
+	//private JButton makeButton(String caption)
+	//{
+	//	JButton b = new JButton(caption);
+	//	b.setActionCommand(caption);
+	//	//b.addActionListener(this);
+	//	add(b,constraints);
+	//	return b;
+	//}
+	
 	public void addUserListener(UserListener listener)
 	{
 		listenerList.add(UserListener.class, listener);
@@ -131,6 +173,11 @@ public class UserPanel extends JPanel
 	public void updateCountLabel(int countVal)
 	{
 		countLabel.setText("Cell Count: " + countVal);
+	}
+	
+	public JToggleButton getToggleButton1()
+	{
+		return startToggleButton;
 	}
 
 }
