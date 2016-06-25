@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
@@ -21,6 +22,7 @@ public class Frame extends JFrame
 	private UserPanel userPanel;
 	private GameRunner gameRunner;
 	private MyListener myListener;
+	private Boolean running;
 	//private Blob blob;
 	//private Simulation sim;
 	
@@ -44,7 +46,23 @@ public class Frame extends JFrame
 	 * 
 	 */
 	
-	private class GameRunner extends SwingWorker<Void,Void>
+	//	May possibly use this private class (does it need to be static?) if I decide to use publish in the GameRunner
+	private class BlobPublishObject
+	{
+		private final Blob blob;
+		BlobPublishObject(Blob blobVal)
+		{
+			blob = blobVal;
+		}
+		
+		Blob getBlob()
+		{
+			return blob;
+		}
+	}
+	
+	//	TESTING... changing second argument of GameRunner to Blob
+	private class GameRunner extends SwingWorker<Void,BlobPublishObject>
 	{
 		
 		private long lastFrameTime;
@@ -60,6 +78,7 @@ public class Frame extends JFrame
 			lastFrameTime = System.currentTimeMillis();
 			tslu = PAUSETIME * 2;
 			
+			/*
 			while(!isCancelled())
 			{
 				tslf = (float) ((thisFrameTime - lastFrameTime) / 1000.0);
@@ -83,9 +102,45 @@ public class Frame extends JFrame
 					tslu = 0;
 				}
 			}
+			*/
+			
+			tslf = (float) ((thisFrameTime - lastFrameTime) / 1000.0);
+			lastFrameTime = thisFrameTime;
+			thisFrameTime = System.currentTimeMillis();
+
+			//	tslf = time since last frame
+			tslu += tslf;
+			//if (tslu > PAUSETIME) 
+			//{
+				//	Update the blob and repaint
+				gameScreen.getBlob().UpdateBlob();
+				//Repaint();
+
+				//	Update the user panel
+				//int age = gameScreen.getBlob().getAge();
+				//int count = gameScreen.getBlob().getLiveCellCount();
+				//userPanel.updateAgeLabel(age);
+				//userPanel.updateCountLabel(count);
+
+				tslu = 0;
+			//}
+			
 			return null;
 		
 		}
+		
+		public void done()
+		{
+			int age = gameScreen.getBlob().getAge();
+			int count = gameScreen.getBlob().getLiveCellCount();
+			Repaint();
+			userPanel.updateAgeLabel(age);
+			userPanel.updateCountLabel(count);
+			userPanel.getAdvanceToggleButton().setSelected(false);
+			userPanel.getAdvanceToggleButton().setText("Advance Simulation");
+		}
+	
+		
 	}
 	
 	/*
@@ -116,6 +171,7 @@ public class Frame extends JFrame
 		//blob = new Blob();
 		//s = new Screen();
 		gameScreen = new GameScreen();
+		running = false;
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
@@ -130,7 +186,8 @@ public class Frame extends JFrame
 		
 		userPanel = new UserPanel();
 		myListener = new MyListener(this);
-		userPanel.getToggleButton1().addActionListener(myListener);
+		userPanel.getAdvanceToggleButton().addActionListener(myListener);
+		userPanel.getLoadBlobButton().addActionListener(myListener);
 		
 		userPanel.addUserListener(new UserListener ()
 		{
@@ -201,6 +258,16 @@ public class Frame extends JFrame
 	{
 		gameRunner.cancel(true);
 		gameRunner = null;
+	}
+	
+	public Boolean getRunning()
+	{
+		return running;
+	}
+	
+	public void setRunning(Boolean runVal)
+	{
+		running = runVal;
 	}
 	
 }

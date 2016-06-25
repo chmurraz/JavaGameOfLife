@@ -22,8 +22,8 @@ public class UserPanel extends JPanel
 	
 	private JLabel ageLabel;
 	private JLabel countLabel;
-	private JButton startBtn;
-	private JToggleButton startToggleButton;
+	private JButton loadBlobButton;
+	private JToggleButton advanceToggleButton;
 	private GridBagConstraints constraints;
 	
 	public UserPanel()
@@ -43,9 +43,10 @@ public class UserPanel extends JPanel
 		//JTextField countField = new JTextField(10);
 		
 		//startBtn = new JButton("Start Simulation");
-		startToggleButton = new JToggleButton("Start Simulation");
-		startToggleButton.setActionCommand("Start Simulation");
-		startToggleButton.setFocusPainted(false);		//	Removes annoying border
+		loadBlobButton = new JButton("Load Game");
+		advanceToggleButton = new JToggleButton("Advance Simulation");
+		advanceToggleButton.setActionCommand("Advance Simulation");
+		advanceToggleButton.setFocusPainted(false);		//	Removes annoying border
 		
 		/*
 		startBtn.addActionListener(new ActionListener()
@@ -96,15 +97,22 @@ public class UserPanel extends JPanel
 		constraints.gridx = 0;	//	x increasing to right
 		constraints.gridy = 0;	//	y increasing downwards
 		add(ageLabel,constraints);
+		ageLabel.setVisible(false);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 1;
 		add(countLabel, constraints);
+		countLabel.setVisible(false);
+		
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		add(advanceToggleButton,constraints);
+		advanceToggleButton.setVisible(false);
 		
 		constraints.weighty = 10;
 		constraints.gridx = 0;
-		constraints.gridy = 2;
-		add(startToggleButton,constraints);
+		constraints.gridy = 3;
+		add(loadBlobButton, constraints);
 		
 		////	Second Column (x = 1)	////
 		
@@ -175,9 +183,24 @@ public class UserPanel extends JPanel
 		countLabel.setText("Cell Count: " + countVal);
 	}
 	
-	public JToggleButton getToggleButton1()
+	public JToggleButton getAdvanceToggleButton()
 	{
-		return startToggleButton;
+		return advanceToggleButton;
+	}
+	
+	public JButton getLoadBlobButton()
+	{
+		return loadBlobButton;
+	}
+	
+	public JLabel getAgeLabel()
+	{
+		return ageLabel;
+	}
+	
+	public JLabel getCountLabel()
+	{
+		return countLabel;
 	}
 
 }

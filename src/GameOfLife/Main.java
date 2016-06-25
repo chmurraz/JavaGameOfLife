@@ -22,7 +22,6 @@ public class Main {
 				public void run() 
 				{
 					game.CreateAndShowGUI();
-					
 				}
 			});
 

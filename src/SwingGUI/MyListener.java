@@ -15,19 +15,35 @@ public class MyListener implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		String command = frame.getUserPanel().getToggleButton1().getActionCommand();
-		if(e.getActionCommand().equals(command))
+		String StartToggleCommand = frame.getUserPanel().getAdvanceToggleButton().getActionCommand();
+		String LoadBlobButtonCommand = frame.getUserPanel().getLoadBlobButton().getActionCommand();
+		if(e.getActionCommand().equals(StartToggleCommand))
 		{
-			if(frame.getUserPanel().getToggleButton1().getText() == "Start Simulation")
+			if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Advance Simulation")
 			{
-				frame.getUserPanel().getToggleButton1().setText("Stop Simulation");
+				frame.getUserPanel().getAdvanceToggleButton().setText("Working...");
 				frame.Execute();
+				frame.setRunning(true);
 			}
-			else if(frame.getUserPanel().getToggleButton1().getText() == "Stop Simulation")
+			else if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Working...")
 			{
-				frame.getUserPanel().getToggleButton1().setText("Start Simulation");
-				frame.Cancel();
+				frame.getUserPanel().getAdvanceToggleButton().setText("Advance Simulation");
+				//frame.Cancel();
+				frame.setRunning(false);
 			}
+		}
+		
+		if(e.getActionCommand().equals(LoadBlobButtonCommand))
+		{
+			frame.getGameScreen().getBlob().BuildRandom(0.5);
+			frame.Repaint();
+			frame.getUserPanel().updateAgeLabel(0);
+			int countVal = frame.getGameScreen().getBlob().getLiveCellCount();
+			frame.getUserPanel().updateCountLabel(countVal);
+			frame.getUserPanel().getAdvanceToggleButton().setVisible(true);
+			frame.getUserPanel().getAgeLabel().setVisible(true);
+			frame.getUserPanel().getCountLabel().setVisible(true);
+			
 		}
 	}
 
