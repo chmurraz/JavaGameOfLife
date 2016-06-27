@@ -35,14 +35,25 @@ public class MyListener implements ActionListener
 		
 		if(e.getActionCommand().equals(LoadBlobButtonCommand))
 		{
-			frame.getGameScreen().getBlob().BuildRandom(0.5);
+			//frame.getGameScreen().getBlob().BuildRandom(0.5);
+			frame.getGameScreen().getBlob().BuildBlock();
 			frame.Repaint();
 			frame.getUserPanel().updateAgeLabel(0);
+			
 			int countVal = frame.getGameScreen().getBlob().getLiveCellCount();
 			frame.getUserPanel().updateCountLabel(countVal);
+			
 			frame.getUserPanel().getAdvanceToggleButton().setVisible(true);
 			frame.getUserPanel().getAgeLabel().setVisible(true);
 			frame.getUserPanel().getCountLabel().setVisible(true);
+			
+			
+			frame.getUserPanel().updateXRangeLabel(frame.getGameScreen().getBlob().getBoundary().getMinX(), frame.getGameScreen().getBlob().getBoundary().getMaxX());
+			frame.getUserPanel().updateYRangeLabel(frame.getGameScreen().getBlob().getBoundary().getMinY(), frame.getGameScreen().getBlob().getBoundary().getMaxY());
+			frame.getUserPanel().getXRangeLabel().setVisible(true);
+			frame.getUserPanel().getYRangeLabel().setVisible(true);
+			
+			
 			
 		}
 	}

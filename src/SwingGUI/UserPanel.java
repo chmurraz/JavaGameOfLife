@@ -22,6 +22,8 @@ public class UserPanel extends JPanel
 	
 	private JLabel ageLabel;
 	private JLabel countLabel;
+	private JLabel xRangeLabel;
+	private JLabel yRangeLabel;
 	private JButton loadBlobButton;
 	private JToggleButton advanceToggleButton;
 	private GridBagConstraints constraints;
@@ -37,6 +39,8 @@ public class UserPanel extends JPanel
 		
 		ageLabel = new JLabel("Blob Age: ");
 		countLabel = new JLabel("Cell Count: ");
+		xRangeLabel = new JLabel("? <= x <= ?");
+		yRangeLabel = new JLabel("? <= y <= ?");
 		
 		//	Parameter is the number of columns for the textfield
 		//JTextField ageField = new JTextField(10);
@@ -106,12 +110,23 @@ public class UserPanel extends JPanel
 		
 		constraints.gridx = 0;
 		constraints.gridy = 2;
+		add(xRangeLabel,constraints);
+		xRangeLabel.setVisible(false);
+		
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		add(yRangeLabel,constraints);
+		yRangeLabel.setVisible(false);
+		
+		constraints.weighty = 3;
+		constraints.gridx = 0;
+		constraints.gridy = 4;
 		add(advanceToggleButton,constraints);
 		advanceToggleButton.setVisible(false);
 		
-		constraints.weighty = 10;
+		constraints.weighty = 3;
 		constraints.gridx = 0;
-		constraints.gridy = 3;
+		constraints.gridy = 5;
 		add(loadBlobButton, constraints);
 		
 		////	Second Column (x = 1)	////
@@ -183,6 +198,16 @@ public class UserPanel extends JPanel
 		countLabel.setText("Cell Count: " + countVal);
 	}
 	
+	public void updateXRangeLabel(int val1, int val2)
+	{
+		xRangeLabel.setText(val1 + "  <= x <= " + val2);
+	}
+	
+	public void updateYRangeLabel(int val1, int val2)
+	{
+		yRangeLabel.setText(val1 + "  <= x <= " + val2);
+	}
+	
 	public JToggleButton getAdvanceToggleButton()
 	{
 		return advanceToggleButton;
@@ -201,6 +226,16 @@ public class UserPanel extends JPanel
 	public JLabel getCountLabel()
 	{
 		return countLabel;
+	}
+	
+	public JLabel getXRangeLabel()
+	{
+		return xRangeLabel;
+	}
+	
+	public JLabel getYRangeLabel()
+	{
+		return yRangeLabel;
 	}
 
 }

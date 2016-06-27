@@ -2,14 +2,6 @@ package GameOfLife;
 
 import javax.swing.SwingUtilities;
 
-///	To do list...
-/*
- * fix image tearing on panels
- * fix concurrent modification of cellsInGame arrrayList
- * add double buffering on panels/frames
- */
-
-
 public class Main {
 
 	public static void main(String[] args) 

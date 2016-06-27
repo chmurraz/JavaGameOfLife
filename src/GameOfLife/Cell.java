@@ -16,7 +16,7 @@ public class Cell
 		if (isAlive)
 		{
 			g.setColor(Color.BLACK);
-			g.fillRect(point.getX()*size, point.getY()*size, size, size);
+			g.drawRect(point.getX()*size, point.getY()*size, size-1, size-1);
 		}
 
 		//g.drawOval(x*size, y*size, size, size);

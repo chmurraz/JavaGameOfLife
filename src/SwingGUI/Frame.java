@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import GameOfLife.Blob;
@@ -125,17 +126,33 @@ public class Frame extends JFrame
 				tslu = 0;
 			//}
 			
+			SwingUtilities.invokeLater(new Runnable()
+			{
+				public void run()
+				{
+					//userPanel.updateCountLabel(gameScreen.getBlob().getLiveCellCount());
+					//userPanel.updateAgeLabel(gameScreen.getBlob().getAge());
+					
+					//userPanel.updateXRangeLabel(gameScreen.getBlob().getBoundary().getMinX(), gameScreen.getBlob().getBoundary().getMaxX());
+					//userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
+					
+					Repaint();
+				}
+			});
+			
 			return null;
 		
 		}
 		
-		public void done()
+		@Override
+		protected void done()
 		{
 			int age = gameScreen.getBlob().getAge();
 			int count = gameScreen.getBlob().getLiveCellCount();
-			Repaint();
 			userPanel.updateAgeLabel(age);
 			userPanel.updateCountLabel(count);
+			userPanel.updateXRangeLabel(gameScreen.getBlob().getBoundary().getMinX(), gameScreen.getBlob().getBoundary().getMaxX());
+			userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
 			userPanel.getAdvanceToggleButton().setSelected(false);
 			userPanel.getAdvanceToggleButton().setText("Advance Simulation");
 		}

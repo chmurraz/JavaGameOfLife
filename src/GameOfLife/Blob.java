@@ -10,8 +10,65 @@ public class Blob
 	private int liveCellCount;
 	private IntPoint2D plotmin;
 	private IntPoint2D plotmax;
+	private BlobBoundaries boundary;
 	private int age;
 
+	public class BlobBoundaries
+	{
+		private int minx;
+		private int maxx;
+		private int miny;
+		private int maxy;
+		
+		public BlobBoundaries()
+		{
+			minx = Integer.MAX_VALUE;
+			maxx = Integer.MIN_VALUE;
+			miny = Integer.MAX_VALUE;
+			maxy = Integer.MIN_VALUE;
+		}
+		
+		public int getMinX()
+		{
+			return minx;
+		}
+		
+		public void setMinX(int val)
+		{
+			minx = val;
+		}
+		
+		public int getMaxX()
+		{
+			return maxx;
+		}
+		
+		public void setMaxX(int val)
+		{
+			maxx = val;
+		}
+		
+		public int getMinY()
+		{
+			return miny;
+		}
+		
+		public void setMinY(int val)
+		{
+			miny = val;
+		}
+		
+		public int getMaxY()
+		{
+			return maxy;
+		}
+		
+		public void setMaxY(int val)
+		{
+			maxy = val;
+		}
+	}
+	
 	private void BuildDeadCells()
 	{
 		//	If there aren't any live cells, don't bother adding dead ones
@@ -62,6 +119,9 @@ public class Blob
 		liveCellCount = 0;
 		cellsInGame = new ArrayList<Cell>();
 		
+		//	Declare an array hold the minx, maxx, miny and maxy values of all cells
+		boundary = new BlobBoundaries();
+		
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();
 		plotmin.setxy(0,0);
@@ -79,6 +139,31 @@ public class Blob
 		Cell addingCell = new Cell(point);
 		cellsInGame.add(addingCell);
 		liveCellCount++;
+		
+		UpdateBoundary(point);
+	}
+	
+	public void UpdateBoundary(IntPoint2D point)
+	{
+		if (point.getX() < boundary.getMinX())
+		{
+			boundary.setMinX(point.getX());
+		}
+		
+		if (point.getX() > boundary.getMaxX())
+		{
+			boundary.setMaxX(point.getX());
+		}
+		
+		if (point.getY() < boundary.getMinY())
+		{
+			boundary.setMinY(point.getY());
+		}
+		
+		if (point.getY() > boundary.getMaxY())
+		{
+			boundary.setMaxY(point.getY());
+		}
 	}
 	
 	public void BirthDeath()
@@ -115,6 +200,17 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(10,8));
 		this.AddLiveCell(new IntPoint2D(10,9));
 		this.AddLiveCell(new IntPoint2D(10,10));
+	}
+	
+	public void BuildBlock()
+	{
+		for (int i = 0; i<=2; i++)
+		{
+			for (int j = 0; j<=2; j++)
+			{
+				this.AddLiveCell(new IntPoint2D(30+i,30+j));
+			}
+		}
 	}
 	
 	public void BuildRandom(double density)
@@ -207,6 +303,12 @@ public class Blob
 		//	cells will be built during the update.
 		
 		liveCellCount = 0;
+		
+		boundary.setMaxX(Integer.MIN_VALUE);
+		boundary.setMinX(Integer.MAX_VALUE);
+		boundary.setMaxY(Integer.MIN_VALUE);
+		boundary.setMinY(Integer.MAX_VALUE);
+		
 		ArrayList<Cell> cellsInGameCopy = new ArrayList<Cell>();
 		
 		for (Cell it:cellsInGame)
@@ -216,6 +318,7 @@ public class Blob
 				liveCellCount++;
 				IntPoint2D newPoint = new IntPoint2D(it.getIntPoint().getX(),it.getIntPoint().getY());
 				Cell newCell = new Cell(newPoint);
+				UpdateBoundary(newPoint);
 				cellsInGameCopy.add(newCell);
 			}
 			it.setNeighborCount(0);
@@ -254,6 +357,11 @@ public class Blob
 	public int getLiveCellCount()
 	{
 		return liveCellCount;
+	}
+	
+	public BlobBoundaries getBoundary()
+	{
+		return boundary;
 	}
 }
 	

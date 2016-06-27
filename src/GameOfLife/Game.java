@@ -42,7 +42,7 @@ public class Game
 		frame.setVisible(true);
 		frame.setResizable(false);
 	}
-	
+/*	
 	public void Run()
 	{
 		while (true) 
@@ -81,7 +81,7 @@ public class Game
 		}
 		
 	}
-	
+*/	
 	public Frame getFrame()
 	{
 		return frame;
