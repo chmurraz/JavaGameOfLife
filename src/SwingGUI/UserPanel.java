@@ -25,6 +25,7 @@ public class UserPanel extends JPanel
 	private JLabel xRangeLabel;
 	private JLabel yRangeLabel;
 	private JButton loadBlobButton;
+	private JButton refreshButton;
 	private JToggleButton advanceToggleButton;
 	private GridBagConstraints constraints;
 	
@@ -48,10 +49,12 @@ public class UserPanel extends JPanel
 		
 		//startBtn = new JButton("Start Simulation");
 		loadBlobButton = new JButton("Load Game");
+		refreshButton = new JButton("Refresh");
 		advanceToggleButton = new JToggleButton("Advance Simulation");
+		
 		advanceToggleButton.setActionCommand("Advance Simulation");
 		advanceToggleButton.setFocusPainted(false);		//	Removes annoying border
-		
+
 		/*
 		startBtn.addActionListener(new ActionListener()
 				{
@@ -128,6 +131,10 @@ public class UserPanel extends JPanel
 		constraints.gridx = 0;
 		constraints.gridy = 5;
 		add(loadBlobButton, constraints);
+		
+		constraints.gridx = 0;
+		constraints.gridy = 6;
+		add(refreshButton, constraints);
 		
 		////	Second Column (x = 1)	////
 		
@@ -236,6 +243,11 @@ public class UserPanel extends JPanel
 	public JLabel getYRangeLabel()
 	{
 		return yRangeLabel;
+	}
+	
+	public JButton getRefreshButton()
+	{
+		return refreshButton;
 	}
 
 }

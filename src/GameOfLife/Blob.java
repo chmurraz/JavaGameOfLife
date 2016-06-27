@@ -138,9 +138,21 @@ public class Blob
 	{
 		Cell addingCell = new Cell(point);
 		cellsInGame.add(addingCell);
-		liveCellCount++;
+		//liveCellCount++;
 		
 		UpdateBoundary(point);
+	}
+	
+	public void UpdateLiveCellCount()
+	{
+		liveCellCount = 0;
+		for(Cell c:this.getCellsInGame())
+		{
+			if(c.getIsAlive())
+			{
+				liveCellCount++;
+			}
+		}
 	}
 	
 	public void UpdateBoundary(IntPoint2D point)
@@ -186,6 +198,7 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(22,5));
 		this.AddLiveCell(new IntPoint2D(22,6));
 		this.AddLiveCell(new IntPoint2D(21,7));
+		UpdateLiveCellCount();
 	}
 	
 	public void BuildOscillator()
@@ -200,17 +213,19 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(10,8));
 		this.AddLiveCell(new IntPoint2D(10,9));
 		this.AddLiveCell(new IntPoint2D(10,10));
+		UpdateLiveCellCount();
 	}
 	
 	public void BuildBlock()
 	{
-		for (int i = 0; i<=2; i++)
+		for (int i = 0; i<=25; i++)
 		{
-			for (int j = 0; j<=2; j++)
+			for (int j = 0; j<=25; j++)
 			{
 				this.AddLiveCell(new IntPoint2D(30+i,30+j));
 			}
 		}
+		UpdateLiveCellCount();
 	}
 	
 	public void BuildRandom(double density)
@@ -239,6 +254,7 @@ public class Blob
 			}while(this.IsCellHere(randomPoint));
 			this.AddLiveCell(randomPoint);
 		}
+		UpdateLiveCellCount();
 		
 	}
 	
@@ -347,6 +363,9 @@ public class Blob
 
 		//	Increment age
 		age++;
+		
+		//	Update liveCell count
+		UpdateLiveCellCount();
 	}
 	
 	public int getAge()
@@ -362,6 +381,11 @@ public class Blob
 	public BlobBoundaries getBoundary()
 	{
 		return boundary;
+	}
+	
+	public ArrayList<Cell> getCellsInGame()
+	{
+		return cellsInGame;
 	}
 }
 	

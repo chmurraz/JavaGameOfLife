@@ -47,23 +47,8 @@ public class Frame extends JFrame
 	 * 
 	 */
 	
-	//	May possibly use this private class (does it need to be static?) if I decide to use publish in the GameRunner
-	private class BlobPublishObject
-	{
-		private final Blob blob;
-		BlobPublishObject(Blob blobVal)
-		{
-			blob = blobVal;
-		}
-		
-		Blob getBlob()
-		{
-			return blob;
-		}
-	}
-	
 	//	TESTING... changing second argument of GameRunner to Blob
-	private class GameRunner extends SwingWorker<Void,BlobPublishObject>
+	private class GameRunner extends SwingWorker<Void,Void>
 	{
 		
 		private long lastFrameTime;
@@ -205,6 +190,7 @@ public class Frame extends JFrame
 		myListener = new MyListener(this);
 		userPanel.getAdvanceToggleButton().addActionListener(myListener);
 		userPanel.getLoadBlobButton().addActionListener(myListener);
+		userPanel.getRefreshButton().addActionListener(myListener);
 		
 		userPanel.addUserListener(new UserListener ()
 		{
