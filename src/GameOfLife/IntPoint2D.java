@@ -1,7 +1,5 @@
 package GameOfLife;
 
-import java.lang.Math;
-
 public class IntPoint2D
 {
 	private int x;

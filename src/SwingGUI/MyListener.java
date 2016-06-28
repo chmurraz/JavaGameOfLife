@@ -33,7 +33,6 @@ public class MyListener implements ActionListener
 			else if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Working...")
 			{
 				frame.getUserPanel().getAdvanceToggleButton().setText("Advance Simulation");
-				//frame.Cancel();
 				frame.setRunning(false);
 			}
 		}
@@ -76,5 +75,4 @@ public class MyListener implements ActionListener
 			frame.getUserPanel().updateCountLabel(count);
 		}
 	}
-
 }

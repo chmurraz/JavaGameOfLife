@@ -23,7 +23,6 @@ public class GameScreen extends JLabel
 		{
 			blob.Draw(g);
 		}
-		//blob.UpdateBlob();
 	}
 	
 	public Blob getBlob()

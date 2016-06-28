@@ -3,49 +3,20 @@ package SwingGUI;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.util.List;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import GameOfLife.Blob;
 import GameOfLife.Game;
 
 public class Frame extends JFrame
 {
-	//private Screen s;
 	private GameScreen gameScreen;
 	private UserPanel userPanel;
 	private GameRunner gameRunner;
 	private MyListener myListener;
 	private Boolean running;
-	//private Blob blob;
-	//private Simulation sim;
-	
-	/*
-	private class Screen extends JLabel
-	{
-		@Override
-		public void paintComponent(Graphics g)
-		{
-			super.paintComponent(g);
-			blob.Draw(g);
-			blob.UpdateBlob();
-		}
-	}
-	*/
-	
-	/*
-	 * 
-	 * FIX THIS BASED ON...
-	 * http://docs.oracle.com/javase/tutorial/uiswing/examples/concurrency/FlipperProject/src/concurrency/Flipper.java
-	 * 
-	 */
 	
 	//	TESTING... changing second argument of GameRunner to Blob
 	private class GameRunner extends SwingWorker<Void,Void>
@@ -62,65 +33,20 @@ public class Frame extends JFrame
 		protected Void doInBackground() throws Exception 
 		{
 			lastFrameTime = System.currentTimeMillis();
-			tslu = PAUSETIME * 2;
-			
-			/*
-			while(!isCancelled())
-			{
-				tslf = (float) ((thisFrameTime - lastFrameTime) / 1000.0);
-				lastFrameTime = thisFrameTime;
-				thisFrameTime = System.currentTimeMillis();
-
-				//	tslf = time since last frame
-				tslu += tslf;
-				if (tslu > PAUSETIME) 
-				{
-					//	Update the blob and repaint
-					gameScreen.getBlob().UpdateBlob();
-					Repaint();
-
-					//	Update the user panel
-					int age = gameScreen.getBlob().getAge();
-					int count = gameScreen.getBlob().getLiveCellCount();
-					userPanel.updateAgeLabel(age);
-					userPanel.updateCountLabel(count);
-
-					tslu = 0;
-				}
-			}
-			*/
-			
+			tslu = PAUSETIME * 2;			
 			tslf = (float) ((thisFrameTime - lastFrameTime) / 1000.0);
 			lastFrameTime = thisFrameTime;
 			thisFrameTime = System.currentTimeMillis();
 
 			//	tslf = time since last frame
 			tslu += tslf;
-			//if (tslu > PAUSETIME) 
-			//{
-				//	Update the blob and repaint
-				gameScreen.getBlob().UpdateBlob();
-				//Repaint();
-
-				//	Update the user panel
-				//int age = gameScreen.getBlob().getAge();
-				//int count = gameScreen.getBlob().getLiveCellCount();
-				//userPanel.updateAgeLabel(age);
-				//userPanel.updateCountLabel(count);
-
-				tslu = 0;
-			//}
+			gameScreen.getBlob().UpdateBlob();
+			tslu = 0;
 			
 			SwingUtilities.invokeLater(new Runnable()
 			{
 				public void run()
 				{
-					//userPanel.updateCountLabel(gameScreen.getBlob().getLiveCellCount());
-					//userPanel.updateAgeLabel(gameScreen.getBlob().getAge());
-					
-					//userPanel.updateXRangeLabel(gameScreen.getBlob().getBoundary().getMinX(), gameScreen.getBlob().getBoundary().getMaxX());
-					//userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
-					
 					Repaint();
 				}
 			});
@@ -141,37 +67,11 @@ public class Frame extends JFrame
 			userPanel.getAdvanceToggleButton().setSelected(false);
 			userPanel.getAdvanceToggleButton().setText("Advance Simulation");
 		}
-	
-		
 	}
-	
-	/*
-	public void actionPerformed(ActionEvent e)
-	{
-		String caption;
-		if ("Start Simulation" == e.getActionCommand())
-		{
-			caption = "Stop Simulation";
-			(gameRunner = new GameRunner()).execute();
-			userPanel.getToggleButton1().setText(caption);
-			userPanel.getToggleButton1().setActionCommand(caption);
-		}
-		if("Stop Simulation" == e.getActionCommand())
-		{
-			caption = "Start Simulation";
-			gameRunner.cancel(true);
-			gameRunner = null;
-			userPanel.getToggleButton1().setText(caption);
-			userPanel.getToggleButton1().setActionCommand(caption);
-		}	
-	}
-	*/
 	
 	public Frame(String title)
 	{
 		super(title);
-		//blob = new Blob();
-		//s = new Screen();
 		gameScreen = new GameScreen();
 		running = false;
 
@@ -192,18 +92,6 @@ public class Frame extends JFrame
 		userPanel.getLoadBlobButton().addActionListener(myListener);
 		userPanel.getRefreshButton().addActionListener(myListener);
 		
-		userPanel.addUserListener(new UserListener ()
-		{
-			public void detailEventOccured(UserEvent event)
-			{
-				//	Get the text from the event
-				//String text = event.getText();
-				
-				//	Append this text into the text panel
-				//textArea.append(text);
-			}
-		});
-		
 		//	Add Swing components to content pane
 		Container c = getContentPane();
 		
@@ -212,30 +100,10 @@ public class Frame extends JFrame
 		c.add(userPanel,BorderLayout.WEST);
 	}
 	
-	
-	//	Is CreateScreen() necessary?
-	/*
-	public void CreateScreen()
-	{
-		s = new Screen();
-		//sim = new Simulation();
-		//blob = new Blob();
-		s.setBounds(0,0,Main.width,Main.height);
-		add(s);
-	}
-	*/
-	
 	public void Repaint()
 	{
 		gameScreen.repaint();
 	}
-	
-	/*
-	public Blob getBlob()
-	{
-		return blob;
-	}
-	*/
 	
 	public GameScreen getGameScreen()
 	{

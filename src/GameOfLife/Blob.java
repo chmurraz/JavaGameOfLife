@@ -1,8 +1,7 @@
 package GameOfLife;
 
-import java.util.ArrayList;
 import java.awt.Graphics;
-import java.lang.Math;
+import java.util.ArrayList;
 
 public class Blob 
 {
@@ -128,19 +127,25 @@ public class Blob
 		plotmax.setxy(100,100);
 		
 		age=0;
-		
-		//frame.setSize(800,600);
-		//frame.setTitle("Hey Guy!");
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void AddLiveCell(IntPoint2D point)
 	{
 		Cell addingCell = new Cell(point);
-		cellsInGame.add(addingCell);
-		//liveCellCount++;
-		
-		UpdateBoundary(point);
+		Boolean cellExistsAtPoint = false;
+		for(Cell c:this.getCellsInGame())
+		{
+			//	Check if there's a live cell at this point
+			if(c.getIntPoint().Equal(point) && c.getIsAlive())
+			{
+				cellExistsAtPoint = true;
+			}
+		}
+		if (!cellExistsAtPoint)
+		{
+			cellsInGame.add(addingCell);
+			UpdateBoundary(point);
+		}
 	}
 	
 	public void UpdateLiveCellCount()
@@ -283,18 +288,10 @@ public class Blob
 	
 	public void Draw(Graphics g)
 	{
-		//	Draw the rectangle on a "JComponent" and add the JComponent to the frame
-		//frame.setVisible(false);
-		
-		//g.drawRect(0, 0, 1, 1);
-		//g.drawRect(0, 1, 1, 1);
-		//g.fillRect(point.getX()*5 + 1, point.getY()*5 + 1, 5 - 1, 5 - 1);
-		
 		for (Cell it:cellsInGame)
 		{
 			it.Draw(g);
 		}
-
 	}
 	
 	public Boolean IsCellHere(IntPoint2D point)
@@ -349,11 +346,6 @@ public class Blob
 		
 		//	Fill the blob with dead cells around every living cell (making sure to avoid any adjacent living cells)
 		BuildDeadCells();
-
-		//	REMOVE the DRAW from the UpdateBlob() routine so that Graphics g can be propogated
-		//Draw(g);
-		//frame.Update(tslf);
-		//frame.Repaint();
 
 		//	Calculate neighbors
 		CountNeighbors();
