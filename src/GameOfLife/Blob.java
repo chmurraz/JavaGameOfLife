@@ -223,9 +223,9 @@ public class Blob
 	
 	public void BuildBlock()
 	{
-		for (int i = 0; i<=25; i++)
+		for (int i = 0; i<=85; i++)
 		{
-			for (int j = 0; j<=25; j++)
+			for (int j = 0; j<=85; j++)
 			{
 				this.AddLiveCell(new IntPoint2D(30+i,30+j));
 			}
@@ -261,6 +261,81 @@ public class Blob
 		}
 		UpdateLiveCellCount();
 		
+	}
+	
+	public void BuildMethuselah()
+	{
+		
+		int xshift = 10;
+		int yshift = 10;
+		this.AddLiveCell(new IntPoint2D(10 + xshift,1 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,2 + yshift));
+		this.AddLiveCell(new IntPoint2D(11 + xshift,1 + yshift));
+		this.AddLiveCell(new IntPoint2D(11 + xshift,2 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,6 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,8 + yshift));
+		this.AddLiveCell(new IntPoint2D(11 + xshift,7 + yshift));
+		this.AddLiveCell(new IntPoint2D(12 + xshift,7 + yshift));
+		UpdateLiveCellCount();
+	}
+	
+	public void BuildAcorn()
+	{
+		int xshift = 76;
+		int yshift = 100;
+		this.AddLiveCell(new IntPoint2D(10 + xshift, 0 + yshift));
+		this.AddLiveCell(new IntPoint2D(11 + xshift, 0 + yshift));
+		this.AddLiveCell(new IntPoint2D(11 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(13 + xshift, 1 + yshift));
+		this.AddLiveCell(new IntPoint2D(14 + xshift, 0 + yshift));
+		this.AddLiveCell(new IntPoint2D(15 + xshift, 0 + yshift));
+		this.AddLiveCell(new IntPoint2D(16 + xshift, 0 + yshift));
+		UpdateLiveCellCount();
+	}
+	
+	public void BuildKokGalaxy()
+	{
+		int xshift = 50;
+		int yshift = 100;
+		
+		this.AddLiveCell(new IntPoint2D(1 + xshift, 3 + yshift));
+		this.AddLiveCell(new IntPoint2D(1 + xshift, 6 + yshift));
+		this.AddLiveCell(new IntPoint2D(1 + xshift, 8 + yshift));
+
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 1 + yshift));
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 6 + yshift));
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 7 + yshift));
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 8 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(3 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(3 + xshift, 9 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(4 + xshift, 1 + yshift));
+		this.AddLiveCell(new IntPoint2D(4 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(4 + xshift, 8 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(6 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(6 + xshift, 8 + yshift));
+		this.AddLiveCell(new IntPoint2D(6 + xshift, 9 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(7 + xshift, 1 + yshift));
+		this.AddLiveCell(new IntPoint2D(7 + xshift, 8 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(8 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(8 + xshift, 3 + yshift));
+		this.AddLiveCell(new IntPoint2D(8 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(8 + xshift, 6 + yshift));
+		this.AddLiveCell(new IntPoint2D(8 + xshift, 8 + yshift));
+		this.AddLiveCell(new IntPoint2D(8 + xshift, 9 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(9 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(9 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(9 + xshift, 7 + yshift));
+
+		
+		UpdateLiveCellCount();
 	}
 	
 	public void CountNeighbors()

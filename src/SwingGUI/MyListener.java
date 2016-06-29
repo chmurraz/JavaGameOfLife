@@ -3,9 +3,6 @@ package SwingGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import GameOfLife.Blob;
-import GameOfLife.Cell;
-
 public class MyListener implements ActionListener
 {
 	private final Frame frame;
@@ -18,29 +15,30 @@ public class MyListener implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		String StartToggleCommand = frame.getUserPanel().getAdvanceToggleButton().getActionCommand();
+		String AdvanceToggleCommand = frame.getUserPanel().getAdvanceToggleButton().getActionCommand();
 		String LoadBlobButtonCommand = frame.getUserPanel().getLoadBlobButton().getActionCommand();
-		String RefreshButtonCommand = frame.getUserPanel().getRefreshButton().getActionCommand();
+		String AutoRunToggleCommand = frame.getUserPanel().getAutoRunToggleButton().getActionCommand();
 		
-		if(e.getActionCommand().equals(StartToggleCommand))
+		if(e.getActionCommand().equals(AdvanceToggleCommand))
 		{
 			if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Advance Simulation")
 			{
 				frame.getUserPanel().getAdvanceToggleButton().setText("Working...");
 				frame.Execute();
-				frame.setRunning(true);
 			}
 			else if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Working...")
 			{
 				frame.getUserPanel().getAdvanceToggleButton().setText("Advance Simulation");
-				frame.setRunning(false);
 			}
 		}
 		
 		if(e.getActionCommand().equals(LoadBlobButtonCommand))
 		{
-			//frame.getGameScreen().getBlob().BuildRandom(0.8);
-			frame.getGameScreen().getBlob().BuildBlock();
+			//frame.getGameScreen().getBlob().BuildRandom(0.5);
+			//frame.getGameScreen().getBlob().BuildBlock();
+			//frame.getGameScreen().getBlob().BuildMethuselah();
+			frame.getGameScreen().getBlob().BuildAcorn();
+			//frame.getGameScreen().getBlob().BuildKokGalaxy();
 			frame.Repaint();
 			frame.getUserPanel().updateAgeLabel(0);
 			
@@ -50,6 +48,7 @@ public class MyListener implements ActionListener
 			frame.getUserPanel().getAdvanceToggleButton().setVisible(true);
 			frame.getUserPanel().getAgeLabel().setVisible(true);
 			frame.getUserPanel().getCountLabel().setVisible(true);
+			frame.getUserPanel().getAutoRunToggleButton().setVisible(true);
 			
 			
 			frame.getUserPanel().updateXRangeLabel(frame.getGameScreen().getBlob().getBoundary().getMinX(), frame.getGameScreen().getBlob().getBoundary().getMaxX());
@@ -58,21 +57,25 @@ public class MyListener implements ActionListener
 			frame.getUserPanel().getYRangeLabel().setVisible(true);			
 		}
 		
-		if(e.getActionCommand().equals(RefreshButtonCommand))
+		if(e.getActionCommand().equals(AutoRunToggleCommand))
 		{
-			int count = frame.getGameScreen().getBlob().getLiveCellCount();
-			frame.getUserPanel().updateCountLabel(count);
-			Blob blob = frame.getGameScreen().getBlob();
-			
-			count = 0;
-			for(Cell c:blob.getCellsInGame())
+			if(frame.getUserPanel().getAutoRunToggleButton().getText() == "Auto Run: Off")
 			{
-				if(c.getIsAlive())
-				{
-					count++;
-				}
+				frame.getUserPanel().getAutoRunToggleButton().setText("Auto Run: On");
+				frame.setRunning(true);
+				frame.getUserPanel().getAdvanceToggleButton().doClick();
+				frame.getUserPanel().getAdvanceToggleButton().setEnabled(false);
+				frame.getUserPanel().getLoadBlobButton().setEnabled(false);
+
 			}
-			frame.getUserPanel().updateCountLabel(count);
+			
+			else if(frame.getUserPanel().getAutoRunToggleButton().getText() == "Auto Run: On")
+			{
+				frame.getUserPanel().getAutoRunToggleButton().setText("Auto Run: Off");
+				frame.getUserPanel().getAdvanceToggleButton().setEnabled(true);
+				frame.getUserPanel().getLoadBlobButton().setEnabled(true);
+				frame.setRunning(false);
+			}
 		}
 	}
 }

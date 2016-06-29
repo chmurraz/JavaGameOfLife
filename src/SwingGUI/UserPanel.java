@@ -19,8 +19,8 @@ public class UserPanel extends JPanel
 	private JLabel xRangeLabel;
 	private JLabel yRangeLabel;
 	private JButton loadBlobButton;
-	private JButton refreshButton;
 	private JToggleButton advanceToggleButton;
+	private JToggleButton autoRunToggleButton;
 	private GridBagConstraints constraints;
 	
 	public UserPanel()
@@ -38,11 +38,20 @@ public class UserPanel extends JPanel
 		yRangeLabel = new JLabel("? <= y <= ?");
 		
 		loadBlobButton = new JButton("Load Game");
-		refreshButton = new JButton("Refresh");
 		advanceToggleButton = new JToggleButton("Advance Simulation");
+		autoRunToggleButton = new JToggleButton("Auto Run: Off");
 		
+		loadBlobButton.setActionCommand("Load Game");
 		advanceToggleButton.setActionCommand("Advance Simulation");
+		autoRunToggleButton.setActionCommand("Auto Run");
+		
+		loadBlobButton.setFocusPainted(false);
 		advanceToggleButton.setFocusPainted(false);		//	Removes annoying border
+		autoRunToggleButton.setFocusPainted(false);
+		
+		/*
+		 * 	Listeners are added in FRAME.JAVA !!
+		 */
 
 		//	GridBagLayout lets you add controls in conjunction with a GridBagConstraints class
 		setLayout(new GridBagLayout());
@@ -83,12 +92,13 @@ public class UserPanel extends JPanel
 		constraints.weighty = 3;
 		constraints.gridx = 0;
 		constraints.gridy = 5;
-		add(loadBlobButton, constraints);
+		add(loadBlobButton, constraints);	
 		
+		constraints.weighty = 3;
 		constraints.gridx = 0;
 		constraints.gridy = 6;
-		add(refreshButton, constraints);
-			
+		add(autoRunToggleButton, constraints);
+		autoRunToggleButton.setVisible(false);
 	}
 	
 	public void updateAgeLabel(int ageVal)
@@ -108,7 +118,7 @@ public class UserPanel extends JPanel
 	
 	public void updateYRangeLabel(int val1, int val2)
 	{
-		yRangeLabel.setText(val1 + "  <= x <= " + val2);
+		yRangeLabel.setText(val1 + "  <= y <= " + val2);
 	}
 	
 	public JToggleButton getAdvanceToggleButton()
@@ -141,8 +151,8 @@ public class UserPanel extends JPanel
 		return yRangeLabel;
 	}
 	
-	public JButton getRefreshButton()
+	public JToggleButton getAutoRunToggleButton()
 	{
-		return refreshButton;
+		return autoRunToggleButton;
 	}
 }

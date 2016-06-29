@@ -15,7 +15,7 @@ public class Cell
 	{
 		if (isAlive)
 		{
-			g.setColor(Color.BLACK);
+			g.setColor(Color.RED);
 			g.fillRect(point.getX()*size, point.getY()*size, size, size);
 		}
 	}

@@ -15,8 +15,8 @@ public class Frame extends JFrame
 	private GameScreen gameScreen;
 	private UserPanel userPanel;
 	private GameRunner gameRunner;
-	private MyListener myListener;
 	private Boolean running;
+	private MyListener myListener;
 	
 	//	TESTING... changing second argument of GameRunner to Blob
 	private class GameRunner extends SwingWorker<Void,Void>
@@ -66,6 +66,10 @@ public class Frame extends JFrame
 			userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
 			userPanel.getAdvanceToggleButton().setSelected(false);
 			userPanel.getAdvanceToggleButton().setText("Advance Simulation");
+			if(running)
+			{
+				Execute();
+			}
 		}
 	}
 	
@@ -90,8 +94,8 @@ public class Frame extends JFrame
 		myListener = new MyListener(this);
 		userPanel.getAdvanceToggleButton().addActionListener(myListener);
 		userPanel.getLoadBlobButton().addActionListener(myListener);
-		userPanel.getRefreshButton().addActionListener(myListener);
-		
+		userPanel.getAutoRunToggleButton().addActionListener(myListener);
+				
 		//	Add Swing components to content pane
 		Container c = getContentPane();
 		
