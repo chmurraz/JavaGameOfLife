@@ -40,6 +40,8 @@ public class MyListener implements ActionListener
 			frame.getGameScreen().getBlob().BuildAcorn();
 			//frame.getGameScreen().getBlob().BuildKokGalaxy();
 			//frame.getGameScreen().getBlob().BuildOscillator();
+			//frame.getGameScreen().getBlob().BuildSimple();
+			//frame.getGameScreen().getBlob().BuildGlider();
 			frame.Repaint();
 			frame.getUserPanel().updateAgeLabel(0);
 			
@@ -67,7 +69,6 @@ public class MyListener implements ActionListener
 				frame.getUserPanel().getAdvanceToggleButton().doClick();
 				frame.getUserPanel().getAdvanceToggleButton().setEnabled(false);
 				frame.getUserPanel().getLoadBlobButton().setEnabled(false);
-
 			}
 			
 			else if(frame.getUserPanel().getAutoRunToggleButton().getText() == "Auto Run: On")

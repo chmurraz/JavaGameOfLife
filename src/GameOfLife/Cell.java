@@ -78,19 +78,19 @@ public class Cell
 		age = ageVal;
 		if(age == 0)
 		{
-			color = Color.GREEN;
+			color = Color.BLACK;
 		}
 		if(age == 1)
 		{
-			color = Color.BLUE;
+			color = Color.BLACK;
 		}
 		if(age == 2)
 		{
-			color = Color.YELLOW;
+			color = Color.BLACK;
 		}
 		if(age == 3)
 		{
-			color = Color.RED;
+			color = Color.BLACK;
 		}
 		if(age > 3)
 		{
