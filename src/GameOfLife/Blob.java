@@ -190,9 +190,17 @@ public class Blob
 			if(it.getIsAlive() && (it.getNeighborCount()<2 || it.getNeighborCount()>3))
 			{
 				it.setIsAlive(false);
+				it.setAge(-1);
 			}
 			if(!it.getIsAlive() && it.getNeighborCount() == 3)
+			{
 				it.setIsAlive(true);
+				it.setAge(0);
+			}
+			if(it.getIsAlive() && it.getNeighborCount() == 3)
+			{
+				it.setAge(it.getAge() + 1);	
+			}
 		}
 	}
 	
@@ -208,16 +216,18 @@ public class Blob
 	
 	public void BuildOscillator()
 	{
-		this.AddLiveCell(new IntPoint2D(10,1));
-		this.AddLiveCell(new IntPoint2D(10,2));
-		this.AddLiveCell(new IntPoint2D(10,3));
-		this.AddLiveCell(new IntPoint2D(10,4));
-		this.AddLiveCell(new IntPoint2D(10,5));
-		this.AddLiveCell(new IntPoint2D(10,6));
-		this.AddLiveCell(new IntPoint2D(10,7));
-		this.AddLiveCell(new IntPoint2D(10,8));
-		this.AddLiveCell(new IntPoint2D(10,9));
-		this.AddLiveCell(new IntPoint2D(10,10));
+		int xshift = 40;
+		int yshift = 50;
+		this.AddLiveCell(new IntPoint2D(10 + xshift,1 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,2 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,3 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,4 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,5 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,6 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,7 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,8 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,9 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift,10 + yshift));
 		UpdateLiveCellCount();
 	}
 	
@@ -406,6 +416,7 @@ public class Blob
 				liveCellCount++;
 				IntPoint2D newPoint = new IntPoint2D(it.getIntPoint().getX(),it.getIntPoint().getY());
 				Cell newCell = new Cell(newPoint);
+				newCell.setAge(it.getAge());
 				UpdateBoundary(newPoint);
 				cellsInGameCopy.add(newCell);
 			}
@@ -425,10 +436,10 @@ public class Blob
 		//	Calculate neighbors
 		CountNeighbors();
 
-		//	Add any newly spawned cells and remove dying cells from the blob
+		//	Add any newly spawned cells and remove dying cells from the blob and update cell ages
 		BirthDeath();
 
-		//	Increment age
+		//	Increment age of the blob
 		age++;
 		
 		//	Update liveCell count

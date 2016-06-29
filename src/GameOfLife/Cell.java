@@ -10,12 +10,14 @@ public class Cell
 	private int neighborCount;
 	private Boolean isAlive;
 	static int size = 5;
+	private int age;
+	private Color color;
 	
 	public void Draw(Graphics g)
 	{
 		if (isAlive)
 		{
-			g.setColor(Color.RED);
+			g.setColor(color);
 			g.fillRect(point.getX()*size, point.getY()*size, size, size);
 		}
 	}
@@ -25,6 +27,8 @@ public class Cell
 		point = pointVal;
 		neighborCount = 0;
 		isAlive = true;
+		age = 0;
+		color = Color.GREEN;
 	}
 	
 	public Cell(int xVal, int yVal)
@@ -62,5 +66,35 @@ public class Cell
 	public IntPoint2D getIntPoint()
 	{
 		return point;
+	}
+	
+	public int getAge()
+	{
+		return age;
+	}
+	
+	public void setAge(int ageVal)
+	{
+		age = ageVal;
+		if(age == 0)
+		{
+			color = Color.GREEN;
+		}
+		if(age == 1)
+		{
+			color = Color.BLUE;
+		}
+		if(age == 2)
+		{
+			color = Color.YELLOW;
+		}
+		if(age == 3)
+		{
+			color = Color.RED;
+		}
+		if(age > 3)
+		{
+			color = Color.BLACK;
+		}
 	}
 }

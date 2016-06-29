@@ -52,7 +52,6 @@ public class Frame extends JFrame
 			});
 			
 			return null;
-		
 		}
 		
 		@Override

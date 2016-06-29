@@ -39,6 +39,7 @@ public class MyListener implements ActionListener
 			//frame.getGameScreen().getBlob().BuildMethuselah();
 			frame.getGameScreen().getBlob().BuildAcorn();
 			//frame.getGameScreen().getBlob().BuildKokGalaxy();
+			//frame.getGameScreen().getBlob().BuildOscillator();
 			frame.Repaint();
 			frame.getUserPanel().updateAgeLabel(0);
 			
