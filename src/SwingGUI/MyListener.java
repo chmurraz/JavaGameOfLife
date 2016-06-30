@@ -44,20 +44,21 @@ public class MyListener implements ActionListener
 			//frame.getGameScreen().getBlob().BuildGlider();
 			frame.Repaint();
 			frame.getUserPanel().updateAgeLabel(0);
+			frame.getUserPanel().updateEscapedCellsCount(0);
 			
 			int countVal = frame.getGameScreen().getBlob().getLiveCellCount();
 			frame.getUserPanel().updateCountLabel(countVal);
 			
-			frame.getUserPanel().getAdvanceToggleButton().setVisible(true);
-			frame.getUserPanel().getAgeLabel().setVisible(true);
-			frame.getUserPanel().getCountLabel().setVisible(true);
-			frame.getUserPanel().getAutoRunToggleButton().setVisible(true);
+			frame.getUserPanel().getAdvanceToggleButton().setEnabled(true);
+			frame.getUserPanel().getAgeLabel().setEnabled(true);
+			frame.getUserPanel().getCountLabel().setEnabled(true);
+			frame.getUserPanel().getAutoRunToggleButton().setEnabled(true);
 			
 			
 			frame.getUserPanel().updateXRangeLabel(frame.getGameScreen().getBlob().getBoundary().getMinX(), frame.getGameScreen().getBlob().getBoundary().getMaxX());
 			frame.getUserPanel().updateYRangeLabel(frame.getGameScreen().getBlob().getBoundary().getMinY(), frame.getGameScreen().getBlob().getBoundary().getMaxY());
-			frame.getUserPanel().getXRangeLabel().setVisible(true);
-			frame.getUserPanel().getYRangeLabel().setVisible(true);			
+			frame.getUserPanel().getXRangeLabel().setEnabled(true);
+			frame.getUserPanel().getYRangeLabel().setEnabled(true);			
 		}
 		
 		if(e.getActionCommand().equals(AutoRunToggleCommand))

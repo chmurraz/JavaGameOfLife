@@ -9,8 +9,14 @@ public class Blob
 	private int liveCellCount;
 	private IntPoint2D plotmin;
 	private IntPoint2D plotmax;
+	private IntPoint2D centroid;
+	private double averageCentroidDistance;
+	private double centroidVariance;
 	private BlobBoundaries boundary;
 	private int age;
+	private Boolean removeSixSigma;
+	private Boolean drawCentroid;
+	private int escapedCells;
 
 	public class BlobBoundaries
 	{
@@ -123,10 +129,15 @@ public class Blob
 		
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();
+		centroid = new IntPoint2D();
 		plotmin.setxy(0,0);
 		plotmax.setxy(100,100);
+		centroid.setxy(0, 0);
+		removeSixSigma = true;
+		drawCentroid = true;
 		
 		age=0;
+		escapedCells = 0;
 	}
 	
 	public void AddLiveCell(IntPoint2D point)
@@ -455,6 +466,78 @@ public class Blob
 		
 		//	Update liveCell count
 		UpdateLiveCellCount();
+		
+		//	Update the blob centroid
+		UpdateCentroid();
+		
+		//	Remove cells further than +/- 6 sigma from centroid.  Consider these cells to have escaped
+		RemoveOutliers();
+	}
+	
+	public void RemoveOutliers()
+	{
+		if (removeSixSigma)
+		{
+			for (Cell it:cellsInGame)
+			{
+				if(it.getIsAlive())
+				{
+					//	Get the distance of the cell from the centroid
+					double distance = it.getIntPoint().Distance(centroid);
+					double sixSigma = 6*Math.pow(centroidVariance, 0.5);
+					
+					if (Math.abs(distance - averageCentroidDistance) > sixSigma)
+					{
+						it.setIsAlive(false);
+						liveCellCount--;
+						escapedCells++;
+					}
+				}
+			}
+		}
+	}
+	
+	public void UpdateCentroid()
+	{
+		centroid.setxy(0, 0);
+		int n = liveCellCount;
+		
+		ArrayList<Cell> aliveCells = new ArrayList<Cell>();
+		for (Cell it:cellsInGame)
+		{
+			if(it.getIsAlive())
+			{
+				aliveCells.add(it);
+			}
+		}
+		
+		//	Calculate the centroid of the blob
+		for (Cell it:aliveCells)
+		{
+			centroid.setxy(centroid.getX() + it.getIntPoint().getX()/n,
+						centroid.getY() + it.getIntPoint().getY()/n);
+		}
+		
+		//	Update the distances for each cell to the centroid
+		averageCentroidDistance = 0;
+		for (Cell it:aliveCells)
+		{
+			double distance = it.getIntPoint().Distance(centroid);
+			it.setCentroidDistance(distance);
+			averageCentroidDistance += distance/n;
+		}
+		
+		centroidVariance = 0;
+		for(Cell it:aliveCells)
+		{
+			double distance = it.getIntPoint().Distance(centroid);
+			centroidVariance += Math.pow(distance - averageCentroidDistance, 2)/n;
+		}
+		
+		if (drawCentroid)
+		{
+			
+		}
 	}
 	
 	public int getAge()
@@ -467,6 +550,11 @@ public class Blob
 		return liveCellCount;
 	}
 	
+	public IntPoint2D getCentroid()
+	{
+		return centroid;
+	}
+	
 	public BlobBoundaries getBoundary()
 	{
 		return boundary;
@@ -475,6 +563,11 @@ public class Blob
 	public ArrayList<Cell> getCellsInGame()
 	{
 		return cellsInGame;
+	}
+	
+	public int getEscapedCells()
+	{
+		return escapedCells;
 	}
 }
 	

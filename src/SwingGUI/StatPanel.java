@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-public class UserPanel extends JPanel
+public class StatPanel extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 
@@ -19,27 +19,25 @@ public class UserPanel extends JPanel
 	private JLabel xRangeLabel;
 	private JLabel yRangeLabel;
 	private JLabel centroidLabel;
-	private JLabel escapedCellsLabel;
 	private JButton loadBlobButton;
 	private JToggleButton advanceToggleButton;
 	private JToggleButton autoRunToggleButton;
 	private GridBagConstraints constraints;
 	
-	public UserPanel()
+	public StatPanel()
 	{
 		Dimension size = getPreferredSize();
 		size.width = 250;
 		setPreferredSize(size);
 		
 		//	Adds a beveled border
-		setBorder(BorderFactory.createTitledBorder("Simulation Data"));
+		setBorder(BorderFactory.createTitledBorder("Statistics Data"));
 		
-		ageLabel = new JLabel("Blob Age: N/A");
-		countLabel = new JLabel("Cell Count: N/A");
-		xRangeLabel = new JLabel("N/A <= x <= N/A");
-		yRangeLabel = new JLabel("N/A <= y <= N/A");
-		centroidLabel = new JLabel("Centroid: N/A");
-		escapedCellsLabel = new JLabel("Escaped Cells: N/A");
+		ageLabel = new JLabel("Blob Age: ");
+		countLabel = new JLabel("Cell Count: ");
+		xRangeLabel = new JLabel("? <= x <= ?");
+		yRangeLabel = new JLabel("? <= y <= ?");
+		centroidLabel = new JLabel("Centroid: ");
 		
 		loadBlobButton = new JButton("Load Cells");
 		advanceToggleButton = new JToggleButton("Advance Simulation");
@@ -78,34 +76,29 @@ public class UserPanel extends JPanel
 		countLabel.setVisible(true);
 		
 		constraints.gridx = 0;
-		constraints.gridy = 3;
-		add(escapedCellsLabel,constraints);
-		escapedCellsLabel.setVisible(true);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 4;
+		constraints.gridy = 2;
 		add(xRangeLabel,constraints);
 		xRangeLabel.setVisible(true);
 		
 		constraints.gridx = 0;
-		constraints.gridy = 5;
+		constraints.gridy = 3;
 		add(yRangeLabel,constraints);
 		yRangeLabel.setVisible(true);
 		
 		constraints.weighty = 3;
 		constraints.gridx = 0;
-		constraints.gridy = 6;
+		constraints.gridy = 4;
 		add(advanceToggleButton,constraints);
 		advanceToggleButton.setVisible(true);
 		
 		constraints.weighty = 3;
 		constraints.gridx = 0;
-		constraints.gridy = 7;
+		constraints.gridy = 5;
 		add(loadBlobButton, constraints);	
 		
 		constraints.weighty = 3;
 		constraints.gridx = 0;
-		constraints.gridy = 8;
+		constraints.gridy = 6;
 		add(autoRunToggleButton, constraints);
 		autoRunToggleButton.setVisible(true);
 	}
@@ -128,11 +121,6 @@ public class UserPanel extends JPanel
 	public void updateYRangeLabel(int val1, int val2)
 	{
 		yRangeLabel.setText(val1 + "  <= y <= " + val2);
-	}
-	
-	public void updateEscapedCellsCount(int val)
-	{
-		escapedCellsLabel.setText("Escaped Cells: " + val);
 	}
 	
 	public JToggleButton getAdvanceToggleButton()
@@ -163,11 +151,6 @@ public class UserPanel extends JPanel
 	public JLabel getYRangeLabel()
 	{
 		return yRangeLabel;
-	}
-	
-	public JLabel getEscapedCellsLabel()
-	{
-		return escapedCellsLabel;
 	}
 	
 	public JToggleButton getAutoRunToggleButton()

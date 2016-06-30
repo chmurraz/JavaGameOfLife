@@ -41,6 +41,16 @@ public class IntPoint2D
 		return Math.max(x, y);
 	}
 	
+	public double Distance(IntPoint2D other)
+	{
+		int a = this.getX() - other.getX();
+		int b = this.getY() - other.getY();
+		
+		double a2 = Math.pow(a, 2);
+		double b2 = Math.pow(b, 2);
+		return Math.pow(a2 + b2, 0.5);
+	}
+				
 	public Boolean Equal(IntPoint2D other)
 	{
 		if(this.getX() == other.getX() && this.getY() == other.getY())

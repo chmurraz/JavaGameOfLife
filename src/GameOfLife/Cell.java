@@ -12,6 +12,7 @@ public class Cell
 	static int size = 5;
 	private int age;
 	private Color color;
+	private double centroidDistance;
 	
 	public void Draw(Graphics g)
 	{
@@ -28,7 +29,8 @@ public class Cell
 		neighborCount = 0;
 		isAlive = true;
 		age = 0;
-		color = Color.GREEN;
+		color = Color.BLACK;
+		centroidDistance = 0;
 	}
 	
 	public Cell(int xVal, int yVal)
@@ -36,6 +38,16 @@ public class Cell
 		point.setxy(xVal, yVal);
 		neighborCount = 0;
 		isAlive = true;
+	}
+	
+	public void setCentroidDistance(double val)
+	{
+		centroidDistance = val;
+	}
+	
+	public double getCentroidDistance()
+	{
+		return centroidDistance;
 	}
 
 	public void setPoint(IntPoint2D pointVal)

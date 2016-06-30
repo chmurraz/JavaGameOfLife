@@ -65,6 +65,7 @@ public class Frame extends JFrame
 			userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
 			userPanel.getAdvanceToggleButton().setSelected(false);
 			userPanel.getAdvanceToggleButton().setText("Advance Simulation");
+			userPanel.updateEscapedCellsCount(gameScreen.getBlob().getEscapedCells());
 			if(running)
 			{
 				Execute();
@@ -89,8 +90,8 @@ public class Frame extends JFrame
 		//gameScreen.getBlob().BuildRandom(0.5);
 		add(gameScreen);
 		
-		userPanel = new UserPanel();
 		myListener = new MyListener(this);
+		userPanel = new UserPanel();
 		userPanel.getAdvanceToggleButton().addActionListener(myListener);
 		userPanel.getLoadBlobButton().addActionListener(myListener);
 		userPanel.getAutoRunToggleButton().addActionListener(myListener);
