@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 
 public class UserPanel extends JPanel
@@ -27,6 +28,7 @@ public class UserPanel extends JPanel
 	
 	public UserPanel()
 	{
+		
 		Dimension size = getPreferredSize();
 		size.width = 250;
 		setPreferredSize(size);
