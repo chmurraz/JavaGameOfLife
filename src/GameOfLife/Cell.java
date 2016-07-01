@@ -9,7 +9,7 @@ public class Cell
 	private IntPoint2D point = new IntPoint2D();
 	private int neighborCount;
 	private Boolean isAlive;
-	static int size = 5;
+	static int size = 3;
 	private int age;
 	private Color color;
 	private double centroidDistance;
