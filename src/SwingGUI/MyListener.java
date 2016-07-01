@@ -3,6 +3,9 @@ package SwingGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import GameOfLife.Blob.Centroid;
+import GameOfLife.IntPoint2D;
+
 public class MyListener implements ActionListener
 {
 	private final Frame frame;
@@ -46,19 +49,22 @@ public class MyListener implements ActionListener
 			frame.getUserPanel().updateAgeLabel(0);
 			frame.getUserPanel().updateEscapedCellsCount(0);
 			
+			//	Initialize statistics
 			int countVal = frame.getGameScreen().getBlob().getLiveCellCount();
 			frame.getUserPanel().updateCountLabel(countVal);
 			
-			frame.getUserPanel().getAdvanceToggleButton().setEnabled(true);
-			frame.getUserPanel().getAgeLabel().setEnabled(true);
-			frame.getUserPanel().getCountLabel().setEnabled(true);
-			frame.getUserPanel().getAutoRunToggleButton().setEnabled(true);
+			Centroid point = frame.getGameScreen().getBlob().getCentroid();
+			frame.getUserPanel().updateCentroid(point);
 			
+			double averageCentroidDist = frame.getGameScreen().getBlob().getAverageCentroidDistance();
+			frame.getUserPanel().updateAverageDistanceToCentroidLabel(averageCentroidDist);
+			double varianceCentroidDist = frame.getGameScreen().getBlob().getVarianceCentroidDistance();
+			frame.getUserPanel().updateVarianceDistanceToCentroidLabel(varianceCentroidDist);
+			
+			frame.getUserPanel().getAdvanceToggleButton().setEnabled(true);			
 			
 			frame.getUserPanel().updateXRangeLabel(frame.getGameScreen().getBlob().getBoundary().getMinX(), frame.getGameScreen().getBlob().getBoundary().getMaxX());
 			frame.getUserPanel().updateYRangeLabel(frame.getGameScreen().getBlob().getBoundary().getMinY(), frame.getGameScreen().getBlob().getBoundary().getMaxY());
-			frame.getUserPanel().getXRangeLabel().setEnabled(true);
-			frame.getUserPanel().getYRangeLabel().setEnabled(true);			
 		}
 		
 		if(e.getActionCommand().equals(AutoRunToggleCommand))

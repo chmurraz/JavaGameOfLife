@@ -66,6 +66,9 @@ public class Frame extends JFrame
 			userPanel.getAdvanceToggleButton().setSelected(false);
 			userPanel.getAdvanceToggleButton().setText("Advance Simulation");
 			userPanel.updateEscapedCellsCount(gameScreen.getBlob().getEscapedCells());
+			userPanel.updateCentroid(gameScreen.getBlob().getCentroid());
+			userPanel.updateAverageDistanceToCentroidLabel(gameScreen.getBlob().getAverageCentroidDistance());
+			userPanel.updateVarianceDistanceToCentroidLabel(gameScreen.getBlob().getVarianceCentroidDistance());
 			if(running)
 			{
 				Execute();
