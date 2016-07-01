@@ -2,7 +2,6 @@ package GameOfLife;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import SwingGUI.Frame;
 
 public class Game
@@ -10,6 +9,7 @@ public class Game
 	static int width;
 	static int height;
 	static float PAUSETIME = 0.05f;
+
 	
 	private Frame frame;
 	

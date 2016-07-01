@@ -9,15 +9,47 @@ public class Blob
 	private int liveCellCount;
 	private IntPoint2D plotmin;
 	private IntPoint2D plotmax;
-	private IntPoint2D centroid;
+	private Centroid centroid;
 	private double averageCentroidDistance;
-	private double centroidVariance;
+	private double varianceCentroidDistance;
 	private BlobBoundaries boundary;
 	private int age;
 	private Boolean removeSixSigma;
 	private Boolean drawCentroid;
 	private int escapedCells;
 
+	public class Centroid
+	{
+		private double x;
+		private double y;
+		
+		public Centroid()
+		{
+			x = 0.00;
+			y = 0.00;
+		}
+		
+		public double getX()
+		{
+			return x;
+		}
+		
+		public double getY()
+		{
+			return y;
+		}
+		
+		public void setX(double xVal)
+		{
+			x = xVal;
+		}
+		
+		public void setY(double yVal)
+		{
+			y = yVal;
+		}
+	}
+	
 	public class BlobBoundaries
 	{
 		private int minx;
@@ -129,10 +161,9 @@ public class Blob
 		
 		plotmin = new IntPoint2D();
 		plotmax = new IntPoint2D();
-		centroid = new IntPoint2D();
+		centroid = new Centroid();
 		plotmin.setxy(0,0);
 		plotmax.setxy(100,100);
-		centroid.setxy(0, 0);
 		removeSixSigma = true;
 		drawCentroid = true;
 		
@@ -281,7 +312,7 @@ public class Blob
 			this.AddLiveCell(randomPoint);
 		}
 		UpdateLiveCellCount();
-		
+		UpdateCentroidStats();
 	}
 	
 	public void BuildMethuselah()
@@ -298,6 +329,7 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(11 + xshift,7 + yshift));
 		this.AddLiveCell(new IntPoint2D(12 + xshift,7 + yshift));
 		UpdateLiveCellCount();
+		UpdateCentroidStats();
 	}
 	
 	public void BuildAcorn()
@@ -312,6 +344,7 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(15 + xshift, 0 + yshift));
 		this.AddLiveCell(new IntPoint2D(16 + xshift, 0 + yshift));
 		UpdateLiveCellCount();
+		UpdateCentroidStats();
 	}
 	
 	public void BuildSimple()
@@ -323,6 +356,7 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(11 + xshift, 0 + yshift));
 		this.AddLiveCell(new IntPoint2D(11 + xshift, 1 + yshift));
 		UpdateLiveCellCount();
+		UpdateCentroidStats();
 	}
 	
 	public void BuildKokGalaxy()
@@ -366,8 +400,8 @@ public class Blob
 		this.AddLiveCell(new IntPoint2D(9 + xshift, 4 + yshift));
 		this.AddLiveCell(new IntPoint2D(9 + xshift, 7 + yshift));
 
-		
 		UpdateLiveCellCount();
+		UpdateCentroidStats();
 	}
 	
 	public void CountNeighbors()
@@ -467,8 +501,8 @@ public class Blob
 		//	Update liveCell count
 		UpdateLiveCellCount();
 		
-		//	Update the blob centroid
-		UpdateCentroid();
+		//	Update the blob centroid statistics
+		UpdateCentroidStats();
 		
 		//	Remove cells further than +/- 6 sigma from centroid.  Consider these cells to have escaped
 		RemoveOutliers();
@@ -483,8 +517,12 @@ public class Blob
 				if(it.getIsAlive())
 				{
 					//	Get the distance of the cell from the centroid
-					double distance = it.getIntPoint().Distance(centroid);
-					double sixSigma = 6*Math.pow(centroidVariance, 0.5);
+					IntPoint2D point = it.getIntPoint();
+					
+					//	Calculate x^2 + y^2 and then the square root of that
+					double distance = Math.pow(point.getX()-centroid.getX(), 2) + Math.pow(point.getY()-centroid.getY(), 2);
+					distance = Math.pow(distance, 0.5);
+					double sixSigma = 6*Math.pow(varianceCentroidDistance, 0.5);
 					
 					if (Math.abs(distance - averageCentroidDistance) > sixSigma)
 					{
@@ -497,9 +535,10 @@ public class Blob
 		}
 	}
 	
-	public void UpdateCentroid()
+	public void UpdateCentroidStats()
 	{
-		centroid.setxy(0, 0);
+		centroid.setX(0.00);
+		centroid.setY(0.00);
 		int n = liveCellCount;
 		
 		ArrayList<Cell> aliveCells = new ArrayList<Cell>();
@@ -514,24 +553,34 @@ public class Blob
 		//	Calculate the centroid of the blob
 		for (Cell it:aliveCells)
 		{
-			centroid.setxy(centroid.getX() + it.getIntPoint().getX()/n,
-						centroid.getY() + it.getIntPoint().getY()/n);
+			centroid.setX(centroid.getX() + (double)it.getIntPoint().getX()/n);
+			centroid.setY(centroid.getY() + (double)it.getIntPoint().getY()/n);
 		}
 		
 		//	Update the distances for each cell to the centroid
 		averageCentroidDistance = 0;
 		for (Cell it:aliveCells)
 		{
-			double distance = it.getIntPoint().Distance(centroid);
+			IntPoint2D point = it.getIntPoint();
+			
+			//	Calculate x^2 + y^2 and then the square root of that
+			double distance = Math.pow(point.getX()-centroid.getX(), 2) + Math.pow(point.getY()-centroid.getY(), 2);
+			distance = Math.pow(distance, 0.5);
+			
 			it.setCentroidDistance(distance);
 			averageCentroidDistance += distance/n;
 		}
 		
-		centroidVariance = 0;
+		varianceCentroidDistance = 0;
 		for(Cell it:aliveCells)
 		{
-			double distance = it.getIntPoint().Distance(centroid);
-			centroidVariance += Math.pow(distance - averageCentroidDistance, 2)/n;
+			IntPoint2D point = it.getIntPoint();
+			
+			//	Calculate x^2 + y^2 and then the square root of that
+			double distance = Math.pow(point.getX()-centroid.getX(), 2) + Math.pow(point.getY()-centroid.getY(), 2);
+			distance = Math.pow(distance, 0.5);
+
+			varianceCentroidDistance += Math.pow(distance - averageCentroidDistance, 2)/n;
 		}
 		
 		if (drawCentroid)
@@ -550,7 +599,7 @@ public class Blob
 		return liveCellCount;
 	}
 	
-	public IntPoint2D getCentroid()
+	public Centroid getCentroid()
 	{
 		return centroid;
 	}
@@ -568,6 +617,16 @@ public class Blob
 	public int getEscapedCells()
 	{
 		return escapedCells;
+	}
+	
+	public double getAverageCentroidDistance()
+	{
+		return averageCentroidDistance;
+	}
+	
+	public double getVarianceCentroidDistance()
+	{
+		return varianceCentroidDistance;
 	}
 }
 	
