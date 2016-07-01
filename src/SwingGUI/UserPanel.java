@@ -1,5 +1,6 @@
 package SwingGUI;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 
 public class UserPanel extends JPanel
@@ -25,12 +27,25 @@ public class UserPanel extends JPanel
 	private JToggleButton autoRunToggleButton;
 	private GridBagConstraints constraints;
 	
+	private JSplitPane splitPaneH;
+	private JPanel statPanel;
+	private JPanel buttonPanel;
+	
 	public UserPanel()
 	{
 		Dimension size = getPreferredSize();
 		size.width = 250;
 		setPreferredSize(size);
 		
+		statPanel = new JPanel();
+		statPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
+		buttonPanel = new JPanel();
+		buttonPanel.setBorder(BorderFactory.createTitledBorder("User Inputs"));
+		
+	    splitPaneH = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT );
+		splitPaneH.setTopComponent(statPanel);
+		splitPaneH.setBottomComponent(buttonPanel);
+	    
 		//	Adds a beveled border
 		setBorder(BorderFactory.createTitledBorder("Simulation Data"));
 		
