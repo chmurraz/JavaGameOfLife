@@ -334,7 +334,7 @@ public class Blob
 	
 	public void BuildAcorn()
 	{
-		int xshift = 76;
+		int xshift = 150;
 		int yshift = 100;
 		this.AddLiveCell(new IntPoint2D(10 + xshift, 0 + yshift));
 		this.AddLiveCell(new IntPoint2D(11 + xshift, 0 + yshift));
