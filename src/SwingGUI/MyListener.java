@@ -38,9 +38,9 @@ public class MyListener implements ActionListener
 		if(e.getActionCommand().equals(LoadBlobButtonCommand))
 		{
 			//frame.getGameScreen().getBlob().BuildRandom(0.5);
-			//frame.getGameScreen().getBlob().BuildBlock();
+			frame.getGameScreen().getBlob().BuildBlock();
 			//frame.getGameScreen().getBlob().BuildMethuselah();
-			frame.getGameScreen().getBlob().BuildAcorn();
+			//frame.getGameScreen().getBlob().BuildAcorn();
 			//frame.getGameScreen().getBlob().BuildKokGalaxy();
 			//frame.getGameScreen().getBlob().BuildOscillator();
 			//frame.getGameScreen().getBlob().BuildSimple();

@@ -275,11 +275,13 @@ public class Blob
 	
 	public void BuildBlock()
 	{
+		int xshift = 80;
+		int yshift = 80;
 		for (int i = 0; i<=85; i++)
 		{
 			for (int j = 0; j<=85; j++)
 			{
-				this.AddLiveCell(new IntPoint2D(30+i,30+j));
+				this.AddLiveCell(new IntPoint2D(xshift + i, yshift + j));
 			}
 		}
 		UpdateLiveCellCount();
