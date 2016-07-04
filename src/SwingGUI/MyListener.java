@@ -1,5 +1,7 @@
 package SwingGUI;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +23,58 @@ public class MyListener implements ActionListener
 		String AdvanceToggleCommand = frame.getUserPanel().getAdvanceToggleButton().getActionCommand();
 		String LoadBlobButtonCommand = frame.getUserPanel().getLoadBlobButton().getActionCommand();
 		String AutoRunToggleCommand = frame.getUserPanel().getAutoRunToggleButton().getActionCommand();
+		String ShowCentroidToggleCommand = frame.getUserPanel().getShowCentroid().getActionCommand();
+		
+		String Glider = frame.getLoadCellPanel().getLoadGlider().getActionCommand();
+		String Oscillator = frame.getLoadCellPanel().getLoadOscillator().getActionCommand();
+		String Block = frame.getLoadCellPanel().getLoadBlock().getActionCommand();
+		String Methuselah = frame.getLoadCellPanel().getLoadMethuselah().getActionCommand();
+		String Acorn = frame.getLoadCellPanel().getLoadAcorn().getActionCommand();
+		String Simple = frame.getLoadCellPanel().getLoadSimple().getActionCommand();
+		String Galaxy = frame.getLoadCellPanel().getLoadKokGalaxy().getActionCommand();
+		String Random = frame.getLoadCellPanel().getLoadRandom().getActionCommand();
+		
+		
+		if(e.getActionCommand().equals(Glider))
+		{
+			frame.getGameScreen().getBlob().BuildGlider();
+			CellBuildCleanUp();
+		}
+		if(e.getActionCommand().equals(Oscillator))
+		{
+			frame.getGameScreen().getBlob().BuildOscillator();
+			CellBuildCleanUp();
+		}
+		if(e.getActionCommand().equals(Block))
+		{
+			frame.getGameScreen().getBlob().BuildBlock();
+			CellBuildCleanUp();
+		}
+		if(e.getActionCommand().equals(Methuselah))
+		{
+			frame.getGameScreen().getBlob().BuildMethuselah();
+			CellBuildCleanUp();
+		}
+		if(e.getActionCommand().equals(Acorn))
+		{
+			frame.getGameScreen().getBlob().BuildAcorn();
+			CellBuildCleanUp();
+		}
+		if(e.getActionCommand().equals(Simple))
+		{
+			frame.getGameScreen().getBlob().BuildSimple();
+			CellBuildCleanUp();
+		}
+		if(e.getActionCommand().equals(Galaxy))
+		{
+			frame.getGameScreen().getBlob().BuildKokGalaxy();
+			CellBuildCleanUp();
+		}
+		if(e.getActionCommand().equals(Random))
+		{
+			frame.getGameScreen().getBlob().BuildRandom(0.5);
+			CellBuildCleanUp();
+		}
 		
 		if(e.getActionCommand().equals(AdvanceToggleCommand))
 		{
@@ -35,16 +89,31 @@ public class MyListener implements ActionListener
 			}
 		}
 		
+		if(e.getActionCommand().equals(ShowCentroidToggleCommand))
+		{
+			if(frame.getUserPanel().getShowCentroid().getText() == "Show Centroid: Off")
+			{
+				frame.getUserPanel().getShowCentroid().setText("Show Centroid: On");
+				frame.getUserPanel().getCentroidLabel().setVisible(true);
+				frame.getUserPanel().getAverageDistanceToCentroidLabel().setVisible(true);
+				frame.getUserPanel().getVarianceDistanceToCentroid().setVisible(true);
+				frame.getGameScreen().getBlob().setDrawCentroid(true);
+			}
+			else if(frame.getUserPanel().getShowCentroid().getText() == "Show Centroid: On")
+			{
+				frame.getUserPanel().getShowCentroid().setText("Show Centroid: Off");
+				frame.getUserPanel().getCentroidLabel().setVisible(false);
+				frame.getUserPanel().getAverageDistanceToCentroidLabel().setVisible(false);
+				frame.getUserPanel().getVarianceDistanceToCentroid().setVisible(false);
+				frame.getGameScreen().getBlob().setDrawCentroid(false);
+			}
+		}
+		
 		if(e.getActionCommand().equals(LoadBlobButtonCommand))
 		{
-			//frame.getGameScreen().getBlob().BuildRandom(0.5);
-			frame.getGameScreen().getBlob().BuildBlock();
-			//frame.getGameScreen().getBlob().BuildMethuselah();
-			//frame.getGameScreen().getBlob().BuildAcorn();
-			//frame.getGameScreen().getBlob().BuildKokGalaxy();
-			//frame.getGameScreen().getBlob().BuildOscillator();
-			//frame.getGameScreen().getBlob().BuildSimple();
-			//frame.getGameScreen().getBlob().BuildGlider();
+			frame.remove(frame.getGameScreen());
+			frame.getLoadCellPanel().setVisible(true);
+			
 			frame.Repaint();
 			frame.getUserPanel().updateAgeLabel(0);
 			frame.getUserPanel().updateEscapedCellsCount(0);
@@ -86,5 +155,14 @@ public class MyListener implements ActionListener
 				frame.setRunning(false);
 			}
 		}
+	}
+	
+	public void CellBuildCleanUp()
+	{
+		Container c = frame.getContentPane();
+		
+		frame.getLoadCellPanel().setVisible(false);
+		c.add(frame.getGameScreen(), BorderLayout.CENTER);
+		frame.getGameScreen().setVisible(true);
 	}
 }

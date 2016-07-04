@@ -109,4 +109,14 @@ public class Cell
 			color = Color.BLACK;
 		}
 	}
+	
+	public void setColor(Color colorVal)
+	{
+		color = colorVal;
+	}
+	
+	public static int getSize()
+	{
+		return size;
+	}
 }

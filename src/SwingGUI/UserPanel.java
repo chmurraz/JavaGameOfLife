@@ -1,7 +1,6 @@
 package SwingGUI;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,7 +10,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -33,19 +31,21 @@ public class UserPanel extends JPanel
 	private JButton loadBlobButton;
 	private JToggleButton advanceToggleButton;
 	private JToggleButton autoRunToggleButton;
+	private JToggleButton showCentroidToggleButton;
 	private GridBagConstraints constraints;
 	
 	private JPanel statPanel;
+	private JPanel statOptionPanel;
 	private JPanel buttonPanel;
 	
 	private DecimalFormat formatter = new DecimalFormat("#.##");
 	
 	public UserPanel()
 	{
-		
 		Dimension size = getPreferredSize();
 		size.width = 250;
 		setPreferredSize(size);
+		setBackground(Color.BLUE);
 		
 		setLayout(new GridBagLayout());
 		constraints = new GridBagConstraints();
@@ -55,7 +55,47 @@ public class UserPanel extends JPanel
 		
 		BuildStatPanel();
 		
+		BuildStatOptionPanel();
+		
 		BuildButtonPanel();
+		
+		AddPanels();
+	}
+
+	private void AddPanels()
+	{
+		constraints.gridx = 0;
+		constraints.anchor = GridBagConstraints.PAGE_START;
+		
+		constraints.gridy = 0;
+		add(buttonPanel,constraints);
+		
+		constraints.gridy = 1;
+		add(statOptionPanel,constraints);
+		
+		constraints.gridy = 2;
+		add(statPanel,constraints);
+
+	}
+
+	private void BuildStatOptionPanel()
+	{
+		statOptionPanel = new JPanel();
+		statOptionPanel.setLayout(new GridBagLayout());
+		Border loweredEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		statOptionPanel.setBorder(BorderFactory.createTitledBorder(loweredEtched,"Statistics Display Options"));
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		
+		showCentroidToggleButton = new JToggleButton("Show Centroid: Off");
+		showCentroidToggleButton.setActionCommand("Show Centroid");
+		
+		//	Remove annoying border on buttons
+		showCentroidToggleButton.setFocusPainted(false);
+		
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		statOptionPanel.add(showCentroidToggleButton,constraints);
+		showCentroidToggleButton.setVisible(true);
 	}
 
 	private void BuildStatPanel() 
@@ -65,12 +105,9 @@ public class UserPanel extends JPanel
 		Border loweredEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 		statPanel.setBorder(BorderFactory.createTitledBorder(loweredEtched,"Statistics"));
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.gridx = 0;
-		constraints.gridy = 0;
+
 		constraints.weightx = 1;
 		constraints.weighty = 1;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		add(statPanel,constraints);
 		
 		ageLabel = new JLabel("Blob Age: N/A");
 		countLabel = new JLabel("Cell Count: N/A");
@@ -80,8 +117,6 @@ public class UserPanel extends JPanel
 		escapedCellsLabel = new JLabel("Escaped Cells: N/A");
 		averageDistanceToCentroidLabel = new JLabel("Average Distance to Centroid: N/A");
 		varianceDistanceToCentroidLabel = new JLabel("Variance of Distance to Centroid: N/A");
-		
-		constraints.anchor = GridBagConstraints.LINE_END;
 		
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -106,16 +141,15 @@ public class UserPanel extends JPanel
 		
 		constraints.gridy = 5;
 		statPanel.add(centroidLabel, constraints);
-		centroidLabel.setVisible(true);
+		centroidLabel.setVisible(false);
 	
 		constraints.gridy = 6;
 		statPanel.add(averageDistanceToCentroidLabel, constraints);
-		averageDistanceToCentroidLabel.setVisible(true);
+		averageDistanceToCentroidLabel.setVisible(false);
 		
 		constraints.gridy = 7;
 		statPanel.add(varianceDistanceToCentroidLabel, constraints);		
-		varianceDistanceToCentroidLabel.setVisible(true);
-		
+		varianceDistanceToCentroidLabel.setVisible(false);
 	}
 	
 	private void BuildButtonPanel()
@@ -123,13 +157,10 @@ public class UserPanel extends JPanel
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridBagLayout());
 		buttonPanel.setBorder(BorderFactory.createTitledBorder("User Inputs"));
-		constraints.gridx = 0;
-		constraints.gridy = 1;
+
 		constraints.weightx = 1;
 		constraints.weighty = 1;
-		constraints.anchor = GridBagConstraints.PAGE_START;
-		add(buttonPanel,constraints);
-		
+
 		loadBlobButton = new JButton("Load Cells");
 		advanceToggleButton = new JToggleButton("Advance Simulation");
 		autoRunToggleButton = new JToggleButton("Auto Run: Off");
@@ -144,16 +175,14 @@ public class UserPanel extends JPanel
 		autoRunToggleButton.setFocusPainted(false);
 		
 		constraints.gridx = 0;
-		constraints.gridy = 6;
+		constraints.gridy = 1;
 		buttonPanel.add(advanceToggleButton,constraints);
 		advanceToggleButton.setVisible(true);
-		
-		constraints.gridx = 0;
-		constraints.gridy = 7;
+	
+		constraints.gridy = 2;
 		buttonPanel.add(loadBlobButton, constraints);	
 		
-		constraints.gridx = 0;
-		constraints.gridy = 8;
+		constraints.gridy = 3;
 		buttonPanel.add(autoRunToggleButton, constraints);
 		autoRunToggleButton.setVisible(true);
 	}
@@ -168,6 +197,11 @@ public class UserPanel extends JPanel
 		centroidLabel.setText("Centroid: " + "(" + formatter.format(point.getX()) + ", " + formatter.format(point.getY()) + ")");
 	}
 	
+	public JLabel getCentroidLabel()
+	{
+		return centroidLabel;
+	}
+	
 	public void updateCountLabel(int countVal)
 	{
 		countLabel.setText("Cell Count: " + countVal);
@@ -178,9 +212,19 @@ public class UserPanel extends JPanel
 		averageDistanceToCentroidLabel.setText("Average Distance to Centroid: " + formatter.format(averageVal));
 	}
 	
+	public JLabel getAverageDistanceToCentroidLabel()
+	{
+		return averageDistanceToCentroidLabel;
+	}
+	
 	public void updateVarianceDistanceToCentroidLabel(double varVal)
 	{
 		varianceDistanceToCentroidLabel.setText("Variance of Distance to Centroid: " + formatter.format(varVal));
+	}
+	
+	public JLabel getVarianceDistanceToCentroid()
+	{
+		return varianceDistanceToCentroidLabel;
 	}
 	
 	public void updateXRangeLabel(int val1, int val2)
@@ -236,5 +280,10 @@ public class UserPanel extends JPanel
 	public JToggleButton getAutoRunToggleButton()
 	{
 		return autoRunToggleButton;
+	}
+	
+	public JToggleButton getShowCentroid()
+	{
+		return showCentroidToggleButton;
 	}
 }

@@ -1,5 +1,6 @@
 package GameOfLife;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ public class Blob
 	private Boolean removeSixSigma;
 	private Boolean drawCentroid;
 	private int escapedCells;
+	private int xshift;
+	private int yshift;
 
 	public class Centroid
 	{
@@ -165,7 +168,7 @@ public class Blob
 		plotmin.setxy(0,0);
 		plotmax.setxy(100,100);
 		removeSixSigma = true;
-		drawCentroid = true;
+		drawCentroid = false;
 		
 		age=0;
 		escapedCells = 0;
@@ -258,8 +261,8 @@ public class Blob
 	
 	public void BuildOscillator()
 	{
-		int xshift = 40;
-		int yshift = 50;
+		xshift = 40;
+		yshift = 50;
 		this.AddLiveCell(new IntPoint2D(10 + xshift,1 + yshift));
 		this.AddLiveCell(new IntPoint2D(10 + xshift,2 + yshift));
 		this.AddLiveCell(new IntPoint2D(10 + xshift,3 + yshift));
@@ -275,8 +278,8 @@ public class Blob
 	
 	public void BuildBlock()
 	{
-		int xshift = 80;
-		int yshift = 80;
+		xshift = 80;
+		yshift = 80;
 		for (int i = 0; i<=85; i++)
 		{
 			for (int j = 0; j<=85; j++)
@@ -289,6 +292,8 @@ public class Blob
 	
 	public void BuildRandom(double density)
 	{
+		xshift = 50;
+		yshift = 70;
 		if (density > 1.0)
 		{
 			density = 1.0;
@@ -309,7 +314,7 @@ public class Blob
 			do
 			{
 				randomPoint = new IntPoint2D();
-				randomPoint.setxy(XDice.roll() + plotmin.getX() - 1, YDice.roll() + plotmin.getY() - 1);
+				randomPoint.setxy(XDice.roll() + plotmin.getX() - 1 + xshift, YDice.roll() + plotmin.getY() - 1 + yshift);
 			}while(this.IsCellHere(randomPoint));
 			this.AddLiveCell(randomPoint);
 		}
@@ -320,8 +325,8 @@ public class Blob
 	public void BuildMethuselah()
 	{
 		
-		int xshift = 10;
-		int yshift = 10;
+		xshift = 10;
+		yshift = 10;
 		this.AddLiveCell(new IntPoint2D(10 + xshift,1 + yshift));
 		this.AddLiveCell(new IntPoint2D(10 + xshift,2 + yshift));
 		this.AddLiveCell(new IntPoint2D(11 + xshift,1 + yshift));
@@ -336,8 +341,8 @@ public class Blob
 	
 	public void BuildAcorn()
 	{
-		int xshift = 150;
-		int yshift = 100;
+		xshift = 150;
+		yshift = 100;
 		this.AddLiveCell(new IntPoint2D(10 + xshift, 0 + yshift));
 		this.AddLiveCell(new IntPoint2D(11 + xshift, 0 + yshift));
 		this.AddLiveCell(new IntPoint2D(11 + xshift, 2 + yshift));
@@ -351,8 +356,8 @@ public class Blob
 	
 	public void BuildSimple()
 	{
-		int xshift = 76;
-		int yshift = 100;
+		xshift = 76;
+		yshift = 100;
 		this.AddLiveCell(new IntPoint2D(10 + xshift, 0 + yshift));
 		this.AddLiveCell(new IntPoint2D(10 + xshift, 1 + yshift));
 		this.AddLiveCell(new IntPoint2D(11 + xshift, 0 + yshift));
@@ -363,8 +368,8 @@ public class Blob
 	
 	public void BuildKokGalaxy()
 	{
-		int xshift = 50;
-		int yshift = 100;
+		xshift = 50;
+		yshift = 100;
 		
 		this.AddLiveCell(new IntPoint2D(1 + xshift, 3 + yshift));
 		this.AddLiveCell(new IntPoint2D(1 + xshift, 6 + yshift));
@@ -529,6 +534,7 @@ public class Blob
 					if (Math.abs(distance - averageCentroidDistance) > sixSigma)
 					{
 						it.setIsAlive(false);
+						it.setColor(Color.RED);
 						liveCellCount--;
 						escapedCells++;
 					}
@@ -584,11 +590,6 @@ public class Blob
 
 			varianceCentroidDistance += Math.pow(distance - averageCentroidDistance, 2)/n;
 		}
-		
-		if (drawCentroid)
-		{
-			
-		}
 	}
 	
 	public int getAge()
@@ -629,6 +630,26 @@ public class Blob
 	public double getVarianceCentroidDistance()
 	{
 		return varianceCentroidDistance;
+	}
+	
+	public Boolean getDrawCentroid()
+	{
+		return drawCentroid;
+	}
+	
+	public void setDrawCentroid(Boolean val)
+	{
+		drawCentroid = val;
+	}
+	
+	public int getXShift()
+	{
+		return xshift;
+	}
+	
+	public int getYShift()
+	{
+		return yshift;
 	}
 }
 	

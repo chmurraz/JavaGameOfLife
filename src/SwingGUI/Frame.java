@@ -1,19 +1,24 @@
 package SwingGUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import GameOfLife.Cell;
 import GameOfLife.Game;
+import GameOfLife.IntPoint2D;
 
 public class Frame extends JFrame
 {
 	private GameScreen gameScreen;
 	private UserPanel userPanel;
+	private LoadCellPanel loadCellPanel;
 	private GameRunner gameRunner;
 	private Boolean running;
 	private MyListener myListener;
@@ -26,6 +31,7 @@ public class Frame extends JFrame
 		private long thisFrameTime;
 		private float tslf;
 		private float tslu;
+		private Graphics g;
 		
 		private float PAUSETIME = 0.05f;
 		
@@ -69,6 +75,7 @@ public class Frame extends JFrame
 			userPanel.updateCentroid(gameScreen.getBlob().getCentroid());
 			userPanel.updateAverageDistanceToCentroidLabel(gameScreen.getBlob().getAverageCentroidDistance());
 			userPanel.updateVarianceDistanceToCentroidLabel(gameScreen.getBlob().getVarianceCentroidDistance());
+		
 			if(running)
 			{
 				Execute();
@@ -79,7 +86,6 @@ public class Frame extends JFrame
 	public Frame(String title)
 	{
 		super(title);
-		gameScreen = new GameScreen();
 		running = false;
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -87,24 +93,36 @@ public class Frame extends JFrame
 		
 		//	Set size of "this" Frame
 		setSize(new Dimension(Game.getWidth()/2,Game.getHeight()));
-		
-		//	Set size of the gameScreen
-		gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
-		//gameScreen.getBlob().BuildRandom(0.5);
-		add(gameScreen);
-		
+				
 		myListener = new MyListener(this);
 		userPanel = new UserPanel();
 		userPanel.getAdvanceToggleButton().addActionListener(myListener);
 		userPanel.getLoadBlobButton().addActionListener(myListener);
 		userPanel.getAutoRunToggleButton().addActionListener(myListener);
-				
+		userPanel.getShowCentroid().addActionListener(myListener);
+		
+		loadCellPanel = new LoadCellPanel();
+		loadCellPanel.getLoadGlider().addActionListener(myListener);
+		loadCellPanel.getLoadOscillator().addActionListener(myListener);
+		loadCellPanel.getLoadBlock().addActionListener(myListener);
+		loadCellPanel.getLoadRandom().addActionListener(myListener);
+		loadCellPanel.getLoadMethuselah().addActionListener(myListener);
+		loadCellPanel.getLoadAcorn().addActionListener(myListener);
+		loadCellPanel.getLoadSimple().addActionListener(myListener);
+		loadCellPanel.getLoadKokGalaxy().addActionListener(myListener);
+		loadCellPanel.getClearAll().addActionListener(myListener);
+		
+		gameScreen = new GameScreen();
+		gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
+
+		
 		//	Add Swing components to content pane
 		Container c = getContentPane();
 		
-		//c.add(textArea, BorderLayout.CENTER);
 		c.add(gameScreen, BorderLayout.CENTER);
 		c.add(userPanel,BorderLayout.WEST);
+		c.add(loadCellPanel, BorderLayout.CENTER);
+		loadCellPanel.setVisible(false);
 	}
 	
 	public void Repaint()
@@ -120,6 +138,11 @@ public class Frame extends JFrame
 	public UserPanel getUserPanel()
 	{
 		return userPanel;
+	}
+	
+	public LoadCellPanel getLoadCellPanel()
+	{
+		return loadCellPanel;
 	}
 	
 	public GameRunner getGameRunner()
