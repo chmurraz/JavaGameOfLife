@@ -33,7 +33,7 @@ public class MyListener implements ActionListener
 		String Simple = frame.getLoadCellPanel().getLoadSimple().getActionCommand();
 		String Galaxy = frame.getLoadCellPanel().getLoadKokGalaxy().getActionCommand();
 		String Random = frame.getLoadCellPanel().getLoadRandom().getActionCommand();
-		
+		String Clear = frame.getLoadCellPanel().getClearAll().getActionCommand();
 		
 		if(e.getActionCommand().equals(Glider))
 		{
@@ -76,6 +76,12 @@ public class MyListener implements ActionListener
 			CellBuildCleanUp();
 		}
 		
+		if(e.getActionCommand().equals(Clear))
+		{
+			frame.getGameScreen().getBlob().BuildClean();
+			CellBuildCleanUp();
+		}
+		
 		if(e.getActionCommand().equals(AdvanceToggleCommand))
 		{
 			if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Advance Simulation")
@@ -113,6 +119,7 @@ public class MyListener implements ActionListener
 		{
 			frame.remove(frame.getGameScreen());
 			frame.getLoadCellPanel().setVisible(true);
+			frame.getGameScreen().setVisible(false);
 			
 			frame.Repaint();
 			frame.getUserPanel().updateAgeLabel(0);

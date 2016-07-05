@@ -1,5 +1,6 @@
 package SwingGUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -27,9 +28,10 @@ public class LoadCellPanel extends JPanel
 	public LoadCellPanel()
 	{
 		Dimension size = getPreferredSize();
-		size.width = 250;
+		size.height = 250;
 		setPreferredSize(size);
 		setBorder(BorderFactory.createTitledBorder("Cell Load Options"));
+		setBackground(Color.WHITE);
 		
 		setLayout(new GridBagLayout());
 		constraints = new GridBagConstraints();

@@ -249,6 +249,15 @@ public class Blob
 		}
 	}
 	
+	public void BuildClean()
+	{
+		for (Cell it:cellsInGame)
+		{
+			it.setIsAlive(false);
+			age = 0;
+		}
+	}
+	
 	public void BuildGlider()
 	{
 		this.AddLiveCell(new IntPoint2D(20,5));

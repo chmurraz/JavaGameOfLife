@@ -29,6 +29,7 @@ public class UserPanel extends JPanel
 	private JLabel averageDistanceToCentroidLabel;
 	private JLabel varianceDistanceToCentroidLabel;
 	private JButton loadBlobButton;
+	private JButton tutorialButton;
 	private JToggleButton advanceToggleButton;
 	private JToggleButton autoRunToggleButton;
 	private JToggleButton showCentroidToggleButton;
@@ -45,7 +46,7 @@ public class UserPanel extends JPanel
 		Dimension size = getPreferredSize();
 		size.width = 250;
 		setPreferredSize(size);
-		setBackground(Color.BLUE);
+		setBackground(Color.WHITE);
 		
 		setLayout(new GridBagLayout());
 		constraints = new GridBagConstraints();
@@ -161,30 +162,43 @@ public class UserPanel extends JPanel
 		constraints.weightx = 1;
 		constraints.weighty = 1;
 
+		tutorialButton = new JButton("Tutorial");
 		loadBlobButton = new JButton("Load Cells");
 		advanceToggleButton = new JToggleButton("Advance Simulation");
 		autoRunToggleButton = new JToggleButton("Auto Run: Off");
 		
+		tutorialButton.setActionCommand("Tutorial");
 		loadBlobButton.setActionCommand("Load Cells");
 		advanceToggleButton.setActionCommand("Advance Simulation");
 		autoRunToggleButton.setActionCommand("Auto Run");
 		
 		//	Remove annoying border on buttons
+		tutorialButton.setFocusPainted(false);
 		loadBlobButton.setFocusPainted(false);
 		advanceToggleButton.setFocusPainted(false);
 		autoRunToggleButton.setFocusPainted(false);
 		
 		constraints.gridx = 0;
+		
 		constraints.gridy = 1;
-		buttonPanel.add(advanceToggleButton,constraints);
-		advanceToggleButton.setVisible(true);
-	
+		buttonPanel.add(tutorialButton, constraints);
+		tutorialButton.setVisible(true);
+		tutorialButton.setEnabled(true);
+		
 		constraints.gridy = 2;
 		buttonPanel.add(loadBlobButton, constraints);	
+		loadBlobButton.setVisible(true);
+		loadBlobButton.setEnabled(true);
 		
 		constraints.gridy = 3;
+		buttonPanel.add(advanceToggleButton,constraints);
+		advanceToggleButton.setVisible(true);
+		advanceToggleButton.setEnabled(false);
+		
+		constraints.gridy = 4;
 		buttonPanel.add(autoRunToggleButton, constraints);
 		autoRunToggleButton.setVisible(true);
+		autoRunToggleButton.setEnabled(false);
 	}
 	
 	public void updateAgeLabel(int ageVal)

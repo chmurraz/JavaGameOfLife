@@ -121,7 +121,7 @@ public class Frame extends JFrame
 		
 		c.add(gameScreen, BorderLayout.CENTER);
 		c.add(userPanel,BorderLayout.WEST);
-		c.add(loadCellPanel, BorderLayout.CENTER);
+		c.add(loadCellPanel, BorderLayout.EAST);
 		loadCellPanel.setVisible(false);
 	}
 	
