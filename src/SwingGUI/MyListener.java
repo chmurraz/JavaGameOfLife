@@ -41,62 +41,6 @@ public class MyListener implements ActionListener
 		String Random = frame.getLoadCellPanel().getLoadRandom().getActionCommand();
 		String Clear = frame.getLoadCellPanel().getClearAll().getActionCommand();
 		
-		if(e.getActionCommand().equals(Glider))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildGlider();
-			CellBuildCleanUp();
-		}
-		if(e.getActionCommand().equals(Oscillator))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildOscillator();
-			CellBuildCleanUp();
-		}
-		if(e.getActionCommand().equals(Block))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildBlock();
-			CellBuildCleanUp();
-		}
-		if(e.getActionCommand().equals(Methuselah))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildMethuselah();
-			CellBuildCleanUp();
-		}
-		if(e.getActionCommand().equals(Acorn))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildAcorn();
-			CellBuildCleanUp();
-		}
-		if(e.getActionCommand().equals(Simple))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildSimple();
-			CellBuildCleanUp();
-		}
-		if(e.getActionCommand().equals(Galaxy))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildKokGalaxy();
-			CellBuildCleanUp();
-		}
-		if(e.getActionCommand().equals(Random))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildRandom(0.5);
-			CellBuildCleanUp();
-		}
-		
-		if(e.getActionCommand().equals(Clear))
-		{
-			CellBuildStartUp();
-			frame.getGameScreen().getBlob().BuildClean();
-			CellBuildCleanUp();
-		}
-		
 		if(e.getActionCommand().equals(AdvanceToggleCommand))
 		{
 			if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Advance Simulation")
@@ -160,16 +104,41 @@ public class MyListener implements ActionListener
 			CellBuildStartUp();
 			switch(s)
 			{
-				case "Glider": frame.getGameScreen().getBlob().BuildGlider();
-				case "Oscillator": frame.getGameScreen().getBlob().BuildOscillator();
-				case "Block": frame.getGameScreen().getBlob().BuildBlock();
-				case "Methuselah": frame.getGameScreen().getBlob().BuildMethuselah();
-				case "Acorn": frame.getGameScreen().getBlob().BuildAcorn();
-				case "Simple": frame.getGameScreen().getBlob().BuildSimple();
-				case "Galaxy": frame.getGameScreen().getBlob().BuildKokGalaxy();
-				case "Random": frame.getGameScreen().getBlob().BuildRandom(0.5);
-				case "Clear All": frame.getGameScreen().getBlob().BuildClean();
+				case "Glider":
+					frame.getGameScreen().getBlob().BuildGlider();
+					break;
+				case "Oscillator":
+					frame.getGameScreen().getBlob().BuildOscillator();
+					break;
+				case "Block":
+					frame.getGameScreen().getBlob().BuildBlock();
+					break;
+				case "Methuselah":
+					frame.getGameScreen().getBlob().BuildMethuselah();
+					break;
+				case "Acorn":
+					frame.getGameScreen().getBlob().BuildAcorn();
+					break;
+				case "Simple":
+					frame.getGameScreen().getBlob().BuildSimple();
+					break;
+				case "Galaxy":
+					frame.getGameScreen().getBlob().BuildKokGalaxy();
+					break;
+				case "Random":
+					frame.getGameScreen().getBlob().BuildRandom(0.5);
+					break;
+				case "Clear All":
+					frame.getGameScreen().getBlob().BuildClean();
+					frame.getUserPanel().getAdvanceToggleButton().setEnabled(false);
+					frame.getUserPanel().getAutoRunToggleButton().setEnabled(false);
+					frame.getUserPanel().getShowCentroid().setEnabled(false);
+					frame.getGameScreen().getBlob().setAge(0);
+					break;
+				default: 
+					break;
 			}
+			
 			CellBuildCleanUp();
 				
 			//	Initialize statistics
@@ -213,14 +182,10 @@ public class MyListener implements ActionListener
 	
 	public void CellBuildCleanUp()
 	{
-		//Container c = frame.getContentPane();
-		
-		//frame.getLoadCellPanel().setVisible(false);
-		
 		frame.getGameScreen().setVisible(true);
-		
-		//c.add(frame.getGameScreen(), BorderLayout.CENTER);
-		//frame.getGameScreen().setVisible(true);
+		frame.getUserPanel().getAutoRunToggleButton().setEnabled(true);
+		frame.getUserPanel().getShowCentroid().setEnabled(true);
+		frame.repaint();
 	}
 	
 	public void CellBuildStartUp()

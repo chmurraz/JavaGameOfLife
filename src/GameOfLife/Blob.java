@@ -256,6 +256,7 @@ public class Blob
 			it.setIsAlive(false);
 			age = 0;
 		}
+		UpdateLiveCellCount();
 	}
 	
 	public void BuildGlider()
@@ -604,6 +605,11 @@ public class Blob
 	public int getAge()
 	{
 		return age;
+	}
+	
+	public void setAge(int val)
+	{
+		age = val;
 	}
 	
 	public int getLiveCellCount()
