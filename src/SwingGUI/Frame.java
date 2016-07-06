@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -22,11 +24,11 @@ public class Frame extends JFrame
 	private GameRunner gameRunner;
 	private Boolean running;
 	private MyListener myListener;
+	private GridBagConstraints constraints;
 	
 	//	TESTING... changing second argument of GameRunner to Blob
 	private class GameRunner extends SwingWorker<Void,Void>
 	{
-		
 		private long lastFrameTime;
 		private long thisFrameTime;
 		private float tslf;
@@ -90,10 +92,9 @@ public class Frame extends JFrame
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+		setLayout(new GridBagLayout());
+		constraints = new GridBagConstraints();
 		
-		//	Set size of "this" Frame
-		setSize(new Dimension(Game.getWidth()/2,Game.getHeight()));
-				
 		myListener = new MyListener(this);
 		userPanel = new UserPanel();
 		userPanel.getAdvanceToggleButton().addActionListener(myListener);
@@ -113,16 +114,36 @@ public class Frame extends JFrame
 		loadCellPanel.getClearAll().addActionListener(myListener);
 		
 		gameScreen = new GameScreen();
-		gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
 
+		//	Set size of the Frame based on static parameters from Game class
+		setSize(new Dimension(Game.getWidth()/2,Game.getHeight()));
+		//gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
+		userPanel.setSize(new Dimension(Game.getWidth()/2, Game.getHeight()/2));
+		gameScreen.setSize(new Dimension(Game.getWidth()/2, Game.getHeight()/2));
 		
 		//	Add Swing components to content pane
-		Container c = getContentPane();
+		//Container c = getContentPane();
 		
-		c.add(gameScreen, BorderLayout.CENTER);
-		c.add(userPanel,BorderLayout.WEST);
-		c.add(loadCellPanel, BorderLayout.EAST);
-		loadCellPanel.setVisible(false);
+		//c.add(gameScreen, BorderLayout.CENTER);
+		//c.add(userPanel,BorderLayout.WEST);
+		//c.add(loadCellPanel, BorderLayout.EAST);
+		//loadCellPanel.setVisible(false);
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.weightx = 1;
+		constraints.weighty = 1;
+		constraints.anchor = GridBagConstraints.NORTHWEST;
+		constraints.fill = GridBagConstraints.BOTH;
+		this.getContentPane().add(userPanel,constraints);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		constraints.weightx = 3;
+		constraints.weighty = 1;
+		constraints.anchor = GridBagConstraints.NORTHEAST;
+		constraints.fill = GridBagConstraints.BOTH;
+		this.getContentPane().add(gameScreen,constraints);
+		gameScreen.setVisible(true);
 	}
 	
 	public void Repaint()

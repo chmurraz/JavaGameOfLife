@@ -2,8 +2,11 @@ package SwingGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 
 import GameOfLife.Blob.Centroid;
 import GameOfLife.IntPoint2D;
@@ -11,10 +14,13 @@ import GameOfLife.IntPoint2D;
 public class MyListener implements ActionListener
 {
 	private final Frame frame;
+	private GridBagConstraints constraints;
 	
 	public MyListener(Frame frameVal)
 	{
 		frame = frameVal;
+		constraints = new GridBagConstraints();
+
 	}
 
 	@Override
@@ -37,47 +43,56 @@ public class MyListener implements ActionListener
 		
 		if(e.getActionCommand().equals(Glider))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildGlider();
 			CellBuildCleanUp();
 		}
 		if(e.getActionCommand().equals(Oscillator))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildOscillator();
 			CellBuildCleanUp();
 		}
 		if(e.getActionCommand().equals(Block))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildBlock();
 			CellBuildCleanUp();
 		}
 		if(e.getActionCommand().equals(Methuselah))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildMethuselah();
 			CellBuildCleanUp();
 		}
 		if(e.getActionCommand().equals(Acorn))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildAcorn();
 			CellBuildCleanUp();
 		}
 		if(e.getActionCommand().equals(Simple))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildSimple();
 			CellBuildCleanUp();
 		}
 		if(e.getActionCommand().equals(Galaxy))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildKokGalaxy();
 			CellBuildCleanUp();
 		}
 		if(e.getActionCommand().equals(Random))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildRandom(0.5);
 			CellBuildCleanUp();
 		}
 		
 		if(e.getActionCommand().equals(Clear))
 		{
+			CellBuildStartUp();
 			frame.getGameScreen().getBlob().BuildClean();
 			CellBuildCleanUp();
 		}
@@ -117,7 +132,15 @@ public class MyListener implements ActionListener
 		
 		if(e.getActionCommand().equals(LoadBlobButtonCommand))
 		{
-			frame.remove(frame.getGameScreen());
+			/*
+			frame.getContentPane().remove(frame.getGameScreen());
+			constraints.gridx = 1;
+			constraints.gridy = 0;
+			constraints.weightx = 3;
+			constraints.weighty = 0.5;
+			constraints.anchor = GridBagConstraints.SOUTHWEST;
+			constraints.fill = GridBagConstraints.BOTH;
+			frame.getContentPane().add(frame.getLoadCellPanel(),constraints);
 			frame.getLoadCellPanel().setVisible(true);
 			frame.getGameScreen().setVisible(false);
 			
@@ -125,6 +148,30 @@ public class MyListener implements ActionListener
 			frame.getUserPanel().updateAgeLabel(0);
 			frame.getUserPanel().updateEscapedCellsCount(0);
 			
+			*/
+			
+			Object[] options = {"Glider", "Oscillator", "Block",
+								"Methuselah", "Acorn", "Simple",
+								"Galaxy", "Random", "Clear All"};
+			
+			String s = (String)JOptionPane.showInputDialog(frame, "Enter the initial set of cells...",
+					"Cell Load Options", JOptionPane.PLAIN_MESSAGE, null, options, "Glider");
+			
+			CellBuildStartUp();
+			switch(s)
+			{
+				case "Glider": frame.getGameScreen().getBlob().BuildGlider();
+				case "Oscillator": frame.getGameScreen().getBlob().BuildOscillator();
+				case "Block": frame.getGameScreen().getBlob().BuildBlock();
+				case "Methuselah": frame.getGameScreen().getBlob().BuildMethuselah();
+				case "Acorn": frame.getGameScreen().getBlob().BuildAcorn();
+				case "Simple": frame.getGameScreen().getBlob().BuildSimple();
+				case "Galaxy": frame.getGameScreen().getBlob().BuildKokGalaxy();
+				case "Random": frame.getGameScreen().getBlob().BuildRandom(0.5);
+				case "Clear All": frame.getGameScreen().getBlob().BuildClean();
+			}
+			CellBuildCleanUp();
+				
 			//	Initialize statistics
 			int countVal = frame.getGameScreen().getBlob().getLiveCellCount();
 			frame.getUserPanel().updateCountLabel(countVal);
@@ -166,10 +213,26 @@ public class MyListener implements ActionListener
 	
 	public void CellBuildCleanUp()
 	{
-		Container c = frame.getContentPane();
+		//Container c = frame.getContentPane();
 		
-		frame.getLoadCellPanel().setVisible(false);
-		c.add(frame.getGameScreen(), BorderLayout.CENTER);
+		//frame.getLoadCellPanel().setVisible(false);
+		
 		frame.getGameScreen().setVisible(true);
+		
+		//c.add(frame.getGameScreen(), BorderLayout.CENTER);
+		//frame.getGameScreen().setVisible(true);
+	}
+	
+	public void CellBuildStartUp()
+	{
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		constraints.weightx = 1;
+		constraints.weighty = 1;
+		constraints.anchor = GridBagConstraints.SOUTHWEST;
+		constraints.fill = GridBagConstraints.BOTH;
+		frame.getLoadCellPanel().setVisible(false);
+		//frame.getContentPane().remove(frame.getLoadCellPanel());
+		//frame.getContentPane().add(frame.getGameScreen(),constraints);
 	}
 }

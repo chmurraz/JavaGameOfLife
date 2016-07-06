@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 import GameOfLife.Blob;
 import GameOfLife.Cell;
 import GameOfLife.IntPoint2D;
 
-public class GameScreen extends JLabel
+public class GameScreen extends JPanel
 {
 	private Blob blob;
 	private Cell centroid;
@@ -18,7 +20,7 @@ public class GameScreen extends JLabel
 	{
 		blob = new Blob();
 		centroid = new Cell(0,0);
-		setBackground(Color.WHITE);
+		setBackground(Color.GREEN);
 	}
 	
 	@Override
@@ -27,6 +29,7 @@ public class GameScreen extends JLabel
 		super.paintComponent(g);
 		if(blob.getLiveCellCount()>0)
 		{
+			//	Draw the blob
 			blob.Draw(g);
 			
 			//	Draw its centroid

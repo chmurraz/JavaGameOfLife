@@ -10,7 +10,6 @@ public class Game
 	static int height;
 	static float PAUSETIME = 0.05f;
 
-	
 	private Frame frame;
 	
 	public Game()

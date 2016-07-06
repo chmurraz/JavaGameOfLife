@@ -44,9 +44,9 @@ public class UserPanel extends JPanel
 	public UserPanel()
 	{
 		Dimension size = getPreferredSize();
-		size.width = 250;
+		//size.width = 250;
 		setPreferredSize(size);
-		setBackground(Color.WHITE);
+		setBackground(Color.YELLOW);
 		
 		setLayout(new GridBagLayout());
 		constraints = new GridBagConstraints();
@@ -97,6 +97,7 @@ public class UserPanel extends JPanel
 		constraints.gridy = 1;
 		statOptionPanel.add(showCentroidToggleButton,constraints);
 		showCentroidToggleButton.setVisible(true);
+		showCentroidToggleButton.setEnabled(false);
 	}
 
 	private void BuildStatPanel() 
