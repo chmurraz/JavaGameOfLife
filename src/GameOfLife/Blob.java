@@ -109,7 +109,7 @@ public class Blob
 		}
 	}
 	
-	private void BuildDeadCells()
+	public void BuildDeadCells()
 	{
 		//	If there aren't any live cells, don't bother adding dead ones
 		if(liveCellCount > 0)
@@ -261,11 +261,13 @@ public class Blob
 	
 	public void BuildGlider()
 	{
-		this.AddLiveCell(new IntPoint2D(20,5));
-		this.AddLiveCell(new IntPoint2D(21,5));
-		this.AddLiveCell(new IntPoint2D(22,5));
-		this.AddLiveCell(new IntPoint2D(22,6));
-		this.AddLiveCell(new IntPoint2D(21,7));
+		xshift = 40;
+		yshift = 50;
+		this.AddLiveCell(new IntPoint2D(20 + xshift,5 + yshift));
+		this.AddLiveCell(new IntPoint2D(21 + xshift,5 + yshift));
+		this.AddLiveCell(new IntPoint2D(22 + xshift,5 + yshift));
+		this.AddLiveCell(new IntPoint2D(22 + xshift,4 + yshift));
+		this.AddLiveCell(new IntPoint2D(21 + xshift,3 + yshift));
 		UpdateLiveCellCount();
 	}
 	
@@ -366,12 +368,11 @@ public class Blob
 	
 	public void BuildSimple()
 	{
-		xshift = 76;
-		yshift = 100;
+		xshift = 20;
+		yshift = 20;
 		this.AddLiveCell(new IntPoint2D(10 + xshift, 0 + yshift));
 		this.AddLiveCell(new IntPoint2D(10 + xshift, 1 + yshift));
-		this.AddLiveCell(new IntPoint2D(11 + xshift, 0 + yshift));
-		this.AddLiveCell(new IntPoint2D(11 + xshift, 1 + yshift));
+		this.AddLiveCell(new IntPoint2D(10 + xshift, 2 + yshift));
 		UpdateLiveCellCount();
 		UpdateCentroidStats();
 	}

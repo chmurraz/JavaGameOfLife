@@ -73,9 +73,11 @@ public class UserPanel extends JPanel
 		
 		constraints.gridy = 1;
 		add(statOptionPanel,constraints);
+		statOptionPanel.setVisible(false);
 		
 		constraints.gridy = 2;
 		add(statPanel,constraints);
+		statPanel.setVisible(false);
 
 	}
 
@@ -300,5 +302,20 @@ public class UserPanel extends JPanel
 	public JToggleButton getShowCentroid()
 	{
 		return showCentroidToggleButton;
+	}
+	
+	public JButton getTutorial()
+	{
+		return tutorialButton;
+	}
+	
+	public JPanel getStatOptionPanel()
+	{
+		return statOptionPanel;
+	}
+	
+	public JPanel getStatPanel()
+	{
+		return statPanel;
 	}
 }

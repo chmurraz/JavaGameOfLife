@@ -119,4 +119,9 @@ public class Cell
 	{
 		return size;
 	}
+	
+	public static void setSize(int val)
+	{
+		size = val;
+	}
 }

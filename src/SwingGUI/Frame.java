@@ -5,10 +5,14 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -25,6 +29,7 @@ public class Frame extends JFrame
 	private Boolean running;
 	private MyListener myListener;
 	private GridBagConstraints constraints;
+	private BufferedImage image;
 	
 	//	TESTING... changing second argument of GameRunner to Blob
 	private class GameRunner extends SwingWorker<Void,Void>
@@ -65,24 +70,29 @@ public class Frame extends JFrame
 		@Override
 		protected void done()
 		{
-			int age = gameScreen.getBlob().getAge();
-			int count = gameScreen.getBlob().getLiveCellCount();
-			userPanel.updateAgeLabel(age);
-			userPanel.updateCountLabel(count);
-			userPanel.updateXRangeLabel(gameScreen.getBlob().getBoundary().getMinX(), gameScreen.getBlob().getBoundary().getMaxX());
-			userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
-			userPanel.getAdvanceToggleButton().setSelected(false);
-			userPanel.getAdvanceToggleButton().setText("Advance Simulation");
-			userPanel.updateEscapedCellsCount(gameScreen.getBlob().getEscapedCells());
-			userPanel.updateCentroid(gameScreen.getBlob().getCentroid());
-			userPanel.updateAverageDistanceToCentroidLabel(gameScreen.getBlob().getAverageCentroidDistance());
-			userPanel.updateVarianceDistanceToCentroidLabel(gameScreen.getBlob().getVarianceCentroidDistance());
-		
+			UpdateLabels();
 			if(running)
 			{
 				Execute();
 			}
 		}
+	}
+	
+	public void UpdateLabels()
+	{
+		int age = gameScreen.getBlob().getAge();
+		int count = gameScreen.getBlob().getLiveCellCount();
+		userPanel.updateAgeLabel(age);
+		userPanel.updateCountLabel(count);
+		userPanel.updateXRangeLabel(gameScreen.getBlob().getBoundary().getMinX(), gameScreen.getBlob().getBoundary().getMaxX());
+		userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
+		userPanel.getAdvanceToggleButton().setSelected(false);
+		userPanel.getAdvanceToggleButton().setText("Advance Simulation");
+		userPanel.updateEscapedCellsCount(gameScreen.getBlob().getEscapedCells());
+		userPanel.updateCentroid(gameScreen.getBlob().getCentroid());
+		userPanel.updateAverageDistanceToCentroidLabel(gameScreen.getBlob().getAverageCentroidDistance());
+		userPanel.updateVarianceDistanceToCentroidLabel(gameScreen.getBlob().getVarianceCentroidDistance());
+
 	}
 	
 	public Frame(String title)
@@ -101,6 +111,7 @@ public class Frame extends JFrame
 		userPanel.getLoadBlobButton().addActionListener(myListener);
 		userPanel.getAutoRunToggleButton().addActionListener(myListener);
 		userPanel.getShowCentroid().addActionListener(myListener);
+		userPanel.getTutorial().addActionListener(myListener);
 		
 		loadCellPanel = new LoadCellPanel();
 		loadCellPanel.getLoadGlider().addActionListener(myListener);
@@ -144,11 +155,30 @@ public class Frame extends JFrame
 		constraints.fill = GridBagConstraints.BOTH;
 		this.getContentPane().add(gameScreen,constraints);
 		gameScreen.setVisible(true);
+		
+		String message = "This is a work in progress.\nPress 'Tutorial' for basic information and detailed instructions";
+		message += "\nPress 'Load Cells' to begin loading some starting patterns into the simulation and to unlock other GUI options";
+		JOptionPane.showMessageDialog(this, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void Repaint()
 	{
 		gameScreen.repaint();
+	}
+	
+	public BufferedImage createImage(JPanel panel)
+	{
+		int w = panel.getWidth();
+		int h = panel.getHeight();
+		BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
+		panel.print(g);
+		return image;
+	}
+	
+	public void Rotate()
+	{
+		
 	}
 	
 	public GameScreen getGameScreen()

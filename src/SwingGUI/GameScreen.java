@@ -20,7 +20,7 @@ public class GameScreen extends JPanel
 	{
 		blob = new Blob();
 		centroid = new Cell(0,0);
-		setBackground(Color.GREEN);
+		setBackground(Color.WHITE);
 	}
 	
 	@Override
