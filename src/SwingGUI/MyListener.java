@@ -193,7 +193,8 @@ public class MyListener implements ActionListener
 			message = "Experiment around by loading different groups of cells and then choosing to advance the simulation manually or run it automatically.";
 			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
 			
-			message = "TO DO:  This code is not complete.  I need to fix some run time concurrency errors, add more GUI options and resize/rescale/recenter options";
+			message = "TO DO:  This code is not complete.";
+			message += "\nI need to fix some run-time concurrency errors, add more GUI options and resize/rescale/recenter options, speed controls, mouse listeners, zoom/pan, etc";
 			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
 			
 			Cell.setSize(3);
