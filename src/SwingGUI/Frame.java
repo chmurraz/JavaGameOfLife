@@ -157,7 +157,7 @@ public class Frame extends JFrame
 		gameScreen.setVisible(true);
 		
 		String message = "This is a work in progress.\nPress 'Tutorial' for basic information and detailed instructions";
-		message += "\nPress 'Load Cells' to begin loading some starting patterns into the simulation and to unlock other GUI options";
+		message += "\nPress 'Load Cells' to begin loading some starting patterns into the simulation and to unlock other options";
 		JOptionPane.showMessageDialog(this, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
