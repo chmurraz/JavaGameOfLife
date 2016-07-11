@@ -30,6 +30,8 @@ public class UserPanel extends JPanel
 	private JLabel varianceDistanceToCentroidLabel;
 	private JButton loadBlobButton;
 	private JButton tutorialButton;
+	private JButton upCellSizeButton;
+	private JButton downCellSizeButton;
 	private JToggleButton advanceToggleButton;
 	private JToggleButton autoRunToggleButton;
 	private JToggleButton showCentroidToggleButton;
@@ -169,17 +171,23 @@ public class UserPanel extends JPanel
 		loadBlobButton = new JButton("Load Cells");
 		advanceToggleButton = new JToggleButton("Advance to Next Generation");
 		autoRunToggleButton = new JToggleButton("Auto Run: Off");
+		upCellSizeButton = new JButton("Increase Cell Size");
+		downCellSizeButton = new JButton("Decrease Cell Size");
 		
 		tutorialButton.setActionCommand("Tutorial");
 		loadBlobButton.setActionCommand("Load Cells");
 		advanceToggleButton.setActionCommand("Advance to Next Generation");
 		autoRunToggleButton.setActionCommand("Auto Run");
+		upCellSizeButton.setActionCommand("Increase Cell Size");
+		downCellSizeButton.setActionCommand("Decrease Cell Size");
 		
 		//	Remove annoying border on buttons
 		tutorialButton.setFocusPainted(false);
 		loadBlobButton.setFocusPainted(false);
 		advanceToggleButton.setFocusPainted(false);
 		autoRunToggleButton.setFocusPainted(false);
+		upCellSizeButton.setFocusPainted(false);
+		downCellSizeButton.setFocusPainted(false);
 		
 		constraints.gridx = 0;
 		
@@ -202,6 +210,16 @@ public class UserPanel extends JPanel
 		buttonPanel.add(autoRunToggleButton, constraints);
 		autoRunToggleButton.setVisible(true);
 		autoRunToggleButton.setEnabled(false);
+		
+		constraints.gridy = 5;
+		buttonPanel.add(upCellSizeButton, constraints);
+		upCellSizeButton.setVisible(true);
+		upCellSizeButton.setEnabled(false);
+		
+		constraints.gridy = 6;
+		buttonPanel.add(downCellSizeButton, constraints);
+		downCellSizeButton.setVisible(true);
+		downCellSizeButton.setEnabled(false);
 	}
 	
 	public void updateAgeLabel(int ageVal)
@@ -297,6 +315,16 @@ public class UserPanel extends JPanel
 	public JToggleButton getAutoRunToggleButton()
 	{
 		return autoRunToggleButton;
+	}
+	
+	public JButton getUpCellSizeButton()
+	{
+		return upCellSizeButton;
+	}
+	
+	public JButton getDownCellSizeButton()
+	{
+		return downCellSizeButton;
 	}
 	
 	public JToggleButton getShowCentroid()

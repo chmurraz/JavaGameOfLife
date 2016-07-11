@@ -33,17 +33,34 @@ public class MyListener implements ActionListener
 		String AutoRunToggleCommand = frame.getUserPanel().getAutoRunToggleButton().getActionCommand();
 		String ShowCentroidToggleCommand = frame.getUserPanel().getShowCentroid().getActionCommand();
 		String Tutorial = frame.getUserPanel().getTutorial().getActionCommand();
+		String UpCellCommand = frame.getUserPanel().getUpCellSizeButton().getActionCommand();
+		String DownCellCommand = frame.getUserPanel().getDownCellSizeButton().getActionCommand();
 		
-		String Glider = frame.getLoadCellPanel().getLoadGlider().getActionCommand();
-		String Oscillator = frame.getLoadCellPanel().getLoadOscillator().getActionCommand();
-		String Block = frame.getLoadCellPanel().getLoadBlock().getActionCommand();
-		String Methuselah = frame.getLoadCellPanel().getLoadMethuselah().getActionCommand();
-		String Acorn = frame.getLoadCellPanel().getLoadAcorn().getActionCommand();
-		String Simple = frame.getLoadCellPanel().getLoadSimple().getActionCommand();
-		String Galaxy = frame.getLoadCellPanel().getLoadKokGalaxy().getActionCommand();
-		String Random = frame.getLoadCellPanel().getLoadRandom().getActionCommand();
-		String Clear = frame.getLoadCellPanel().getClearAll().getActionCommand();
+		if(e.getActionCommand().equals(UpCellCommand))
+		{
+			if(Cell.getSize() < 9)
+			{
+				Cell.setSize(Cell.getSize() + 1);
+			}
+			else
+			{
+				Cell.setSize(10);
+			}
+			frame.repaint();
+		}
 		
+		if(e.getActionCommand().equals(DownCellCommand))
+		{
+			if(Cell.getSize() > 2)
+			{
+				Cell.setSize(Cell.getSize() - 1);
+			}
+			else
+			{
+				Cell.setSize(1);
+			}
+			frame.repaint();
+		}
 		
 		if(e.getActionCommand().equals(AdvanceToggleCommand))
 		{
@@ -211,9 +228,8 @@ public class MyListener implements ActionListener
 		
 		if(e.getActionCommand().equals(LoadBlobButtonCommand))
 		{
-			Object[] options = {"Glider", "Oscillator", "Block",
-								"Methuselah", "Acorn", "Simple",
-								"Galaxy", "Random", "Clear All"};
+			Object[] options = {"Glider", "Glider Gun", "Oscillator", "Block",
+								"Methuselah", "Acorn", "Galaxy", "Random", "Clear All"};
 			
 			String s = (String)JOptionPane.showInputDialog(frame, "Enter the initial set of cells...",
 					"Cell Load Options", JOptionPane.PLAIN_MESSAGE, null, options, "Glider");
@@ -227,6 +243,9 @@ public class MyListener implements ActionListener
 			{
 				case "Glider":
 					frame.getGameScreen().getBlob().BuildGlider();
+					break;
+				case "Glider Gun":
+					frame.getGameScreen().getBlob().BuildGliderGun();
 					break;
 				case "Oscillator":
 					frame.getGameScreen().getBlob().BuildOscillator();
@@ -314,6 +333,8 @@ public class MyListener implements ActionListener
 		frame.getGameScreen().setVisible(true);
 		frame.getUserPanel().getAutoRunToggleButton().setEnabled(true);
 		frame.getUserPanel().getShowCentroid().setEnabled(true);
+		frame.getUserPanel().getUpCellSizeButton().setEnabled(true);
+		frame.getUserPanel().getDownCellSizeButton().setEnabled(true);
 		frame.repaint();
 	}
 	

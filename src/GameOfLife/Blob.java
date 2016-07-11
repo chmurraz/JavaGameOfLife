@@ -302,6 +302,65 @@ public class Blob
 		UpdateLiveCellCount();
 	}
 	
+	public void BuildGliderGun()
+	{
+		xshift = 50;
+		yshift = 200;
+		this.AddLiveCell(new IntPoint2D(1 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(1 + xshift, 5 + yshift));
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(2 + xshift, 5 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(11 + xshift, 3 + yshift));
+		this.AddLiveCell(new IntPoint2D(11 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(11 + xshift, 5 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(12 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(12 + xshift, 6 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(13 + xshift, 1 + yshift));
+		this.AddLiveCell(new IntPoint2D(13 + xshift, 7 + yshift));
+		this.AddLiveCell(new IntPoint2D(14 + xshift, 1 + yshift));
+		this.AddLiveCell(new IntPoint2D(14 + xshift, 7 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(15 + xshift, 4 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(16 + xshift, 2 + yshift));
+		this.AddLiveCell(new IntPoint2D(16 + xshift, 6 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(17 + xshift, 3 + yshift));
+		this.AddLiveCell(new IntPoint2D(17 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(17 + xshift, 5 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(18 + xshift, 4 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(21 + xshift, 5 + yshift));
+		this.AddLiveCell(new IntPoint2D(21 + xshift, 6 + yshift));
+		this.AddLiveCell(new IntPoint2D(21 + xshift, 7 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(22 + xshift, 5 + yshift));
+		this.AddLiveCell(new IntPoint2D(22 + xshift, 6 + yshift));
+		this.AddLiveCell(new IntPoint2D(22 + xshift, 7 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(23 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(23 + xshift, 8 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(25 + xshift, 3 + yshift));
+		this.AddLiveCell(new IntPoint2D(25 + xshift, 4 + yshift));
+		this.AddLiveCell(new IntPoint2D(25 + xshift, 8 + yshift));
+		this.AddLiveCell(new IntPoint2D(25 + xshift, 9 + yshift));
+		
+		this.AddLiveCell(new IntPoint2D(35 + xshift, 6 + yshift));
+		this.AddLiveCell(new IntPoint2D(35 + xshift, 7 + yshift));
+		this.AddLiveCell(new IntPoint2D(36 + xshift, 6 + yshift));
+		this.AddLiveCell(new IntPoint2D(36 + xshift, 7 + yshift));
+
+
+
+		
+		UpdateLiveCellCount();
+	}
+	
 	public void BuildRandom(double density)
 	{
 		xshift = 50;

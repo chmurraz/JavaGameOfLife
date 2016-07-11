@@ -112,6 +112,8 @@ public class Frame extends JFrame
 		userPanel.getAutoRunToggleButton().addActionListener(myListener);
 		userPanel.getShowCentroid().addActionListener(myListener);
 		userPanel.getTutorial().addActionListener(myListener);
+		userPanel.getUpCellSizeButton().addActionListener(myListener);
+		userPanel.getDownCellSizeButton().addActionListener(myListener);
 		
 		loadCellPanel = new LoadCellPanel();
 		loadCellPanel.getLoadGlider().addActionListener(myListener);
