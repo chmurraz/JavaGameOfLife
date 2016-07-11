@@ -167,12 +167,12 @@ public class UserPanel extends JPanel
 
 		tutorialButton = new JButton("Tutorial");
 		loadBlobButton = new JButton("Load Cells");
-		advanceToggleButton = new JToggleButton("Advance Simulation");
+		advanceToggleButton = new JToggleButton("Advance to Next Generation");
 		autoRunToggleButton = new JToggleButton("Auto Run: Off");
 		
 		tutorialButton.setActionCommand("Tutorial");
 		loadBlobButton.setActionCommand("Load Cells");
-		advanceToggleButton.setActionCommand("Advance Simulation");
+		advanceToggleButton.setActionCommand("Advance to Next Generation");
 		autoRunToggleButton.setActionCommand("Auto Run");
 		
 		//	Remove annoying border on buttons

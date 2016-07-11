@@ -87,7 +87,7 @@ public class Frame extends JFrame
 		userPanel.updateXRangeLabel(gameScreen.getBlob().getBoundary().getMinX(), gameScreen.getBlob().getBoundary().getMaxX());
 		userPanel.updateYRangeLabel(gameScreen.getBlob().getBoundary().getMinY(), gameScreen.getBlob().getBoundary().getMaxY());
 		userPanel.getAdvanceToggleButton().setSelected(false);
-		userPanel.getAdvanceToggleButton().setText("Advance Simulation");
+		userPanel.getAdvanceToggleButton().setText("Advance to Next Generation");
 		userPanel.updateEscapedCellsCount(gameScreen.getBlob().getEscapedCells());
 		userPanel.updateCentroid(gameScreen.getBlob().getCentroid());
 		userPanel.updateAverageDistanceToCentroidLabel(gameScreen.getBlob().getAverageCentroidDistance());
@@ -158,7 +158,7 @@ public class Frame extends JFrame
 		
 		String message = "This is a work in progress.\nPress 'Tutorial' for basic information and detailed instructions";
 		message += "\nPress 'Load Cells' to begin loading some starting patterns into the simulation and to unlock other options";
-		JOptionPane.showMessageDialog(this, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, message, "Conway's Game of Life with Java Swing GUI", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void Repaint()

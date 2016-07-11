@@ -47,14 +47,14 @@ public class MyListener implements ActionListener
 		
 		if(e.getActionCommand().equals(AdvanceToggleCommand))
 		{
-			if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Advance Simulation")
+			if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Advance to Next Generation")
 			{
 				frame.getUserPanel().getAdvanceToggleButton().setText("Working...");
 				frame.Execute();
 			}
 			else if(frame.getUserPanel().getAdvanceToggleButton().getText() == "Working...")
 			{
-				frame.getUserPanel().getAdvanceToggleButton().setText("Advance Simulation");
+				frame.getUserPanel().getAdvanceToggleButton().setText("Advance to Next Generation");
 			}
 		}
 		
@@ -90,17 +90,17 @@ public class MyListener implements ActionListener
 			message += "\nThe 'game' is a celluar automaton developed by mathematician John Conway in 1970.";
 			message += "\nThe 'game' can be considered more of a simulation of cells under a microscope that appear to be 'alive' and exhibit interesting behavior.";
 			message += "\nAlternatively, the 'game' can be thought of as a zero-player game.  Set up the starting conditions and press 'start' to see what the cells do.";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (1 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			message = "The game world consists of a group of 'cells' which are either alive or dead.";
 			message += "\nThe cells will be displayed on the white section.  The yellow section controls various inputs and options.";
 			message += "\nOnce a starting arrangement of cells is selected, the game rules determine if individual cells live or die and if new cells are born.";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (2 of 13)", JOptionPane.INFORMATION_MESSAGE);
 
 			message = "The birth, death and survival of individual cells is determined by the number of neighbors a cell has.";
 			message += "\nFor any given cell, another cell is considered a neighbor is it is both alive and located above, below, left, right or diagonally adjacent to the given cell.";
 			message += "\nFor example, I will now draw a simple arrangement of three cells in a vertical line";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (3 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			CellBuildStartUp();
 			Cell.setSize(10);
@@ -108,7 +108,7 @@ public class MyListener implements ActionListener
 			CellBuildCleanUp();
 			
 			message = "I will now color the cells in an alternating red and black pattern to make them easier to tell apart";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (4 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			int i = 0;
 			for(Cell c:frame.getGameScreen().getBlob().getCellsInGame())
@@ -126,11 +126,11 @@ public class MyListener implements ActionListener
 			
 			message = "This 'game' consists of the three living cells (two red and one black).";
 			message += "\nEach red cell has only one neighbor (the black cell) and the black cell has two neighbors (the two red cells).";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (5 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			message = "In addition to the live cells, the 'game' tracks dead cells as well.  These dead cells are normally not displayed.";
 			message += "\nHowever, for purposes of illustration, I will highlight the dead cells surrounding the red and black live cells.  These will be in green.";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (6 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			frame.getGameScreen().getBlob().BuildDeadCells();
 			for(Cell c:frame.getGameScreen().getBlob().getCellsInGame())
@@ -146,17 +146,17 @@ public class MyListener implements ActionListener
 			message = "The green (dead) cells in the top and bottom rows each have one neighbor (the red cells).";
 			message += "\nThe green (dead) cells toward the top and bottom of the left and right columns have one neighbor.";
 			message += "\nThe green (dead) cells in the center of the left and right columns have two neighbors.";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (7 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			message = "The rules for the Game of Life are, at each iteration:";
 			message += "\n     1.   If a cell is alive and it has fewer than two live neighbors, it dies.";
 			message += "\n     2.   If a cell is alive and it has two or three live neighors it lives to the next generation.";
 			message += "\n     3.   If a cell is alive and it has more than three live neighbors, it dies.";
 			message += "\n     4.   If a cell is dead and has three live neighbors it becomes a live cell.";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (8 of 13)", JOptionPane.INFORMATION_MESSAGE);
 
 			message = "I will now remove the highlighting on the dead (green) cells and display only the living (red and black) cells";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (9 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			frame.getGameScreen().getBlob().BuildClean();
 			frame.getGameScreen().getBlob().BuildSimple();
 
@@ -182,20 +182,22 @@ public class MyListener implements ActionListener
 			frame.UpdateLabels();
 			
 			message = "Now, I will click the 'Advance Simulation' button to advance the simulation one generation";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (10 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			frame.getUserPanel().getAdvanceToggleButton().doClick();
 			
 			message = "Notice how the cell in the center has remained alive (it had two neighbors).";
 			message += "\nThe two red cells on the top and bottom each only had one neighbor (so they each died)";
 			message += "\nNotice that two new cells to the left and right of the center cell were born.  They had been dead cells, but they each had two live neighbors.";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (11 of 13)", JOptionPane.INFORMATION_MESSAGE);
 
 			message = "Experiment around by loading different groups of cells and then choosing to advance the simulation manually or run it automatically.";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			message += "\nOnce a set of cells is loaded, click the 'Auto Run' or 'Advance Simulation' buttons to move the simulation to the next generation.";
+			message += "\nThe 'Acorn' is an interesting pattern.  From an initial set of seven cells, it lasts for 5206 generations before reaching a steady population of 633 cells (including some that escape).";
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (12 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			message = "TO DO:  This code is not complete.";
-			message += "\nI need to fix some run-time concurrency errors, add more GUI options and resize/rescale/recenter options, speed controls, mouse listeners, zoom/pan, etc";
-			JOptionPane.showMessageDialog(frame, message, "Tutorial", JOptionPane.INFORMATION_MESSAGE);
+			message += "\nI need to fix some run-time concurrency errors, add more GUI options and resize/rescale/recenter options, speed controls, mouse listeners, zoom/pan, back-buffering, etc";
+			JOptionPane.showMessageDialog(frame, message, "Tutorial (13 of 13)", JOptionPane.INFORMATION_MESSAGE);
 			
 			Cell.setSize(3);
 			frame.repaint();
