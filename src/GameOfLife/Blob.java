@@ -447,6 +447,14 @@ public class Blob
 	
 	public void Draw(Graphics g)
 	{
+		//	Create a copy of the cellsInGame ArrayList to iterate over
+		//	This is to avoid the concurrency run time errors of changing the array
+		//	while iterating over it.
+		
+		//ArrayList<Cell> copy = cellsInGame;
+		
+		//	The copy did not solve the concurrency run time error.
+		
 		for (Cell it:cellsInGame)
 		{
 			it.Draw(g);
