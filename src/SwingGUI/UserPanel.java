@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.plaf.basic.BasicArrowButton;
 
 import GameOfLife.Blob.Centroid;
 
@@ -32,6 +33,11 @@ public class UserPanel extends JPanel
 	private JButton tutorialButton;
 	private JButton upCellSizeButton;
 	private JButton downCellSizeButton;
+	private JButton panUpButton;
+	private JButton panDownButton;
+	private JButton panLeftButton;
+	private JButton panRightButton;
+	private JButton recenterButton;
 	private JToggleButton advanceToggleButton;
 	private JToggleButton autoRunToggleButton;
 	private JToggleButton showCentroidToggleButton;
@@ -40,6 +46,7 @@ public class UserPanel extends JPanel
 	private JPanel statPanel;
 	private JPanel statOptionPanel;
 	private JPanel buttonPanel;
+	private JPanel arrowPanel;
 	
 	private DecimalFormat formatter = new DecimalFormat("#.##");
 	
@@ -62,6 +69,8 @@ public class UserPanel extends JPanel
 		
 		BuildButtonPanel();
 		
+		BuildArrowPanel();
+		
 		AddPanels();
 	}
 
@@ -74,10 +83,13 @@ public class UserPanel extends JPanel
 		add(buttonPanel,constraints);
 		
 		constraints.gridy = 1;
+		add(arrowPanel,constraints);
+		
+		constraints.gridy = 2;
 		add(statOptionPanel,constraints);
 		statOptionPanel.setVisible(false);
 		
-		constraints.gridy = 2;
+		constraints.gridy = 3;
 		add(statPanel,constraints);
 		statPanel.setVisible(false);
 
@@ -173,7 +185,7 @@ public class UserPanel extends JPanel
 		autoRunToggleButton = new JToggleButton("Auto Run: Off");
 		upCellSizeButton = new JButton("Increase Cell Size");
 		downCellSizeButton = new JButton("Decrease Cell Size");
-		
+
 		tutorialButton.setActionCommand("Tutorial");
 		loadBlobButton.setActionCommand("Load Cells");
 		advanceToggleButton.setActionCommand("Advance to Next Generation");
@@ -220,6 +232,61 @@ public class UserPanel extends JPanel
 		buttonPanel.add(downCellSizeButton, constraints);
 		downCellSizeButton.setVisible(true);
 		downCellSizeButton.setEnabled(false);
+	}
+	
+	private void BuildArrowPanel()
+	{
+		arrowPanel = new JPanel();
+		arrowPanel.setLayout(new GridBagLayout());
+		arrowPanel.setBorder(BorderFactory.createTitledBorder("Pan and Recenter"));
+
+		panUpButton = new BasicArrowButton(BasicArrowButton.NORTH);
+		panDownButton = new BasicArrowButton(BasicArrowButton.SOUTH);
+		panLeftButton = new BasicArrowButton(BasicArrowButton.WEST);
+		panRightButton = new BasicArrowButton(BasicArrowButton.EAST);
+		recenterButton = new JButton("Recenter");
+		
+		panUpButton.setActionCommand("Pan up");
+		panDownButton.setActionCommand("Pan down");
+		panRightButton.setActionCommand("Pan right");
+		panLeftButton.setActionCommand("Pan left");
+		recenterButton.setActionCommand("Recenter");
+		
+		panUpButton.setFocusPainted(false);
+		panDownButton.setFocusPainted(false);
+		panRightButton.setFocusPainted(false);
+		panLeftButton.setFocusPainted(false);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		arrowPanel.add(panUpButton, constraints);
+		panUpButton.setVisible(true);
+		panUpButton.setEnabled(true);
+		
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		arrowPanel.add(panLeftButton, constraints);
+		panUpButton.setVisible(true);
+		panUpButton.setEnabled(true);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 1;
+		arrowPanel.add(recenterButton, constraints);
+		recenterButton.setVisible(true);
+		recenterButton.setVisible(true);
+		
+		constraints.gridx = 2;
+		constraints.gridy = 1;
+		arrowPanel.add(panRightButton, constraints);
+		panRightButton.setVisible(true);
+		panRightButton.setVisible(true);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 2;
+		arrowPanel.add(panDownButton, constraints);
+		panDownButton.setVisible(true);
+		panDownButton.setVisible(true);
+		
 	}
 	
 	public void updateAgeLabel(int ageVal)
@@ -325,6 +392,31 @@ public class UserPanel extends JPanel
 	public JButton getDownCellSizeButton()
 	{
 		return downCellSizeButton;
+	}
+	
+	public JButton getPanUpButton()
+	{
+		return panUpButton;
+	}
+	
+	public JButton getPanDownButton()
+	{
+		return panDownButton;
+	}
+	
+	public JButton getPanLeftButton()
+	{
+		return panLeftButton;
+	}
+	
+	public JButton getPanRightButton()
+	{
+		return panRightButton;
+	}
+	
+	public JButton getRecenterButton()
+	{
+		return recenterButton;
 	}
 	
 	public JToggleButton getShowCentroid()

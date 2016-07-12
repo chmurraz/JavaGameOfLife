@@ -114,17 +114,23 @@ public class Frame extends JFrame
 		userPanel.getTutorial().addActionListener(myListener);
 		userPanel.getUpCellSizeButton().addActionListener(myListener);
 		userPanel.getDownCellSizeButton().addActionListener(myListener);
+		userPanel.getPanUpButton().addActionListener(myListener);
+		userPanel.getPanDownButton().addActionListener(myListener);
+		userPanel.getPanLeftButton().addActionListener(myListener);
+		userPanel.getRecenterButton().addActionListener(myListener);
+		userPanel.getPanRightButton().addActionListener(myListener);
+		userPanel.getPanDownButton().addActionListener(myListener);
 		
-		loadCellPanel = new LoadCellPanel();
-		loadCellPanel.getLoadGlider().addActionListener(myListener);
-		loadCellPanel.getLoadOscillator().addActionListener(myListener);
-		loadCellPanel.getLoadBlock().addActionListener(myListener);
-		loadCellPanel.getLoadRandom().addActionListener(myListener);
-		loadCellPanel.getLoadMethuselah().addActionListener(myListener);
-		loadCellPanel.getLoadAcorn().addActionListener(myListener);
-		loadCellPanel.getLoadSimple().addActionListener(myListener);
-		loadCellPanel.getLoadKokGalaxy().addActionListener(myListener);
-		loadCellPanel.getClearAll().addActionListener(myListener);
+		//loadCellPanel = new LoadCellPanel();
+		//loadCellPanel.getLoadGlider().addActionListener(myListener);
+		//loadCellPanel.getLoadOscillator().addActionListener(myListener);
+		//loadCellPanel.getLoadBlock().addActionListener(myListener);
+		//loadCellPanel.getLoadRandom().addActionListener(myListener);
+		//loadCellPanel.getLoadMethuselah().addActionListener(myListener);
+		//loadCellPanel.getLoadAcorn().addActionListener(myListener);
+		//loadCellPanel.getLoadSimple().addActionListener(myListener);
+		//loadCellPanel.getLoadKokGalaxy().addActionListener(myListener);
+		//loadCellPanel.getClearAll().addActionListener(myListener);
 		
 		gameScreen = new GameScreen();
 

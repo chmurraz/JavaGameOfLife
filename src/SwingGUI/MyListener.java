@@ -35,6 +35,60 @@ public class MyListener implements ActionListener
 		String Tutorial = frame.getUserPanel().getTutorial().getActionCommand();
 		String UpCellCommand = frame.getUserPanel().getUpCellSizeButton().getActionCommand();
 		String DownCellCommand = frame.getUserPanel().getDownCellSizeButton().getActionCommand();
+		String PanUp = frame.getUserPanel().getPanUpButton().getActionCommand();
+		String PanLeft = frame.getUserPanel().getPanLeftButton().getActionCommand();
+		String Recenter = frame.getUserPanel().getRecenterButton().getActionCommand();
+		String PanRight = frame.getUserPanel().getPanRightButton().getActionCommand();
+		String PanDown = frame.getUserPanel().getPanDownButton().getActionCommand();
+		
+		if(e.getActionCommand().equals(PanUp))
+		{
+			for(Cell c:frame.getGameScreen().getBlob().getCellsInGame())
+			{
+				int x = c.getIntPoint().getX();
+				int y = c.getIntPoint().getY();
+				c.getIntPoint().setxy(x, y - 1);
+			}
+			frame.repaint();
+		}
+		
+		if(e.getActionCommand().equals(PanLeft))
+		{
+			for(Cell c:frame.getGameScreen().getBlob().getCellsInGame())
+			{
+				int x = c.getIntPoint().getX();
+				int y = c.getIntPoint().getY();
+				c.getIntPoint().setxy(x - 1, y);
+			}
+			frame.repaint();
+		}
+		
+		if(e.getActionCommand().equals(Recenter))
+		{
+			frame.repaint();
+		}
+		
+		if(e.getActionCommand().equals(PanRight))
+		{
+			for(Cell c:frame.getGameScreen().getBlob().getCellsInGame())
+			{
+				int x = c.getIntPoint().getX();
+				int y = c.getIntPoint().getY();
+				c.getIntPoint().setxy(x + 1, y);
+			}
+			frame.repaint();
+		}
+		
+		if(e.getActionCommand().equals(PanDown))
+		{
+			for(Cell c:frame.getGameScreen().getBlob().getCellsInGame())
+			{
+				int x = c.getIntPoint().getX();
+				int y = c.getIntPoint().getY();
+				c.getIntPoint().setxy(x, y + 1);
+			}
+			frame.repaint();
+		}
 		
 		if(e.getActionCommand().equals(UpCellCommand))
 		{
@@ -346,7 +400,7 @@ public class MyListener implements ActionListener
 		constraints.weighty = 1;
 		constraints.anchor = GridBagConstraints.SOUTHWEST;
 		constraints.fill = GridBagConstraints.BOTH;
-		frame.getLoadCellPanel().setVisible(false);
+		//frame.getLoadCellPanel().setVisible(false);
 		//frame.getContentPane().remove(frame.getLoadCellPanel());
 		//frame.getContentPane().add(frame.getGameScreen(),constraints);
 	}

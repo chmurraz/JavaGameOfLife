@@ -725,9 +725,19 @@ public class Blob
 		drawCentroid = val;
 	}
 	
+	public void setXShift(int val)
+	{
+		xshift = val;
+	}
+	
 	public int getXShift()
 	{
 		return xshift;
+	}
+	
+	public void setYShift(int val)
+	{
+		yshift = val;
 	}
 	
 	public int getYShift()
