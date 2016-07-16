@@ -32,6 +32,13 @@ public class GameScreen extends JPanel
 			//	Draw the blob
 			blob.Draw(g);
 			
+			//	Draw center
+			IntPoint2D pointc = new IntPoint2D(this.getWidth()/4, this.getHeight()/4);
+			pointc = new IntPoint2D(0, 0);
+			Cell center = new Cell(pointc);
+			center.setColor(Color.BLUE);
+			center.Draw(g);
+			
 			//	Draw its centroid
 			if(blob.getDrawCentroid())
 			{

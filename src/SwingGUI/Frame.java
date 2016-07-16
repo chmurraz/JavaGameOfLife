@@ -136,9 +136,11 @@ public class Frame extends JFrame
 
 		//	Set size of the Frame based on static parameters from Game class
 		setSize(new Dimension(Game.getWidth()/2,Game.getHeight()));
-		//gameScreen.setBounds(0,0,Game.getWidth()/2,Game.getHeight()/2);
-		userPanel.setSize(new Dimension(Game.getWidth()/2, Game.getHeight()/2));
-		gameScreen.setSize(new Dimension(Game.getWidth()/2, Game.getHeight()/2));
+		//gameScreen.setBounds(0,0,Game.getWidth()/10,Game.getHeight()/2);
+		
+		//userPanel.setSize(new Dimension(Game.getWidth()/2, Game.getHeight()/2));
+		//gameScreen.setSize(new Dimension(Game.getWidth()/2, Game.getHeight()/2));
+		//gameScreen.setSize(10,1);
 		
 		//	Add Swing components to content pane
 		//Container c = getContentPane();
@@ -159,7 +161,7 @@ public class Frame extends JFrame
 		constraints.gridy = 0;
 		constraints.weightx = 3;
 		constraints.weighty = 1;
-		constraints.anchor = GridBagConstraints.NORTHEAST;
+		constraints.anchor = GridBagConstraints.NORTHWEST;
 		constraints.fill = GridBagConstraints.BOTH;
 		this.getContentPane().add(gameScreen,constraints);
 		gameScreen.setVisible(true);
